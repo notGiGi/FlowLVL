@@ -1,0 +1,22 @@
+actions:
+  eviction_rate_high:
+    conditions:
+      metrics:
+        eviction_rate: '> 100'
+    description: "Acci\xF3n para alta tasa de expulsi\xF3n"
+    priority: medium
+    remediation:
+      command: kubectl scale statefulset {service_name} --replicas={current_replicas
+        + 1}
+      type: command
+  memory_fragmentation_high:
+    conditions:
+      metrics:
+        memory_fragmentation_ratio: '> 3'
+    description: "Acci\xF3n para alta fragmentaci\xF3n de memoria"
+    priority: low
+    remediation:
+      command: kubectl exec {pod_name} -- redis-cli MEMORY PURGE
+      type: command
+description: "Pol\xEDtica para servicios de cach\xE9"
+service_id: cache_service

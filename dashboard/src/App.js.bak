@@ -1,0 +1,132 @@
+﻿import React, { useState } from 'react';
+
+// Componente principal
+function App() {
+  return (
+    <div className="flex h-screen bg-gray-100">
+      <Sidebar />
+      <main className="flex-1 overflow-y-auto">
+        <Dashboard />
+      </main>
+    </div>
+  );
+}
+
+// Barra lateral
+function Sidebar() {
+  const [collapsed, setCollapsed] = useState(false);
+  
+  return (
+    <div className={g-gray-800 text-white transition-all duration-300 }>
+      <div className="flex items-center justify-between p-4 border-b border-gray-700">
+        {!collapsed && <h1 className="text-xl font-bold">Predictor AI</h1>}
+        <button onClick={() => setCollapsed(!collapsed)} className="p-1 rounded hover:bg-gray-700">
+          <span>☰</span>
+        </button>
+      </div>
+      
+      <nav className="mt-4">
+        <SidebarLink to="/" icon="🏠" text="Dashboard" collapsed={collapsed} />
+        <SidebarLink to="/services" icon="🖥️" text="Servicios" collapsed={collapsed} />
+        <SidebarLink to="/anomalies" icon="⚠️" text="Anomalías" collapsed={collapsed} />
+        <SidebarLink to="/failures" icon="❌" text="Fallos" collapsed={collapsed} />
+        <SidebarLink to="/predictions" icon="📈" text="Predicciones" collapsed={collapsed} />
+        <SidebarLink to="/actions" icon="▶️" text="Acciones" collapsed={collapsed} />
+        <SidebarLink to="/settings" icon="⚙️" text="Configuración" collapsed={collapsed} />
+      </nav>
+    </div>
+  );
+}
+
+function SidebarLink({ to, icon, text, collapsed }) {
+  return (
+    <a href={to} className="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-colors">
+      <span className="mr-3">{icon}</span>
+      {!collapsed && <span>{text}</span>}
+    </a>
+  );
+}
+
+// Dashboard principal
+function Dashboard() {
+  return (
+    <div className="p-6">
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-bold text-gray-800">Dashboard</h1>
+        <button className="bg-blue-500 text-white px-4 py-2 rounded">Refrescar</button>
+      </div>
+      
+      {/* Estado del sistema */}
+      <div className="mb-6 p-4 rounded-lg bg-green-100">
+        <div className="flex items-center">
+          <span className="text-green-500 mr-2">✓</span>
+          <h2 className="text-lg font-semibold">
+            Estado del sistema: Saludable
+          </h2>
+        </div>
+      </div>
+      
+      {/* Resumen estadístico */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+        <StatCard
+          title="Servicios Monitoreados"
+          value="5"
+          icon="🖥️"
+        />
+        <StatCard
+          title="Anomalías (24h)"
+          value="3"
+          icon="⚠️"
+        />
+        <StatCard
+          title="Fallos (24h)"
+          value="1"
+          icon="❌"
+        />
+        <StatCard
+          title="Éxito de Acciones"
+          value="95%"
+          icon="✓"
+        />
+      </div>
+      
+      <div className="mb-6">
+        <h2 className="text-xl font-semibold mb-4">Sistema Predictivo de Mantenimiento</h2>
+        <p className="text-gray-700">
+          Bienvenido al dashboard del Sistema Predictivo de Mantenimiento para Sistemas Distribuidos.
+          Esta interfaz te permite monitorear y gestionar el estado de tus sistemas distribuidos, 
+          detectar anomalías, predecir fallos potenciales y ejecutar acciones correctivas de forma proactiva.
+        </p>
+      </div>
+      
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="bg-white rounded-lg shadow p-6">
+          <h2 className="text-lg font-semibold mb-4">Anomalías y Fallos Recientes</h2>
+          <p className="text-gray-500 italic">Datos de ejemplo - Conexión a la API pendiente</p>
+        </div>
+        
+        <div className="bg-white rounded-lg shadow p-6">
+          <h2 className="text-lg font-semibold mb-4">Distribución de Fallos</h2>
+          <p className="text-gray-500 italic">Datos de ejemplo - Conexión a la API pendiente</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Componente reutilizable para tarjetas de estadísticas
+function StatCard({ title, value, icon }) {
+  return (
+    <div className="bg-white rounded-lg shadow p-6">
+      <div className="flex items-center">
+        <div className="p-3 rounded-full bg-gray-50">{icon}</div>
+        <div className="ml-4">
+          <h2 className="text-sm font-medium text-gray-500">{title}</h2>
+          <p className="text-2xl font-semibold text-gray-900">{value}</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;

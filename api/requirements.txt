@@ -1,0 +1,9 @@
+# requirements.txt para api
+# Guardar como: ./api/requirements.txt
+fastapi==0.95.0
+uvicorn==0.21.1
+pandas==2.0.0
+sqlalchemy==2.0.9
+kafka-python==2.0.2
+pydantic==1.10.7
+psycopg2-binary==2.9.6

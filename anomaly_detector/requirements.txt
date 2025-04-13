@@ -1,0 +1,8 @@
+﻿kafka-python==2.0.2
+pandas==2.0.0
+sqlalchemy==2.0.9
+numpy==1.23.5
+scikit-learn==1.2.2
+tensorflow==2.12.0
+joblib==1.2.0
+psycopg2-binary==2.9.6

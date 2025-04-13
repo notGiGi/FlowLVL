@@ -1,0 +1,21 @@
+collection_interval: 60  # segundos
+prometheus:
+  enabled: true
+  endpoints:
+    - url: http://prometheus:9090
+      service_id: prometheus
+      metrics: [up, memory_usage, cpu_usage]
+kubernetes:
+  enabled: false
+  incluster: true
+  node_metrics: true
+  pod_metrics: true
+node:
+  enabled: true
+  metrics: [cpu, memory, disk, network]
+log_files:
+  enabled: true
+  paths:
+    - path: /var/log/syslog
+      service_id: system
+      pattern: ERROR|FATAL|CRIT

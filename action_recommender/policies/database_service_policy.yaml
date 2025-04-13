@@ -1,0 +1,24 @@
+actions:
+  connection_pool_exhaustion:
+    conditions:
+      metrics:
+        active_connections: '> 90'
+        connection_wait_time: '> 200'
+    description: "Acci\xF3n para agotamiento del pool de conexiones"
+    priority: high
+    remediation:
+      command: kubectl exec {pod_name} -- sh -c "echo 'ALTER SYSTEM SET max_connections
+        = {current_connections * 1.5};' | psql -U postgres && echo 'SELECT pg_reload_conf();'
+        | psql -U postgres"
+      type: command
+  disk_space_low:
+    conditions:
+      metrics:
+        disk_usage_percent: '> 85'
+    description: "Acci\xF3n para poco espacio en disco"
+    priority: critical
+    remediation:
+      command: kubectl exec {pod_name} -- sh -c "echo 'VACUUM FULL;' | psql -U postgres"
+      type: command
+description: "Pol\xEDtica para servicios de base de datos"
+service_id: database_service

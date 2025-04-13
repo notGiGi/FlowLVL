@@ -1,0 +1,27 @@
+# Configuración de fuentes de datos para Grafana
+# Guardar como: ./grafana/provisioning/datasources/datasource.yml
+
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: true
+    version: 1
+    editable: true
+
+  - name: TimescaleDB
+    type: postgres
+    url: timescaledb:5432
+    database: metrics_db
+    user: predictor
+    secureJsonData:
+      password: "predictor_password"
+    jsonData:
+      sslmode: "disable"
+      postgresVersion: 1200
+      timescaledb: true
+    version: 1
+    editable: true

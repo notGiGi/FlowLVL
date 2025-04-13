@@ -1,0 +1,38 @@
+actions:
+  high_cpu:
+    conditions:
+      metrics:
+        cpu_usage: '> 90'
+    description: "Acci\xF3n para alto uso de CPU"
+    priority: high
+    remediation:
+      command: kubectl scale deployment {service_name} --replicas={current_replicas
+        + 1}
+      rollback: kubectl scale deployment {service_name} --replicas={original_replicas}
+      type: command
+  high_latency:
+    conditions:
+      metrics:
+        response_time_ms: '> 500'
+    description: "Acci\xF3n para alta latencia"
+    priority: medium
+    remediation:
+      endpoint: http://{service_host}:{service_port}/admin/cache/clear
+      headers:
+        Authorization: Bearer {service_token}
+      method: POST
+      payload:
+        scope: all
+      type: api
+  memory_leak:
+    conditions:
+      metrics:
+        memory_growth_rate: '> 10'
+        memory_usage: '> 85'
+    description: "Acci\xF3n para posible fuga de memoria"
+    priority: critical
+    remediation:
+      command: kubectl rollout restart deployment {service_name}
+      type: command
+description: "Pol\xEDtica para servicios web"
+service_id: web_service

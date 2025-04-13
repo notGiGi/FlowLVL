@@ -1,0 +1,66 @@
+# Configuración global de Prometheus
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  scrape_timeout: 10s
+
+# Alertmanager para enviar alertas
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          # - alertmanager:9093
+
+# Opciones del servicio
+rule_files:
+  # - "alerts.yml"
+
+# Configuración de los targets para recopilar métricas
+scrape_configs:
+  # Configuración para recopilar métricas del propio Prometheus
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Configuración para recopilar métricas del API REST
+  - job_name: 'api'
+    metrics_path: '/metrics'
+    static_configs:
+      - targets: ['api:8000']
+    scrape_interval: 10s
+
+  # Configuración para recopilar métricas de Kafka
+  - job_name: 'kafka'
+    static_configs:
+      - targets: ['kafka:9308']  # kafka_exporter
+    scrape_interval: 10s
+
+  # Configuración para recopilar métricas de TimescaleDB
+  - job_name: 'timescaledb'
+    static_configs:
+      - targets: ['timescaledb_exporter:9187']  # postgres_exporter
+    scrape_interval: 10s
+
+  # Configuración para recopilar métricas de los nodos
+  - job_name: 'node'
+    static_configs:
+      - targets: ['node-exporter:9100']
+    scrape_interval: 10s
+
+  # Configuración para recopilar métricas del detector de anomalías
+  - job_name: 'anomaly_detector'
+    static_configs:
+      - targets: ['anomaly_detector:8000']
+    scrape_interval: 10s
+
+  # Configuración para recopilar métricas del motor predictivo
+  - job_name: 'predictive_engine'
+    static_configs:
+      - targets: ['predictive_engine:8000']
+    scrape_interval: 10s
+
+  # Configuración para recopilar métricas del recomendador de acciones
+  - job_name: 'action_recommender'
+    static_configs:
+      - targets: ['action_recommender:8000']
+    scrape_interval: 10s
