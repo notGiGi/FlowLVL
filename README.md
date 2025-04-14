@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Sistema Predictivo de Mantenimiento para Sistemas Distribuidos
 
 Este proyecto implementa un sistema avanzado de IA para la predicción, detección y mitigación proactiva de fallos en sistemas distribuidos, utilizando técnicas de machine learning y análisis de datos en tiempo real.
@@ -252,3 +253,6 @@ Este proyecto está licenciado bajo la licencia MIT - ver el archivo [LICENSE](L
 
 - Menciona a cualquier persona que haya contribuido al proyecto
 - Inspiraciones, recursos utilizados, etc.
+=======
+# FlowLVL
+>>>>>>> 82e020785ff2e209e6c370029755b2301ecf50f5

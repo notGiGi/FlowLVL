@@ -1,429 +1,1075 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Predictive Engine - Sistema predictivo de mantenimiento para sistemas distribuidos
+--------------------------------------------------------------------------------
+Módulo de predicción de fallos con LSTM y mecanismo de atención.
+"""
+
 import os
 import json
 import logging
 import numpy as np
 import pandas as pd
-import tensorflow as tf
-from kafka import KafkaConsumer, KafkaProducer
-from sqlalchemy import create_engine
-from datetime import datetime, timedelta
-import time
-from threading import Thread
-from tensorflow.keras.models import load_model, Sequential
-from tensorflow.keras.layers import LSTM, Dense, Dropout, Input
-from tensorflow.keras.callbacks import EarlyStopping
-from sklearn.preprocessing import MinMaxScaler
 import joblib
-import pickle
+import time
+from datetime import datetime, timedelta
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import f1_score, roc_auc_score, confusion_matrix, precision_recall_curve
+import tensorflow as tf
+from tensorflow.keras.models import Model, Sequential, load_model
+from tensorflow.keras.layers import Input, Dense, LSTM, Dropout, TimeDistributed
+from tensorflow.keras.layers import RepeatVector, Flatten, Activation, Permute, Multiply, Lambda
+from tensorflow.keras.callbacks import EarlyStopping, ReduceLROnPlateau, ModelCheckpoint
+from tensorflow.keras import backend as K
+import matplotlib.pyplot as plt
+import seaborn as sns
+import warnings
 
-# Configurar logging
+# Configuración de logging
 logging.basicConfig(
     level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    format='[%(asctime)s] %(levelname)s [%(name)s]: %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
 )
 logger = logging.getLogger('predictive_engine')
 
+# Suprimir advertencias
+warnings.filterwarnings("ignore")
+
+# Configurar uso de memoria GPU si está disponible
+gpus = tf.config.experimental.list_physical_devices('GPU')
+if gpus:
+    try:
+        for gpu in gpus:
+            tf.config.experimental.set_memory_growth(gpu, True)
+        logger.info(f"GPU disponible para entrenamiento: {len(gpus)} dispositivos")
+    except RuntimeError as e:
+        logger.warning(f"Error al configurar GPU: {str(e)}")
+else:
+    logger.info("No se detectó GPU, usando CPU para entrenamiento")
+
+
+class AttentionLayer(tf.keras.layers.Layer):
+    """
+    Capa de atención personalizada para LSTM
+    Permite al modelo enfocarse en pasos de tiempo específicos
+    """
+    def __init__(self, **kwargs):
+        super(AttentionLayer, self).__init__(**kwargs)
+        
+    def build(self, input_shape):
+        # Crea los pesos para la capa de atención
+        self.W = self.add_weight(
+            name="attention_weight",
+            shape=(input_shape[-1], 1),
+            initializer="random_normal",
+            trainable=True
+        )
+        self.b = self.add_weight(
+            name="attention_bias",
+            shape=(input_shape[1], 1),
+            initializer="zeros",
+            trainable=True
+        )
+        super(AttentionLayer, self).build(input_shape)
+    
+    def call(self, inputs):
+        # Calcular puntuaciones de atención
+        e = K.tanh(K.dot(inputs, self.W) + self.b)
+        # Obtener pesos de atención vía softmax
+        a = K.softmax(e, axis=1)
+        # Aplicar atención a las entradas
+        output = K.sum(inputs * a, axis=1)
+        return output
+    
+    def compute_output_shape(self, input_shape):
+        return (input_shape[0], input_shape[-1])
+    
+    def get_config(self):
+        return super(AttentionLayer, self).get_config()
+
+
+def create_attention_lstm_model(input_shape, output_shape=1, lstm_units=128, dropout_rate=0.2):
+    """
+    Crea un modelo LSTM con mecanismo de atención
+    
+    Args:
+        input_shape: Forma de los datos de entrada (sequence_length, features)
+        output_shape: Número de salidas (1 para clasificación binaria)
+        lstm_units: Número de unidades en la capa LSTM
+        dropout_rate: Tasa de dropout para regularización
+    
+    Returns:
+        Modelo compilado
+    """
+    # Capa de entrada
+    inputs = Input(shape=input_shape)
+    
+    # Primera capa LSTM (devuelve secuencias)
+    lstm_out = LSTM(lstm_units, return_sequences=True)(inputs)
+    lstm_out = Dropout(dropout_rate)(lstm_out)
+    
+    # Segunda capa LSTM (devuelve secuencias)
+    lstm_out = LSTM(lstm_units//2, return_sequences=True)(lstm_out)
+    lstm_out = Dropout(dropout_rate)(lstm_out)
+    
+    # Capa de atención
+    attention_out = AttentionLayer()(lstm_out)
+    
+    # Capas densas para clasificación
+    dense_out = Dense(lstm_units//4, activation='relu')(attention_out)
+    dense_out = Dropout(dropout_rate)(dense_out)
+    outputs = Dense(output_shape, activation='sigmoid')(dense_out)
+    
+    # Crear y compilar modelo
+    model = Model(inputs=inputs, outputs=outputs)
+    model.compile(
+        optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
+        loss='binary_crossentropy',
+        metrics=['accuracy']
+    )
+    
+    return model
+
+
+# Alternativa utilizando capas básicas
+def create_simplified_attention_lstm(input_shape, output_shape=1, lstm_units=128, dropout_rate=0.2):
+    """
+    Implementación alternativa usando capas estándar de Keras
+    """
+    # Capa de entrada
+    inputs = Input(shape=input_shape)
+    
+    # Primera capa LSTM
+    lstm_out = LSTM(lstm_units, return_sequences=True)(inputs)
+    lstm_out = Dropout(dropout_rate)(lstm_out)
+    
+    # Segunda capa LSTM
+    lstm_out = LSTM(lstm_units//2, return_sequences=True)(lstm_out)
+    lstm_out = Dropout(dropout_rate)(lstm_out)
+    
+    # Mecanismo de atención
+    attention = TimeDistributed(Dense(1, activation='tanh'))(lstm_out)
+    attention = Flatten()(attention)
+    attention = Activation('softmax')(attention)
+    attention = RepeatVector(lstm_units//2)(attention)
+    attention = Permute([2, 1])(attention)
+    
+    # Aplicar atención
+    merged = Multiply()([lstm_out, attention])
+    merged = Lambda(lambda x: K.sum(x, axis=1))(merged)
+    
+    # Capas densas finales
+    dense_out = Dense(lstm_units//4, activation='relu')(merged)
+    dense_out = Dropout(dropout_rate)(dense_out)
+    outputs = Dense(output_shape, activation='sigmoid')(dense_out)
+    
+    # Crear y compilar modelo
+    model = Model(inputs=inputs, outputs=outputs)
+    model.compile(
+        optimizer='adam',
+        loss='binary_crossentropy',
+        metrics=['accuracy']
+    )
+    
+    return model
+
+
 class PredictiveEngine:
-    def __init__(self):
-        # Configuración de conexiones
-        self.db_host = os.environ.get('DB_HOST', 'timescaledb')
-        self.db_port = os.environ.get('DB_PORT', '5432')
-        self.db_user = os.environ.get('DB_USER', 'predictor')
-        self.db_password = os.environ.get('DB_PASSWORD', 'predictor_password')
-        self.db_name = os.environ.get('DB_NAME', 'metrics_db')
-        self.kafka_servers = os.environ.get('KAFKA_BOOTSTRAP_SERVERS', 'kafka:29092')
+    """
+    Motor predictivo para sistemas distribuidos utilizando LSTM con atención
+    para la predicción anticipada de fallos.
+    """
+    
+    def __init__(self, config=None, engine=None, kafka_producer=None):
+        """
+        Inicializa el motor predictivo.
         
-        # Conectar a la base de datos
-        self.db_url = f"postgresql://{self.db_user}:{self.db_password}@{self.db_host}:{self.db_port}/{self.db_name}"
-        self.engine = create_engine(self.db_url)
+        Args:
+            config: Configuración del motor predictivo
+            engine: Conexión a la base de datos
+            kafka_producer: Productor Kafka para publicar predicciones
+        """
+        self.config = config or {}
+        self.engine = engine
+        self.kafka_producer = kafka_producer
         
-        # Configurar consumidor Kafka
-        self.consumer = KafkaConsumer(
-            'processed_metrics',
-            bootstrap_servers=self.kafka_servers,
-            auto_offset_reset='latest',
-            value_deserializer=lambda x: json.loads(x.decode('utf-8')),
-            group_id='predictive_engine_group'
-        )
+        # Parámetros de configuración
+        self.models_dir = self.config.get('models_dir', '/app/models/predictive')
+        self.sequence_length = self.config.get('sequence_length', 12)  # 12 puntos de tiempo
+        self.prediction_threshold = self.config.get('prediction_threshold', 0.7)
+        self.horizon_hours = self.config.get('horizon_hours', [1, 6, 24])  # Horizonte de predicción en horas
+        self.retrain_interval = self.config.get('retrain_interval', 168)  # Reentrenar cada 7 días (en horas)
         
-        # Configurar productor Kafka
-        self.producer = KafkaProducer(
-            bootstrap_servers=self.kafka_servers,
-            value_serializer=lambda x: json.dumps(x).encode('utf-8')
-        )
+        # Crear directorio de modelos si no existe
+        os.makedirs(self.models_dir, exist_ok=True)
         
-        # Cargar modelos y escaladores
-        self.models = {}
-        self.scalers = {}
-        self.service_data = {}
-        self.sequence_length = 20  # Longitud de secuencia para modelos LSTM
-        self.prediction_horizon = 5  # Horizonte de predicción (en intervalos de tiempo)
-        self.failure_threshold = 0.7  # Umbral para considerar predicción de fallo
+        # Inicializar scalers y modelos
+        self.scalers = {}  # Scaler por servicio
+        self.models = {}  # Modelo por servicio
+        self.service_features = {}  # Características importantes por servicio
+        self.model_metadata = {}  # Metadatos de modelo por servicio
+        self.attention_weights = {}  # Pesos de atención por servicio
         
-        # Cargar o crear modelos por servicio
+        # Estadísticas de predicción
+        self.prediction_stats = {
+            'total_predictions': 0,
+            'positive_predictions': 0,
+            'last_predictions': [],
+            'last_update': datetime.now().isoformat()
+        }
+        
+        # Cargar modelos existentes
         self.load_models()
         
-        logger.info("Motor predictivo inicializado correctamente")
-
+        logger.info("Motor predictivo inicializado")
+    
     def load_models(self):
-        """Carga los modelos predictivos existentes o crea nuevos si no existen"""
-        # Directorio para modelos
-        models_dir = "/app/models/predictive"
-        os.makedirs(models_dir, exist_ok=True)
-        
+        """Carga modelos predictivos previamente entrenados"""
         try:
-            # Cargar registro de modelos si existe
-            model_registry_path = os.path.join(models_dir, "model_registry.json")
-            if os.path.exists(model_registry_path):
-                with open(model_registry_path, 'r') as f:
-                    model_registry = json.load(f)
+            # Obtener lista de servicios con modelos
+            services = []
+            for filename in os.listdir(self.models_dir):
+                if filename.endswith('_model.h5'):
+                    service_id = filename.replace('_model.h5', '')
+                    services.append(service_id)
+            
+            # Cargar modelo y scaler para cada servicio
+            for service_id in services:
+                model_path = os.path.join(self.models_dir, f"{service_id}_model.h5")
+                scaler_path = os.path.join(self.models_dir, f"{service_id}_scaler.joblib")
+                metadata_path = os.path.join(self.models_dir, f"{service_id}_metadata.json")
                 
-                # Cargar cada modelo registrado
-                for service_id, model_info in model_registry.items():
-                    model_path = model_info.get('model_path')
-                    scaler_path = model_info.get('scaler_path')
-                    feature_list = model_info.get('features', [])
+                # Cargar modelo
+                if os.path.exists(model_path):
+                    # Necesitamos registrar la capa personalizada para cargar el modelo
+                    custom_objects = {"AttentionLayer": AttentionLayer}
+                    self.models[service_id] = load_model(model_path, custom_objects=custom_objects)
+                    logger.info(f"Modelo predictivo cargado para servicio {service_id}")
+                
+                # Cargar scaler
+                if os.path.exists(scaler_path):
+                    self.scalers[service_id] = joblib.load(scaler_path)
+                    logger.info(f"Scaler cargado para servicio {service_id}")
+                
+                # Cargar metadatos
+                if os.path.exists(metadata_path):
+                    with open(metadata_path, 'r') as f:
+                        self.model_metadata[service_id] = json.load(f)
+                    logger.info(f"Metadatos cargados para servicio {service_id}")
                     
-                    if os.path.exists(model_path) and os.path.exists(scaler_path):
-                        self.models[service_id] = load_model(model_path)
-                        self.scalers[service_id] = joblib.load(scaler_path)
-                        self.service_data[service_id] = {
-                            'features': feature_list,
-                            'data_buffer': []
-                        }
-                        logger.info(f"Modelo cargado para servicio: {service_id}")
-            else:
-                logger.info("No se encontró registro de modelos, se crearán dinámicamente")
+                    # Extraer características importantes
+                    if 'feature_importance' in self.model_metadata[service_id]:
+                        self.service_features[service_id] = self.model_metadata[service_id]['feature_importance']
+                    
+                    # Extraer pesos de atención si existen
+                    if 'attention_weights' in self.model_metadata[service_id]:
+                        self.attention_weights[service_id] = self.model_metadata[service_id]['attention_weights']
+            
+            # Cargar estadísticas generales si existen
+            stats_path = os.path.join(self.models_dir, 'prediction_stats.json')
+            if os.path.exists(stats_path):
+                with open(stats_path, 'r') as f:
+                    self.prediction_stats = json.load(f)
+                logger.info("Estadísticas de predicción cargadas")
+            
+            logger.info(f"Se cargaron modelos para {len(self.models)} servicios")
+            
         except Exception as e:
             logger.error(f"Error al cargar modelos: {str(e)}")
     
-    def create_lstm_model(self, input_shape, output_shape=1):
-        """Crea un modelo LSTM para predicción de series temporales"""
-        model = Sequential([
-            Input(shape=input_shape),
-            LSTM(128, return_sequences=True),
-            Dropout(0.2),
-            LSTM(64),
-            Dropout(0.2),
-            Dense(32, activation='relu'),
-            Dense(output_shape, activation='sigmoid')
-        ])
+    def prepare_sequence_data(self, data, service_id, train_mode=False):
+        """
+        Prepara los datos en secuencias para entrada al modelo LSTM.
         
-        model.compile(
-            optimizer='adam',
-            loss='binary_crossentropy' if output_shape == 1 else 'categorical_crossentropy',
-            metrics=['accuracy']
-        )
-        
-        return model
-
-    def train_model_for_service(self, service_id):
-        """Entrena un modelo para un servicio específico usando datos históricos"""
+        Args:
+            data: DataFrame con datos históricos ordenados por tiempo
+            service_id: ID del servicio
+            train_mode: Si es True, entrena un nuevo scaler
+            
+        Returns:
+            Tuple: (X_sequences, y_labels)
+        """
         try:
-            # Obtener datos históricos del servicio
-            query = f"""
-                SELECT * FROM metrics 
-                WHERE service_id = '{service_id}' 
-                AND timestamp > NOW() - INTERVAL '30 days'
-                ORDER BY timestamp ASC
-            """
-            df = pd.read_sql(query, self.engine)
-            
-            if df.empty:
-                logger.warning(f"No hay suficientes datos para entrenar modelo para servicio {service_id}")
+            # Asegurarse que hay suficientes datos
+            if len(data) < self.sequence_length + 1:
+                logger.warning(f"Datos insuficientes para {service_id}: {len(data)} filas")
                 return None, None
             
-            # Obtener datos de fallos históricos
-            failure_query = f"""
-                SELECT * FROM failures 
-                WHERE service_id = '{service_id}' 
-                AND timestamp > NOW() - INTERVAL '30 days'
-            """
-            failures_df = pd.read_sql(failure_query, self.engine)
+            # Seleccionar solo características numéricas
+            numeric_features = data.select_dtypes(include=['number']).columns.tolist()
             
-            # Si no hay fallos registrados, no podemos entrenar el modelo predictivo
-            if failures_df.empty:
-                logger.warning(f"No hay fallos registrados para servicio {service_id}, no se puede entrenar modelo")
+            # Excluir columnas no deseadas
+            exclude_cols = ['id', 'timestamp', 'is_failure', 'service_id', 'prediction']
+            numeric_features = [f for f in numeric_features if f not in exclude_cols]
+            
+            if not numeric_features:
+                logger.warning(f"No se encontraron características numéricas para {service_id}")
                 return None, None
             
-            # Preprocesar datos
-            # Seleccionar características numéricas
-            numeric_features = df.select_dtypes(include=['float64', 'int64']).columns.tolist()
-            if 'timestamp' in numeric_features:
-                numeric_features.remove('timestamp')
+            # Extraer características y etiquetas
+            X = data[numeric_features].values
             
-            feature_df = df[numeric_features].fillna(0)
+            # Para entrenamiento, necesitamos etiquetas
+            if train_mode:
+                if 'is_failure' not in data.columns:
+                    logger.warning(f"No se encontró columna 'is_failure' para {service_id}")
+                    return None, None
+                y = data['is_failure'].values
+            else:
+                y = None
             
-            # Crear etiquetas: 1 si hubo fallo en las próximas N horas, 0 si no
-            prediction_window = timedelta(hours=1)  # Ventana de predicción (ej: 1 hora)
-            labels = []
-            
-            for idx, row in df.iterrows():
-                current_time = row['timestamp']
-                # Verificar si hay fallos en la ventana de predicción
-                future_failures = failures_df[
-                    (failures_df['timestamp'] > current_time) & 
-                    (failures_df['timestamp'] <= current_time + prediction_window)
-                ]
-                labels.append(1 if not future_failures.empty else 0)
-            
-            # Normalizar características
-            scaler = MinMaxScaler()
-            scaled_features = scaler.fit_transform(feature_df)
+            # Escalar datos
+            if service_id in self.scalers and not train_mode:
+                scaler = self.scalers[service_id]
+                X_scaled = scaler.transform(X)
+            else:
+                # Para entrenamiento o si no existe scaler
+                scaler = StandardScaler()
+                X_scaled = scaler.fit_transform(X)
+                self.scalers[service_id] = scaler
+                
+                # Guardar scaler
+                scaler_path = os.path.join(self.models_dir, f"{service_id}_scaler.joblib")
+                joblib.dump(scaler, scaler_path)
             
             # Crear secuencias para LSTM
-            X, y = [], []
-            for i in range(len(scaled_features) - self.sequence_length):
-                X.append(scaled_features[i:i + self.sequence_length])
-                y.append(labels[i + self.sequence_length])
+            X_sequences = []
+            y_labels = []
             
-            X = np.array(X)
-            y = np.array(y)
+            for i in range(len(X_scaled) - self.sequence_length):
+                # Secuencia de características
+                X_sequences.append(X_scaled[i:i + self.sequence_length])
+                
+                # Para entrenamiento, etiqueta es si hubo fallo después de la secuencia
+                if train_mode:
+                    y_labels.append(y[i + self.sequence_length])
             
-            # Si hay muy pocos ejemplos positivos, no entrenar
-            if sum(y) < 5:
-                logger.warning(f"Insuficientes ejemplos de fallos para servicio {service_id}")
+            # Convertir a arrays numpy
+            X_sequences = np.array(X_sequences)
+            if train_mode:
+                y_labels = np.array(y_labels)
+            
+            # Guardar las características utilizadas
+            self.service_features[service_id] = numeric_features
+            
+            return X_sequences, y_labels
+            
+        except Exception as e:
+            logger.error(f"Error al preparar datos de secuencia: {str(e)}")
+            return None, None
+    
+    def train_model_for_service(self, service_id, data=None):
+        """
+        Entrena un modelo para un servicio específico.
+        
+        Args:
+            service_id: ID del servicio
+            data: DataFrame con datos históricos (opcional)
+            
+        Returns:
+            Tuple: (model, metadata)
+        """
+        try:
+            # Si no se proporcionan datos, obtenerlos de la base de datos
+            if data is None and self.engine is not None:
+                # Consulta para obtener datos históricos con etiquetas de fallos
+                query = f"""
+                    SELECT m.*, 
+                           CASE WHEN f.failure_id IS NOT NULL THEN 1 ELSE 0 END as is_failure
+                    FROM metrics m
+                    LEFT JOIN failures f 
+                      ON m.service_id = f.service_id 
+                      AND f.timestamp BETWEEN m.timestamp AND m.timestamp + INTERVAL '24 hours'
+                    WHERE m.service_id = '{service_id}'
+                    ORDER BY m.timestamp
+                """
+                data = pd.read_sql(query, self.engine)
+                
+                if data.empty:
+                    logger.warning(f"No se encontraron datos para {service_id}")
+                    return None, None
+                
+                logger.info(f"Datos obtenidos para entrenamiento: {len(data)} filas")
+            
+            if data is None or data.empty:
+                logger.warning(f"No hay datos disponibles para entrenar modelo de {service_id}")
+                return None, None
+            
+            # Verificar distribución de clases
+            if 'is_failure' in data.columns:
+                failure_count = data['is_failure'].sum()
+                total_samples = len(data)
+                failure_rate = failure_count / total_samples if total_samples > 0 else 0
+                
+                logger.info(f"Distribución de clases para {service_id}: "
+                           f"{failure_count} fallos de {total_samples} muestras ({failure_rate:.2%})")
+                
+                # Si hay muy pocos fallos, puede ser difícil entrenar el modelo
+                if failure_count < 10:
+                    logger.warning(f"Muy pocos fallos para {service_id}: {failure_count} fallos")
+                    # Considerar técnicas de balanceo
+            
+            # Preparar datos de secuencia
+            X_sequences, y_labels = self.prepare_sequence_data(data, service_id, train_mode=True)
+            
+            if X_sequences is None or y_labels is None:
+                logger.warning(f"No se pudieron preparar secuencias para {service_id}")
                 return None, None
             
             # Dividir en entrenamiento y validación
-            train_size = int(len(X) * 0.8)
-            X_train, X_val = X[:train_size], X[train_size:]
-            y_train, y_val = y[:train_size], y[train_size:]
+            X_train, X_val, y_train, y_val = train_test_split(
+                X_sequences, y_labels, test_size=0.2, random_state=42, stratify=y_labels
+            )
             
-            # Crear y entrenar modelo
-            model = self.create_lstm_model(input_shape=(self.sequence_length, len(numeric_features)))
+            logger.info(f"Datos de entrenamiento: {X_train.shape}, Validación: {X_val.shape}")
             
+            # Obtener forma de entrada
+            input_shape = (X_train.shape[1], X_train.shape[2])
+            
+            # Crear modelo con atención
+            model = create_attention_lstm_model(
+                input_shape=input_shape,
+                output_shape=1,
+                lstm_units=128,
+                dropout_rate=0.3
+            )
+            
+            # Callbacks para entrenamiento
             early_stopping = EarlyStopping(
                 monitor='val_loss',
-                patience=5,
+                patience=8,
                 restore_best_weights=True
             )
             
-            model.fit(
-                X_train, y_train,
-                validation_data=(X_val, y_val),
-                epochs=50,
-                batch_size=32,
-                callbacks=[early_stopping],
+            reduce_lr = ReduceLROnPlateau(
+                monitor='val_loss',
+                factor=0.5,
+                patience=3,
+                min_lr=0.0001
+            )
+            
+            checkpoint = ModelCheckpoint(
+                os.path.join(self.models_dir, f"{service_id}_best_model.h5"),
+                monitor='val_loss',
+                save_best_only=True,
                 verbose=1
             )
             
-            # Guardar modelo y scaler
-            models_dir = "/app/models/predictive"
-            model_path = os.path.join(models_dir, f"{service_id}_model.h5")
-            scaler_path = os.path.join(models_dir, f"{service_id}_scaler.joblib")
+            # Calcular pesos de clase para balanceo
+            class_weights = None
+            if len(np.unique(y_train)) > 1:
+                neg_samples = np.sum(y_train == 0)
+                pos_samples = np.sum(y_train == 1)
+                if pos_samples > 0:
+                    weight_ratio = neg_samples / pos_samples
+                    class_weights = {0: 1.0, 1: weight_ratio}
+                    logger.info(f"Pesos de clase para balanceo: {class_weights}")
             
+            # Entrenar modelo
+            history = model.fit(
+                X_train, y_train,
+                validation_data=(X_val, y_val),
+                epochs=100,
+                batch_size=32,
+                callbacks=[early_stopping, reduce_lr, checkpoint],
+                verbose=1,
+                class_weight=class_weights
+            )
+            
+            # Evaluar modelo
+            val_loss, val_acc = model.evaluate(X_val, y_val, verbose=0)
+            
+            # Calcular métricas avanzadas
+            val_pred = model.predict(X_val).ravel()
+            val_pred_binary = (val_pred >= 0.5).astype(int)
+            
+            f1 = f1_score(y_val, val_pred_binary)
+            auc = roc_auc_score(y_val, val_pred)
+            tn, fp, fn, tp = confusion_matrix(y_val, val_pred_binary).ravel()
+            
+            precision = tp / (tp + fp) if (tp + fp) > 0 else 0
+            recall = tp / (tp + fn) if (tp + fn) > 0 else 0
+            
+            # Extraer pesos de atención para interpretabilidad
+            # Esto requiere modificar el modelo para extraer estos pesos
+            attention_weights = None
+            # TODO: Implementar extracción de pesos de atención
+            
+            # Calcular importancia de características usando permutation importance
+            # Esto requiere entrenamiento adicional
+            feature_importance = {}
+            for i, feature in enumerate(self.service_features.get(service_id, [])):
+                feature_importance[feature] = 1.0  # Placeholder, implementar cálculo real
+            
+            # Ordenar por importancia
+            feature_importance = {k: v for k, v in sorted(feature_importance.items(), 
+                                                         key=lambda item: item[1], 
+                                                         reverse=True)}
+            
+            # Guardar modelo
+            model_path = os.path.join(self.models_dir, f"{service_id}_model.h5")
             model.save(model_path)
-            joblib.dump(scaler, scaler_path)
             
-            # Actualizar registro de modelos
-            model_registry_path = os.path.join(models_dir, "model_registry.json")
-            model_registry = {}
-            
-            if os.path.exists(model_registry_path):
-                with open(model_registry_path, 'r') as f:
-                    model_registry = json.load(f)
-            
-            model_registry[service_id] = {
-                'model_path': model_path,
-                'scaler_path': scaler_path,
-                'features': numeric_features,
-                'created_at': datetime.now().isoformat()
+            # Guardar metadatos
+            metadata = {
+                'trained_at': datetime.now().isoformat(),
+                'metrics': {
+                    'val_loss': float(val_loss),
+                    'val_accuracy': float(val_acc),
+                    'f1_score': float(f1),
+                    'auc': float(auc),
+                    'precision': float(precision),
+                    'recall': float(recall),
+                    'confusion_matrix': {
+                        'tn': int(tn),
+                        'fp': int(fp),
+                        'fn': int(fn),
+                        'tp': int(tp)
+                    }
+                },
+                'features': self.service_features.get(service_id, []),
+                'feature_importance': feature_importance,
+                'training_history': {
+                    'loss': [float(x) for x in history.history['loss']],
+                    'val_loss': [float(x) for x in history.history['val_loss']],
+                    'accuracy': [float(x) for x in history.history['accuracy']],
+                    'val_accuracy': [float(x) for x in history.history['val_accuracy']]
+                },
+                'model_config': {
+                    'sequence_length': self.sequence_length,
+                    'prediction_threshold': self.prediction_threshold,
+                    'input_shape': input_shape
+                }
             }
             
-            with open(model_registry_path, 'w') as f:
-                json.dump(model_registry, f)
+            if attention_weights:
+                metadata['attention_weights'] = attention_weights
             
-            logger.info(f"Modelo entrenado y guardado para servicio {service_id}")
+            # Guardar metadatos
+            metadata_path = os.path.join(self.models_dir, f"{service_id}_metadata.json")
+            with open(metadata_path, 'w') as f:
+                json.dump(metadata, f)
             
-            return model, scaler, numeric_features
+            # Actualizar modelos y metadatos en memoria
+            self.models[service_id] = model
+            self.model_metadata[service_id] = metadata
+            
+            logger.info(f"Modelo entrenado y guardado para {service_id}, "
+                      f"F1-score: {f1:.3f}, AUC: {auc:.3f}")
+            
+            return model, metadata
             
         except Exception as e:
-            logger.error(f"Error al entrenar modelo para servicio {service_id}: {str(e)}")
+            logger.error(f"Error al entrenar modelo para {service_id}: {str(e)}")
             return None, None
-
-    def predict_failures(self, service_id, data_buffer):
-        """Predice fallos futuros para un servicio específico"""
+    
+    def predict_failures(self, service_id, data, horizon_hours=None):
+        """
+        Predice la probabilidad de fallo para un servicio.
+        
+        Args:
+            service_id: ID del servicio
+            data: Datos recientes para predicción
+            horizon_hours: Horizonte de predicción en horas (lista de horas)
+            
+        Returns:
+            dict: Resultado de la predicción
+        """
         try:
-            # Verificar si tenemos suficientes datos en el buffer
-            if len(data_buffer) < self.sequence_length:
-                return None, 0.0
+            # Incrementar contador de predicciones
+            self.prediction_stats['total_predictions'] += 1
             
             # Verificar si tenemos modelo para este servicio
             if service_id not in self.models:
-                model, scaler, features = self.train_model_for_service(service_id)
-                if model is None:
-                    return None, 0.0
+                logger.warning(f"No hay modelo disponible para {service_id}, intentando entrenar")
+                self.train_model_for_service(service_id)
                 
-                self.models[service_id] = model
-                self.scalers[service_id] = scaler
-                self.service_data[service_id] = {
-                    'features': features,
-                    'data_buffer': data_buffer[-self.sequence_length:]
+                if service_id not in self.models:
+                    logger.error(f"No se pudo entrenar modelo para {service_id}")
+                    return {
+                        'service_id': service_id,
+                        'timestamp': datetime.now().isoformat(),
+                        'prediction': False,
+                        'probability': 0.0,
+                        'error': 'Modelo no disponible'
+                    }
+            
+            # Convertir a DataFrame si es un diccionario
+            if isinstance(data, dict):
+                data_df = pd.DataFrame([data])
+            else:
+                data_df = pd.DataFrame(data)
+            
+            # Preparar secuencias para predicción
+            if len(data_df) < self.sequence_length:
+                logger.warning(f"Datos insuficientes para {service_id}, se necesitan al menos {self.sequence_length} puntos")
+                return {
+                    'service_id': service_id,
+                    'timestamp': datetime.now().isoformat(),
+                    'prediction': False,
+                    'probability': 0.0,
+                    'error': 'Datos insuficientes'
                 }
             
-            # Obtener las características relevantes
-            features = self.service_data[service_id]['features']
+            # Tomar últimos N puntos para la secuencia
+            recent_data = data_df.iloc[-self.sequence_length:].copy()
             
-            # Extraer las características del buffer de datos
-            feature_data = []
-            for item in data_buffer[-self.sequence_length:]:
-                features_dict = {}
-                for feature in features:
-                    if feature in item:
-                        features_dict[feature] = item[feature]
-                    else:
-                        features_dict[feature] = 0  # Valor por defecto si falta
-                
-                feature_values = [features_dict[f] for f in features]
-                feature_data.append(feature_values)
+            # Preparar secuencia
+            X_sequence, _ = self.prepare_sequence_data(recent_data, service_id, train_mode=False)
             
-            # Normalizar datos
-            scaler = self.scalers[service_id]
-            feature_data_array = np.array(feature_data)
-            scaled_data = scaler.transform(feature_data_array)
-            
-            # Preparar input para el modelo (añadir dimensión de batch)
-            model_input = np.expand_dims(scaled_data, axis=0)
+            if X_sequence is None:
+                logger.warning(f"No se pudo preparar secuencia para {service_id}")
+                return {
+                    'service_id': service_id,
+                    'timestamp': datetime.now().isoformat(),
+                    'prediction': False,
+                    'probability': 0.0,
+                    'error': 'Error al preparar secuencia'
+                }
             
             # Realizar predicción
-            model = self.models[service_id]
-            failure_probability = model.predict(model_input, verbose=0)[0][0]
+            failure_prob = self.models[service_id].predict(X_sequence, verbose=0)[0][0]
             
-            # Si la probabilidad supera el umbral, predecir fallo
-            predicted_failure = failure_probability >= self.failure_threshold
+            # Aplicar umbral de predicción
+            prediction = failure_prob >= self.prediction_threshold
             
-            return predicted_failure, float(failure_probability)
+            # Horizonte de predicción
+            if horizon_hours is None:
+                horizon_hours = self.horizon_hours
+            
+            # Determinar qué horizonte tiene mayor probabilidad
+            horizon_probs = {}
+            
+            # Para un modelo completo, tendríamos diferentes modelos para diferentes horizontes
+            # Aquí simplificamos asumiendo mayor probabilidad para horizontes más cercanos
+            for hours in horizon_hours:
+                decay_factor = 1.0 - (0.1 * hours / 24)  # Decaimiento por hora
+                horizon_probs[hours] = failure_prob * max(0.1, decay_factor)
+            
+            # Seleccionar horizonte con mayor probabilidad
+            best_horizon = max(horizon_probs, key=horizon_probs.get)
+            
+            # Identificar métricas con mayor influencia
+            # Idealmente esto usaría pesos de atención, pero usamos una aproximación
+            # basada en desviaciones de valores normales y tendencias
+            influential_metrics = self._identify_influential_metrics(service_id, data_df)
+            
+            # Registrar predicción positiva si aplica
+            if prediction:
+                self.prediction_stats['positive_predictions'] += 1
+                
+                # Guardar predicción para seguimiento
+                prediction_record = {
+                    'service_id': service_id,
+                    'timestamp': datetime.now().isoformat(),
+                    'probability': float(failure_prob),
+                    'horizon_hours': best_horizon,
+                    'predicted_failure_time': (datetime.now() + timedelta(hours=best_horizon)).isoformat(),
+                    'influential_metrics': influential_metrics
+                }
+                
+                self.prediction_stats['last_predictions'].append(prediction_record)
+                
+                # Mantener solo las últimas 100 predicciones
+                if len(self.prediction_stats['last_predictions']) > 100:
+                    self.prediction_stats['last_predictions'] = self.prediction_stats['last_predictions'][-100:]
+                
+                # Actualizar timestamp
+                self.prediction_stats['last_update'] = datetime.now().isoformat()
+                
+                # Guardar estadísticas
+                stats_path = os.path.join(self.models_dir, 'prediction_stats.json')
+                with open(stats_path, 'w') as f:
+                    json.dump(self.prediction_stats, f)
+            
+            # Preparar resultado de predicción
+            result = {
+                'service_id': service_id,
+                'timestamp': datetime.now().isoformat(),
+                'prediction': bool(prediction),
+                'probability': float(failure_prob),
+                'prediction_horizon': best_horizon,
+                'predicted_failure_time': (datetime.now() + timedelta(hours=best_horizon)).isoformat() if prediction else None,
+                'confidence': 'high' if failure_prob > 0.85 or failure_prob < 0.15 else 'medium' if failure_prob > 0.7 or failure_prob < 0.3 else 'low',
+                'influential_metrics': influential_metrics,
+                'horizon_probabilities': {str(h): float(p) for h, p in horizon_probs.items()},
+            }
+            
+            # Publicar en Kafka si es una predicción positiva y tenemos productor
+            if prediction and self.kafka_producer:
+                try:
+                    self.kafka_producer.send('failure_predictions', result)
+                    logger.info(f"Predicción de fallo publicada para {service_id} con prob={failure_prob:.3f}")
+                except Exception as e:
+                    logger.error(f"Error al publicar predicción en Kafka: {str(e)}")
+            
+            return result
             
         except Exception as e:
-            logger.error(f"Error al predecir fallos para servicio {service_id}: {str(e)}")
-            return None, 0.0
-
-    def process_message(self, message):
-        """Procesa un mensaje con métricas y realiza predicciones"""
+            logger.error(f"Error al predecir fallos para {service_id}: {str(e)}")
+            return {
+                'service_id': service_id,
+                'timestamp': datetime.now().isoformat(),
+                'prediction': False,
+                'probability': 0.0,
+                'error': str(e)
+            }
+    
+    def _identify_influential_metrics(self, service_id, data_df):
+        """
+        Identifica las métricas más influyentes en la predicción.
+        
+        Args:
+            service_id: ID del servicio
+            data_df: DataFrame con datos recientes
+            
+        Returns:
+            dict: Métricas influyentes y su importancia
+        """
         try:
-            data = message.value
-            service_id = data.get('service_id', 'unknown')
+            influential_metrics = {}
             
-            # Inicializar buffer de datos para este servicio si no existe
-            if service_id not in self.service_data:
-                self.service_data[service_id] = {
-                    'features': [],
-                    'data_buffer': []
-                }
+            # Obtener características del servicio
+            if service_id not in self.service_features:
+                return influential_metrics
             
-            # Añadir datos al buffer
-            self.service_data[service_id]['data_buffer'].append(data)
+            features = self.service_features[service_id]
             
-            # Mantener solo los últimos N elementos en el buffer
-            buffer_size = max(100, self.sequence_length * 2)
-            if len(self.service_data[service_id]['data_buffer']) > buffer_size:
-                self.service_data[service_id]['data_buffer'] = self.service_data[service_id]['data_buffer'][-buffer_size:]
+            # Obtener scaler para normalización
+            if service_id not in self.scalers:
+                return influential_metrics
             
-            # Realizar predicción si tenemos suficientes datos
-            if len(self.service_data[service_id]['data_buffer']) >= self.sequence_length:
-                predicted_failure, probability = self.predict_failures(
-                    service_id, 
-                    self.service_data[service_id]['data_buffer']
-                )
+            scaler = self.scalers[service_id]
+            
+            # Seleccionar solo las características numéricas disponibles
+            available_features = [f for f in features if f in data_df.columns and pd.api.types.is_numeric_dtype(data_df[f])]
+            
+            if not available_features:
+                return influential_metrics
+            
+            # Calcular estadísticas para cada característica
+            for feature in available_features:
+                if feature not in data_df.columns:
+                    continue
                 
-                # Si se predijo un fallo, enviar alerta
-                if predicted_failure:
-                    prediction_data = {
-                        'timestamp': datetime.now().isoformat(),
-                        'service_id': service_id,
-                        'node_id': data.get('node_id', 'unknown'),
-                        'predicted_failure': True,
-                        'failure_probability': probability,
-                        'prediction_horizon': self.prediction_horizon,
-                        'original_data': data
+                # Obtener valores recientes
+                recent_values = data_df[feature].values
+                
+                if len(recent_values) < 2:
+                    continue
+                
+                # Calcular tendencia
+                trend = (recent_values[-1] - recent_values[0]) / max(1e-5, abs(recent_values[0]))
+                
+                # Escalar último valor para comparar con distribución normal
+                feature_idx = list(data_df.columns).index(feature)
+                last_value = recent_values[-1]
+                
+                # Calcular z-score aproximado usando parámetros del scaler
+                if hasattr(scaler, 'mean_') and feature_idx < len(scaler.mean_):
+                    mean = scaler.mean_[feature_idx]
+                    std = scaler.scale_[feature_idx]
+                    if std > 0:
+                        z_score = abs((last_value - mean) / std)
+                    else:
+                        z_score = 0
+                else:
+                    # Cálculo alternativo
+                    mean = np.mean(recent_values)
+                    std = np.std(recent_values) + 1e-5
+                    z_score = abs((last_value - mean) / std)
+                
+                # Calcular score de influencia combinando tendencia y desviación
+                influence_score = (0.7 * z_score) + (0.3 * abs(trend))
+                
+                # Añadir si tiene influencia significativa
+                if influence_score > 1.0:
+                    influential_metrics[feature] = {
+                        'score': float(influence_score),
+                        'trend': float(trend),
+                        'z_score': float(z_score),
+                        'current_value': float(last_value),
+                        'direction': 'increasing' if trend > 0 else 'decreasing'
                     }
-                    
-                    # Enviar a tópico de predicciones
-                    self.producer.send('failure_predictions', prediction_data)
-                    
-                    # Almacenar la predicción
-                    self.store_prediction(prediction_data)
-                    
-                    logger.info(f"Fallo predicho para servicio {service_id} con probabilidad {probability:.4f}")
-                    
+            
+            # Ordenar por puntuación
+            return {k: v for k, v in sorted(influential_metrics.items(), 
+                                           key=lambda item: item[1]['score'], 
+                                           reverse=True)}
+            
+        except Exception as e:
+            logger.error(f"Error al identificar métricas influyentes: {str(e)}")
+            return {}
+    
+    def evaluate_model_performance(self, service_id, test_data=None):
+        """
+        Evalúa el rendimiento del modelo en datos de prueba.
+        
+        Args:
+            service_id: ID del servicio
+            test_data: Datos de prueba (opcional)
+            
+        Returns:
+            dict: Métricas de rendimiento
+        """
+        try:
+            # Verificar si tenemos modelo para este servicio
+            if service_id not in self.models:
+                logger.warning(f"No hay modelo disponible para {service_id}")
+                return {'error': 'Modelo no disponible'}
+            
+            # Si no se proporcionan datos, obtenerlos de la base de datos
+            if test_data is None and self.engine is not None:
+                # Consulta para obtener datos de prueba recientes
+                query = f"""
+                    SELECT m.*, 
+                           CASE WHEN f.failure_id IS NOT NULL THEN 1 ELSE 0 END as is_failure
+                    FROM metrics m
+                    LEFT JOIN failures f 
+                      ON m.service_id = f.service_id 
+                      AND f.timestamp BETWEEN m.timestamp AND m.timestamp + INTERVAL '24 hours'
+                    WHERE m.service_id = '{service_id}'
+                    AND m.timestamp > (SELECT MAX(timestamp) FROM metrics WHERE service_id = '{service_id}') - INTERVAL '30 days'
+                    ORDER BY m.timestamp
+                """
+                test_data = pd.read_sql(query, self.engine)
+                
+                if test_data.empty:
+                    logger.warning(f"No se encontraron datos de prueba para {service_id}")
+                    return {'error': 'Datos de prueba no disponibles'}
+            
+            if test_data is None or test_data.empty:
+                logger.warning(f"No hay datos disponibles para evaluar modelo de {service_id}")
+                return {'error': 'Datos de prueba no disponibles'}
+            
+            # Verificar si hay etiquetas
+            if 'is_failure' not in test_data.columns:
+                logger.warning(f"No hay etiquetas de fallo en los datos de prueba para {service_id}")
+                return {'error': 'No hay etiquetas de fallo en los datos'}
+            
+            # Preparar secuencias para evaluación
+            X_test, y_test = self.prepare_sequence_data(test_data, service_id, train_mode=False)
+            
+            if X_test is None or y_test is None or len(X_test) == 0 or len(y_test) == 0:
+                logger.warning(f"No se pudieron preparar secuencias para evaluación de {service_id}")
+                return {'error': 'Error al preparar secuencias'}
+            
+            # Evaluar modelo
+            test_loss, test_acc = self.models[service_id].evaluate(X_test, y_test, verbose=0)
+            
+            # Calcular métricas avanzadas
+            y_pred = self.models[service_id].predict(X_test).ravel()
+            y_pred_binary = (y_pred >= self.prediction_threshold).astype(int)
+            
+            f1 = f1_score(y_test, y_pred_binary)
+            auc = roc_auc_score(y_test, y_pred)
+            tn, fp, fn, tp = confusion_matrix(y_test, y_pred_binary).ravel()
+            
+            precision = tp / (tp + fp) if (tp + fp) > 0 else 0
+            recall = tp / (tp + fn) if (tp + fn) > 0 else 0
+            
+            # Calcular curva precision-recall
+            precisions, recalls, thresholds = precision_recall_curve(y_test, y_pred)
+            
+            # Gráfico de curva ROC (solo para diagnósticos)
+            # plt.figure(figsize=(8, 6))
+            # plt.plot(recalls, precisions, 'b-', label=f'AUC = {auc:.3f}')
+            # plt.xlabel('Recall')
+            # plt.ylabel('Precision')
+            # plt.title(f'Precision-Recall Curve - {service_id}')
+            # plt.legend(loc='lower left')
+            # plt.grid()
+            # plt.savefig(os.path.join(self.models_dir, f"{service_id}_pr_curve.png"))
+            # plt.close()
+            
+            # Preparar resultados
+            results = {
+                'service_id': service_id,
+                'evaluation_time': datetime.now().isoformat(),
+                'metrics': {
+                    'test_loss': float(test_loss),
+                    'test_accuracy': float(test_acc),
+                    'f1_score': float(f1),
+                    'auc': float(auc),
+                    'precision': float(precision),
+                    'recall': float(recall),
+                    'confusion_matrix': {
+                        'tn': int(tn),
+                        'fp': int(fp),
+                        'fn': int(fn),
+                        'tp': int(tp)
+                    }
+                },
+                'prediction_threshold': self.prediction_threshold,
+                'sample_count': len(y_test),
+                'failure_rate': float(np.mean(y_test))
+            }
+            
+            # Actualizar metadatos del modelo
+            if service_id in self.model_metadata:
+                self.model_metadata[service_id]['last_evaluation'] = results
+                
+                # Guardar metadatos actualizados
+                metadata_path = os.path.join(self.models_dir, f"{service_id}_metadata.json")
+                with open(metadata_path, 'w') as f:
+                    json.dump(self.model_metadata[service_id], f)
+            
+            logger.info(f"Evaluación de modelo para {service_id}: F1={f1:.3f}, AUC={auc:.3f}")
+            
+            return results
+            
+        except Exception as e:
+            logger.error(f"Error al evaluar modelo para {service_id}: {str(e)}")
+            return {'error': str(e)}
+    
+    def check_drift_and_retrain(self, service_id, current_data):
+        """
+        Verifica deriva de modelo y lo reentrenar si es necesario.
+        
+        Args:
+            service_id: ID del servicio
+            current_data: Datos actuales para verificar deriva
+            
+        Returns:
+            bool: True si el modelo fue reentrenado
+        """
+        try:
+            # Verificar si tenemos modelo y metadatos
+            if service_id not in self.models or service_id not in self.model_metadata:
+                logger.warning(f"No hay modelo o metadatos para {service_id}")
+                return False
+            
+            # Obtener fecha de último entrenamiento
+            last_trained = self.model_metadata[service_id].get('trained_at')
+            if not last_trained:
+                logger.warning(f"No hay fecha de entrenamiento para {service_id}")
+                return False
+            
+            # Convertir a datetime
+            try:
+                last_trained_dt = datetime.fromisoformat(last_trained.replace('Z', '+00:00'))
+            except:
+                last_trained_dt = datetime.now() - timedelta(days=30)  # Valor por defecto
+            
+            # Calcular tiempo desde último entrenamiento
+            hours_since_trained = (datetime.now() - last_trained_dt).total_seconds() / 3600
+            
+            # Verificar si es tiempo de reentrenar
+            if hours_since_trained >= self.retrain_interval:
+                logger.info(f"Reentrenando modelo para {service_id} "
+                          f"(último entrenamiento hace {hours_since_trained:.1f} horas)")
+                
+                # Reentrenar modelo
+                new_model, new_metadata = self.train_model_for_service(service_id)
+                
+                if new_model and new_metadata:
+                    logger.info(f"Modelo reentrenado exitosamente para {service_id}")
                     return True
             
-            return False
-                
-        except Exception as e:
-            logger.error(f"Error al procesar mensaje: {str(e)}")
-            return False
-
-    def store_prediction(self, prediction_data):
-        """Almacena la predicción en la base de datos"""
-        try:
-            # Preparar datos para la base de datos
-            prediction_df = pd.DataFrame([{
-                'timestamp': datetime.now(),
-                'service_id': prediction_data['service_id'],
-                'node_id': prediction_data['node_id'],
-                'failure_probability': prediction_data['failure_probability'],
-                'prediction_horizon': prediction_data['prediction_horizon'],
-                'prediction_data': json.dumps(prediction_data)
-            }])
+            # También podemos verificar drift usando métricas de evaluación recientes
+            # Esto requeriría datos etiquetados recientes
             
-            # Insertar en la tabla de predicciones
-            prediction_df.to_sql('failure_predictions', self.engine, if_exists='append', index=False)
+            return False
             
         except Exception as e:
-            logger.error(f"Error al almacenar predicción: {str(e)}")
-
-    def retrain_models_periodically(self):
-        """Función para reentrenar los modelos periódicamente"""
-        while True:
-            try:
-                # Reentrenar cada 48 horas
-                time.sleep(172800)  # 48 horas en segundos
-                logger.info("Iniciando reentrenamiento de modelos predictivos...")
-                
-                # Reentrenar cada modelo existente
-                for service_id in list(self.models.keys()):
-                    logger.info(f"Reentrenando modelo para servicio: {service_id}")
-                    model, scaler, features = self.train_model_for_service(service_id)
-                    if model is not None:
-                        self.models[service_id] = model
-                        self.scalers[service_id] = scaler
-                        self.service_data[service_id]['features'] = features
-                
-                logger.info("Reentrenamiento de modelos predictivos completado")
-                
-            except Exception as e:
-                logger.error(f"Error en reentrenamiento de modelos: {str(e)}")
-                time.sleep(3600)  # Esperar 1 hora antes de reintentar
-
-    def run(self):
-        """Ejecuta el motor predictivo"""
-        # Iniciar hilo para reentrenamiento periódico
-        retraining_thread = Thread(target=self.retrain_models_periodically, daemon=True)
-        retraining_thread.start()
+            logger.error(f"Error al verificar deriva para {service_id}: {str(e)}")
+            return False
+    
+    def process_and_predict(self, data):
+        """
+        Procesa datos y predice fallos.
         
-        logger.info("Motor predictivo iniciado, esperando mensajes...")
-        
+        Args:
+            data: Datos a procesar para predicción
+            
+        Returns:
+            dict: Resultado de la predicción
+        """
         try:
-            # Consumir mensajes de Kafka
-            for message in self.consumer:
-                self.process_message(message)
-                
-        except KeyboardInterrupt:
-            logger.info("Motor predictivo detenido por el usuario")
+            start_time = time.time()
+            
+            # Extraer service_id
+            service_id = data.get('service_id', 'unknown_service')
+            
+            # Verificar si tenemos suficientes datos históricos
+            # En un sistema real, obtendríamos datos históricos de la base de datos
+            # Aquí asumimos que data ya contiene suficientes datos históricos
+            
+            # Predecir fallos
+            prediction_result = self.predict_failures(service_id, data)
+            
+            # Calcular tiempo de procesamiento
+            processing_time = time.time() - start_time
+            prediction_result['processing_time_ms'] = processing_time * 1000
+            
+            # Verificar si es tiempo de reentrenar
+            if service_id in self.models and service_id in self.model_metadata:
+                self.check_drift_and_retrain(service_id, data)
+            
+            return prediction_result
+            
         except Exception as e:
-            logger.error(f"Error en el motor predictivo: {str(e)}")
-        finally:
-            # Cerrar conexiones
-            self.consumer.close()
-            self.producer.close()
+            logger.error(f"Error en process_and_predict: {str(e)}")
+            return {
+                'error': str(e),
+                'service_id': data.get('service_id', 'unknown_service'),
+                'timestamp': datetime.now().isoformat(),
+                'prediction': False
+            }
 
+# Función principal de ejemplo
+def main():
+    """Función principal para pruebas locales"""
+    # Configuración de ejemplo
+    config = {
+        'models_dir': './models/predictive',
+        'sequence_length': 12,
+        'prediction_threshold': 0.7,
+        'horizon_hours': [1, 6, 24]
+    }
+    
+    # Crear motor predictivo
+    engine = PredictiveEngine(config=config)
+    
+    # Datos de ejemplo
+    # En un caso real, tendríamos una serie de datos históricos
+    example_data = []
+    for i in range(15):  # 15 puntos de tiempo
+        example_data.append({
+            'service_id': 'web_service',
+            'cpu_usage': 60 + i * 2,  # Incremento gradual
+            'memory_usage': 50 + i * 1.5,
+            'disk_usage_percent': 65 + i * 0.3,
+            'response_time_ms': 120 + i * 10,
+            'error_rate': 0.5 + i * 0.2,
+            'active_connections': 100 + i * 5
+        })
+    
+    # Convertir a DataFrame
+    example_df = pd.DataFrame(example_data)
+    
+    # Para entrenamiento, necesitaríamos etiquetas (simuladas aquí)
+    example_df['is_failure'] = 0
+    example_df.loc[14, 'is_failure'] = 1  # Fallo en el último punto
+    
+    # Entrenar modelo
+    model, metadata = engine.train_model_for_service('web_service', example_df)
+    
+    if model:
+        print("Modelo entrenado exitosamente")
+        
+        # Realizar predicción
+        prediction = engine.predict_failures('web_service', example_data)
+        
+        # Mostrar resultado
+        print("\nPredicción:")
+        for key, value in prediction.items():
+            print(f"  {key}: {value}")
+    else:
+        print("Error al entrenar modelo")
 
 if __name__ == "__main__":
-    # Esperar a que Kafka esté disponible
-    time.sleep(15)
-    
-    # Iniciar el motor predictivo
-    engine = PredictiveEngine()
-    engine.run()
+    main()
