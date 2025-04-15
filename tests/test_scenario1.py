@@ -4,6 +4,7 @@ import json
 import numpy as np
 from datetime import datetime
 import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
 
 # Añadir directorio padre al path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -18,14 +19,14 @@ with open("data/test_scenario1.json", "r") as f:
 
 # Crear instancias de los componentes
 anomaly_detector = AnomalyDetector(config={
-    "anomaly_threshold": 0.7,
+    "anomaly_threshold": 0.65,  # Umbral reducido para mayor sensibilidad
     "models_dir": "./models/anomaly"
 })
 
 predictive_engine = PredictiveEngine(config={
     "models_dir": "./models/predictive",
     "sequence_length": 5,  # Para pruebas usamos secuencia corta
-    "prediction_threshold": 0.7
+    "prediction_threshold": 0.6  # Umbral reducido para predicciones
 })
 
 action_recommender = ActionRecommender(config={
@@ -81,10 +82,10 @@ for i, (timestamp, metrics) in enumerate(zip(scenario_data["timestamps"], scenar
         # Predecir fallos
         prediction_result = predictive_engine.predict_failures(service_id, data_points)
         
-        print(f"Resultado predicción: {'FALLO PREDICHO' if prediction_result['prediction'] else 'Sin predicción'}")
-        if prediction_result["prediction"]:
-            print(f"Probabilidad de fallo: {prediction_result['probability']:.3f}")
-            print(f"Horizonte de predicción: {prediction_result['prediction_horizon']} horas")
+        print(f"Resultado predicción: {'FALLO PREDICHO' if prediction_result.get('prediction', False) else 'Sin predicción'}")
+        if prediction_result.get("prediction", False):
+            print(f"Probabilidad de fallo: {prediction_result.get('probability', 0):.3f}")
+            print(f"Horizonte de predicción: {prediction_result.get('prediction_horizon', 0)} horas")
         
         # Almacenar predicción
         results["predictions"].append(prediction_result)
@@ -103,7 +104,7 @@ for i, (timestamp, metrics) in enumerate(zip(scenario_data["timestamps"], scenar
                 recommendation = action_recommender.process_and_recommend(prediction_data=prediction_result)
             
             # Mostrar recomendación
-            if "recommended_action" in recommendation:
+            if recommendation and "recommended_action" in recommendation:
                 action = recommendation["recommended_action"]
                 print(f"Acción recomendada: {action.get('action_id')}")
                 print(f"Comando: {action.get('command')}")
@@ -128,21 +129,29 @@ for i, (timestamp, metrics) in enumerate(zip(scenario_data["timestamps"], scenar
                     print(f"GC Time: {post_action_metrics['gc_collection_time']}ms (antes: {metrics['gc_collection_time']}ms)")
                     print(f"Response Time: {post_action_metrics['response_time_ms']}ms (antes: {metrics['response_time_ms']}ms)")
 
-# Visualización de resultados
-timestamps = scenario_data["timestamps"]
+# Visualización de resultados mejorada
+# Convertir timestamps a objetos datetime para graficar
+timestamps = [datetime.fromisoformat(t.replace('Z', '+00:00')) for t in scenario_data["timestamps"]]
 memory_values = [m["memory_usage"] for m in scenario_data["metrics"]]
 gc_time_values = [m["gc_collection_time"] for m in scenario_data["metrics"]]
 anomaly_scores = [r["anomaly_score"] for r in results["anomaly_detection"]]
 
 plt.figure(figsize=(10, 6))
-plt.plot(timestamps, memory_values, "-o", label="Uso de Memoria (%)")
-plt.plot(timestamps, [x/10 for x in gc_time_values], "-o", label="GC Time (ms/10)")
-plt.plot(timestamps, anomaly_scores, "-o", label="Score de Anomalía")
+
+# Usar valores numéricos para el eje X en lugar de timestamps directamente
+x_values = list(range(len(timestamps)))
+
+plt.plot(x_values, memory_values, "-o", label="Uso de Memoria (%)")
+plt.plot(x_values, [x/10 for x in gc_time_values], "-o", label="GC Time (ms/10)")
+plt.plot(x_values, anomaly_scores, "-o", label="Score de Anomalía")
 
 # Marcar puntos de anomalía
 for i, r in enumerate(results["anomaly_detection"]):
     if r["is_anomaly"]:
-        plt.axvline(x=timestamps[i], color="r", linestyle="--", alpha=0.3)
+        plt.axvline(x=i, color="r", linestyle="--", alpha=0.3)
+
+# Configurar etiquetas de tiempo para el eje X
+plt.xticks(x_values, [t.strftime('%H:%M') for t in timestamps], rotation=45)
 
 plt.title(f"Detección de Fuga de Memoria - {service_id}")
 plt.xlabel("Tiempo")
