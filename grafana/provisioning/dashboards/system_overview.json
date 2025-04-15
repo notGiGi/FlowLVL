@@ -1,6 +1,3 @@
-# Dashboard para el sistema predictivo
-# Guardar como: ./grafana/provisioning/dashboards/system_overview.json
-
 {
   "annotations": {
     "list": [

@@ -1,16 +1,16 @@
 {
   "order-processing-service": {
-    "description": "Acciones para el servicio de procesamiento de \u00f3rdenes",
+    "description": "Acciones para el servicio de procesamiento de órdenes",
     "actions": {
       "memory_leak_restart": {
         "description": "Reinicia el servicio para resolver fuga de memoria",
         "command": "kubectl rollout restart deployment ${service_id}",
         "conditions": {
           "metrics": {
-            "memory_usage": "> 70",
-            "gc_collection_time": "> 500"
+            "memory_usage": "> 65",
+            "gc_collection_time": "> 400"
           },
-          "anomaly_score": "> 0.6"
+          "anomaly_score": "> 0.5"
         },
         "priority": "high"
       }
@@ -21,12 +21,16 @@
     "actions": {
       "connection_pool_increase": {
         "description": "Aumenta el pool de conexiones",
-        "command": "kubectl exec ${service_id}-0 -- psql -c \"ALTER SYSTEM SET max_connections = 200; SELECT pg_reload_conf();\"",
+        "command": "kubectl exec ${service_id}-0 -- psql -c \"ALTER SYSTEM SET max_connections = ${max_connections}; SELECT pg_reload_conf();\"",
         "conditions": {
           "metrics": {
-            "active_connections": "> 80",
+            "active_connections": "> 70",
             "connection_wait_time": "> 100"
-          }
+          },
+          "anomaly_score": "> 0.3"
+        },
+        "parameters": {
+          "max_connections": "200"
         },
         "priority": "high"
       }
@@ -40,8 +44,9 @@
         "command": "kubectl exec ${service_id}-0 -- redis-cli MEMORY PURGE",
         "conditions": {
           "metrics": {
-            "memory_fragmentation_ratio": "> 2.0"
-          }
+            "memory_fragmentation_ratio": "> 1.8"
+          },
+          "anomaly_score": "> 0.3"
         },
         "priority": "high"
       }

@@ -953,4 +953,271 @@ class SystemDiagnostic:
                     critical_issues.append({
                         'component': 'system',
                         'issue': 'high_disk_usage',
-                        'details': f"Uso de disco crí
+                        'details': f"Uso de disco crítico: {resource_usage['disk']['percent']}%"
+                    })
+            
+            if diagnostic_result.get('database_health', {}).get('status') == 'critical':
+                critical_issues.append({
+                    'component': 'database',
+                    'issue': 'database_failure',
+                    'details': "Base de datos en estado crítico"
+                })
+            
+            if diagnostic_result.get('kafka_health', {}).get('status') == 'critical':
+                critical_issues.append({
+                    'component': 'kafka',
+                    'issue': 'kafka_failure',
+                    'details': "Kafka en estado crítico"
+                })
+            
+            # Ejecutar acciones para cada problema crítico
+            for issue in critical_issues:
+                self.execute_recovery_action(issue)
+            
+            # Notificar problemas críticos
+            if critical_issues:
+                self.send_alert_notification(critical_issues)
+            
+        except Exception as e:
+            logger.error(f"Error al manejar problemas críticos: {str(e)}")
+    
+    def execute_recovery_action(self, issue):
+        """Ejecuta una acción de recuperación basada en el problema detectado"""
+        try:
+            component = issue['component']
+            issue_type = issue['issue']
+            
+            logger.info(f"Ejecutando acción de recuperación para {component}: {issue_type}")
+            
+            # Acciones específicas por tipo de problema
+            if issue_type == 'high_latency':
+                # Reiniciar componentes de procesamiento
+                self.restart_component('preprocessor')
+                
+            elif issue_type == 'component_failure':
+                # Reiniciar componente específico
+                self.restart_component(component)
+                
+            elif issue_type == 'high_cpu_usage':
+                # Escalar recursos o reducir carga
+                self.scale_component(component, 'cpu')
+                
+            elif issue_type == 'high_memory_usage':
+                # Escalar recursos o reducir carga
+                self.scale_component(component, 'memory')
+                
+            elif issue_type == 'high_disk_usage':
+                # Limpiar datos antiguos
+                self.cleanup_old_data()
+                
+            elif issue_type == 'database_failure':
+                # Verificar y reparar conexión a DB
+                self.repair_database_connection()
+                
+            elif issue_type == 'kafka_failure':
+                # Reiniciar conexión a Kafka
+                self.restart_kafka_connection()
+            
+            logger.info(f"Acción de recuperación ejecutada para {component}: {issue_type}")
+            
+        except Exception as e:
+            logger.error(f"Error al ejecutar acción de recuperación: {str(e)}")
+    
+    def restart_component(self, component):
+        """Reinicia un componente del sistema"""
+        logger.info(f"Reiniciando componente: {component}")
+        # En un entorno real, esto ejecutaría un comando para reiniciar el servicio
+        # Por ejemplo, usando Kubernetes API para reiniciar un pod
+        try:
+            # Simulación de reinicio
+            logger.info(f"Ejecutando kubectl rollout restart deployment {component}")
+            
+            # Aquí iría el código real para reiniciar el componente
+            # Por ejemplo:
+            # from kubernetes import client, config
+            # config.load_incluster_config()
+            # v1 = client.AppsV1Api()
+            # v1.patch_namespaced_deployment(
+            #     name=component,
+            #     namespace="default",
+            #     body={"spec": {"template": {"metadata": {"annotations": {"kubectl.kubernetes.io/restartedAt": datetime.now().isoformat()}}}}}
+            # )
+            
+            # Registrar la acción
+            self.log_recovery_action(component, "restart", "success")
+            
+        except Exception as e:
+            logger.error(f"Error al reiniciar componente {component}: {str(e)}")
+            self.log_recovery_action(component, "restart", "failure", str(e))
+    
+    def scale_component(self, component, resource_type):
+        """Escala un componente para manejar más carga"""
+        logger.info(f"Escalando componente {component} por uso alto de {resource_type}")
+        
+        try:
+            # Simulación de escalado
+            logger.info(f"Ejecutando kubectl scale deployment {component} --replicas=3")
+            
+            # Aquí iría el código real para escalar
+            # Por ejemplo:
+            # from kubernetes import client, config
+            # config.load_incluster_config()
+            # v1 = client.AppsV1Api()
+            # v1.patch_namespaced_deployment_scale(
+            #     name=component,
+            #     namespace="default",
+            #     body={"spec": {"replicas": 3}}
+            # )
+            
+            # Registrar la acción
+            self.log_recovery_action(component, f"scale_for_{resource_type}", "success")
+            
+        except Exception as e:
+            logger.error(f"Error al escalar componente {component}: {str(e)}")
+            self.log_recovery_action(component, f"scale_for_{resource_type}", "failure", str(e))
+    
+    def cleanup_old_data(self):
+        """Limpia datos antiguos para liberar espacio en disco"""
+        logger.info("Limpiando datos antiguos para liberar espacio en disco")
+        
+        try:
+            # Ejecutar borrado de datos antiguos en la base de datos
+            queries = [
+                """
+                DELETE FROM metrics
+                WHERE timestamp < NOW() - INTERVAL '90 days'
+                """,
+                """
+                DELETE FROM anomalies
+                WHERE timestamp < NOW() - INTERVAL '60 days'
+                """,
+                """
+                DELETE FROM failure_predictions
+                WHERE timestamp < NOW() - INTERVAL '60 days'
+                """,
+                """
+                DELETE FROM recommendations
+                WHERE timestamp < NOW() - INTERVAL '30 days'
+                """,
+                """
+                DELETE FROM logs
+                WHERE timestamp < NOW() - INTERVAL '30 days'
+                """
+            ]
+            
+            rows_deleted = {}
+            
+            for query in queries:
+                result = self.engine.execute(text(query))
+                table_name = query.strip().split()[1]  # Extraer nombre de tabla
+                rows_deleted[table_name] = result.rowcount
+            
+            logger.info(f"Datos antiguos eliminados: {rows_deleted}")
+            
+            # Aquí también se podría añadir limpieza de archivos temporales
+            
+            # Registrar la acción
+            self.log_recovery_action("database", "cleanup_old_data", "success", 
+                                    details=json.dumps(rows_deleted))
+            
+        except Exception as e:
+            logger.error(f"Error al limpiar datos antiguos: {str(e)}")
+            self.log_recovery_action("database", "cleanup_old_data", "failure", str(e))
+    
+    def repair_database_connection(self):
+        """Intenta reparar la conexión a la base de datos"""
+        logger.info("Intentando reparar conexión a la base de datos")
+        
+        try:
+            # Intentar reconexión
+            self.engine.dispose()  # Cerrar conexiones existentes
+            
+            # Intentar nueva conexión
+            self.engine.connect()
+            
+            # Verificar conexión
+            self.engine.execute(text("SELECT 1"))
+            
+            logger.info("Conexión a la base de datos reparada exitosamente")
+            
+            # Registrar acción
+            self.log_recovery_action("database", "repair_connection", "success")
+            
+        except Exception as e:
+            logger.error(f"Error al reparar conexión a la base de datos: {str(e)}")
+            self.log_recovery_action("database", "repair_connection", "failure", str(e))
+    
+    def restart_kafka_connection(self):
+        """Reinicia la conexión a Kafka"""
+        logger.info("Reiniciando conexión a Kafka")
+        
+        try:
+            # Cerrar productor existente
+            if self.producer:
+                self.producer.close()
+            
+            # Crear nuevo productor
+            from kafka import KafkaProducer
+            import json
+            
+            self.producer = KafkaProducer(
+                bootstrap_servers=['kafka:9092'],
+                value_serializer=lambda v: json.dumps(v).encode('utf-8')
+            )
+            
+            # Verificar conexión
+            self.producer.send('test', {'test': True})
+            self.producer.flush()
+            
+            logger.info("Conexión a Kafka reiniciada exitosamente")
+            
+            # Registrar acción
+            self.log_recovery_action("kafka", "restart_connection", "success")
+            
+        except Exception as e:
+            logger.error(f"Error al reiniciar conexión a Kafka: {str(e)}")
+            self.log_recovery_action("kafka", "restart_connection", "failure", str(e))
+    
+    def log_recovery_action(self, component, action, result, details=None):
+        """Registra una acción de recuperación en la base de datos"""
+        try:
+            # Preparar datos para la base de datos
+            action_log = {
+                'timestamp': datetime.now(),
+                'component': component,
+                'action': action,
+                'result': result,
+                'details': details
+            }
+            
+            # Convertir a DataFrame para inserción
+            action_df = pd.DataFrame([action_log])
+            
+            # Insertar en la tabla de acciones de recuperación
+            action_df.to_sql('recovery_actions', self.engine, if_exists='append', index=False)
+            
+        except Exception as e:
+            logger.error(f"Error al registrar acción de recuperación: {str(e)}")
+    
+    def send_alert_notification(self, issues):
+        """Envía una notificación de alerta sobre problemas críticos"""
+        try:
+            # Preparar mensaje de alerta
+            alert_msg = {
+                'timestamp': datetime.now().isoformat(),
+                'severity': 'critical',
+                'system': 'predictive_maintenance',
+                'issues': issues
+            }
+            
+            # Publicar en Kafka
+            if self.producer:
+                self.producer.send('alerts', alert_msg)
+            
+            # En un sistema real, aquí se enviarían alertas a otros canales
+            # como email, Slack, PagerDuty, etc.
+            
+            logger.info(f"Alerta enviada para {len(issues)} problemas críticos")
+            
+        except Exception as e:
+            logger.error(f"Error al enviar notificación de alerta: {str(e)}")
