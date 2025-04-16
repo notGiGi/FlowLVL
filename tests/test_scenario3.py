@@ -5,7 +5,9 @@ import numpy as np
 from datetime import datetime
 import matplotlib.pyplot as plt
 import logging
-
+import logging
+# Reducir verbosidad del font manager de matplotlib
+logging.getLogger('matplotlib.font_manager').setLevel(logging.WARNING)
 # Configurar logging para ver mensajes de depuración
 logging.basicConfig(level=logging.DEBUG, 
                    format='[%(asctime)s] %(levelname)s: %(message)s')

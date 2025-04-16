@@ -1,231 +1,292 @@
-# anomaly_detector.py
-import numpy as np
-import pandas as pd
+# anomaly_detector/main.py
+
+import os
+import json
 import logging
-from datetime import datetime
+import time
+import threading
+from kafka import KafkaConsumer, KafkaProducer
+from sqlalchemy import create_engine, text
+from enhanced_detector import EnhancedAnomalyDetector
 
 # Configuración de logging
 logging.basicConfig(level=logging.INFO, format='[%(asctime)s] %(levelname)s: %(message)s')
-logger = logging.getLogger('anomaly_detector')
+logger = logging.getLogger('anomaly_detector_service')
 
-class AdaptiveEnsembleDetector:
-    """Detector de anomalías con soporte para múltiples patrones"""
+class AnomalyDetectorService:
+    """Servicio de detección de anomalías con soporte para múltiples algoritmos"""
     
-    def __init__(self, models_config=None):
-        # Pesos para diferentes detectores
-        self.model_weights = {"memory_leak": 0.7, "db_overload": 0.7, "memory_fragmentation": 0.7}
+    def __init__(self):
+        # Configuración desde variables de entorno
+        self.db_host = os.environ.get('DB_HOST', 'timescaledb')
+        self.db_port = os.environ.get('DB_PORT', '5432')
+        self.db_user = os.environ.get('DB_USER', 'predictor')
+        self.db_password = os.environ.get('DB_PASSWORD', 'predictor_password')
+        self.db_name = os.environ.get('DB_NAME', 'metrics_db')
+        self.kafka_servers = os.environ.get('KAFKA_BOOTSTRAP_SERVERS', 'kafka:29092')
+        self.anomaly_threshold = float(os.environ.get('ANOMALY_THRESHOLD', '0.3'))
         
-        # Umbrales por tipo de métrica
-        self.thresholds = {
-            # Memoria y GC
-            "memory_usage": 65.0, 
-            "gc_collection_time": 400.0,
-            
-            # Base de datos
-            "active_connections": 85.0,
-            "connection_wait_time": 150.0,
-            
-            # Redis
-            "memory_fragmentation_ratio": 2.0,
-            "hit_rate": 85.0  # Umbral inverso (por debajo es problemático)
-        }
-    
-    def predict(self, data, threshold=0.65, update_weights=True):
-        """Predice anomalías adaptando el enfoque al tipo de datos disponibles"""
-        if not isinstance(data, dict):
-            return False, 0.0, {}
+        # Conectar a la base de datos
+        self.db_url = f"postgresql://{self.db_user}:{self.db_password}@{self.db_host}:{self.db_port}/{self.db_name}"
+        self.engine = create_engine(self.db_url)
         
-        # Determinar qué tipo de anomalía podría ser
-        anomaly_type = self._identify_anomaly_type(data)
+        # Configurar consumidor Kafka
+        self.consumer = KafkaConsumer(
+            'preprocessed_metrics',
+            bootstrap_servers=self.kafka_servers,
+            auto_offset_reset='latest',
+            value_deserializer=lambda x: json.loads(x.decode('utf-8')),
+            group_id='anomaly_detector'
+        )
         
-        # Calcular score según el tipo de anomalía
-        if anomaly_type == "memory_leak":
-            score = self._detect_memory_leak(data)
-        elif anomaly_type == "db_overload":
-            score = self._detect_db_overload(data)
-        elif anomaly_type == "memory_fragmentation":
-            score = self._detect_memory_fragmentation(data)
-        else:
-            # Enfoque genérico si no se identifica un tipo específico
-            score = self._generic_detection(data)
+        # Configurar productor Kafka
+        self.producer = KafkaProducer(
+            bootstrap_servers=self.kafka_servers,
+            value_serializer=lambda x: json.dumps(x).encode('utf-8')
+        )
         
-        # Determinar si es anomalía
-        is_anomaly = score >= threshold
+        # Crear detector de anomalías mejorado
+        self.detector = EnhancedAnomalyDetector(config={
+            'anomaly_threshold': self.anomaly_threshold,
+            'models_dir': '/app/models/anomaly'
+        })
         
-        # Crear detalles para diagnóstico
-        details = {
-            "anomaly_type": anomaly_type,
-            "anomaly_score": score,
-            "threshold": threshold,
-            "metrics_analysis": self._analyze_metrics(data, anomaly_type)
+        # Control de estado del servicio
+        self.running = False
+        self.health_status = {
+            'status': 'starting',
+            'last_update': time.time(),
+            'processed_messages': 0,
+            'detected_anomalies': 0,
+            'errors': 0
         }
         
-        return is_anomaly, score, details
+        logger.info("Servicio de detección de anomalías inicializado")
     
-    def _identify_anomaly_type(self, data):
-        """Identifica qué tipo de anomalía podría estar presente según las métricas"""
-        # Comprobar si hay métricas de leak de memoria
-        if 'memory_usage' in data and 'gc_collection_time' in data:
-            return "memory_leak"
+    def start(self):
+        """Inicia el servicio de detección de anomalías"""
+        if self.running:
+            logger.warning("El servicio ya está en ejecución")
+            return
         
-        # Comprobar si hay métricas de sobrecarga de BD
-        if 'active_connections' in data and 'connection_wait_time' in data:
-            return "db_overload"
+        self.running = True
         
-        # Comprobar si hay métricas de fragmentación de memoria
-        if 'memory_fragmentation_ratio' in data and 'hit_rate' in data:
-            return "memory_fragmentation"
+        # Iniciar hilo de procesamiento de métricas
+        self.processing_thread = threading.Thread(target=self.process_metrics, daemon=True)
+        self.processing_thread.start()
         
-        # Tipo general si no se puede identificar
-        return "general"
-    
-    def _detect_memory_leak(self, data):
-        """Detecta leak de memoria basado en uso de memoria y tiempo de GC"""
-        memory = data.get('memory_usage', 0)
-        gc_time = data.get('gc_collection_time', 0)
+        # Iniciar hilo de monitoreo de salud
+        self.health_thread = threading.Thread(target=self.monitor_health, daemon=True)
+        self.health_thread.start()
         
-        # Calcular scores normalizados
-        memory_factor = max(0, min(1, (memory - 55) / 30))  # 55-85% rango
-        gc_factor = max(0, min(1, (gc_time - 300) / 500))   # 300-800ms rango
+        logger.info("Servicio de detección de anomalías iniciado")
         
-        # Combinar con peso
-        return 0.6 * memory_factor + 0.4 * gc_factor
-    
-    def _detect_db_overload(self, data):
-        """Detecta sobrecarga de base de datos"""
-        connections = data.get('active_connections', 0)
-        wait_time = data.get('connection_wait_time', 0)
-        
-        # Calcular scores normalizados con umbrales más bajos
-        conn_factor = max(0, min(1, (connections - 70) / 50))  # 70-120 conexiones
-        wait_factor = max(0, min(1, (wait_time - 100) / 300))  # 100-400ms
-        
-        # Añadir factor combinado (conexiones altas Y tiempo alto)
-        combined_factor = 0
-        if connections > 80 and wait_time > 200:
-            combined_factor = 0.3
-        
-        # Combinar con pesos
-        return 0.5 * conn_factor + 0.3 * wait_factor + combined_factor
-    
-    def _detect_memory_fragmentation(self, data):
-        """Detecta fragmentación de memoria en Redis"""
-        frag_ratio = data.get('memory_fragmentation_ratio', 0)
-        hit_rate = data.get('hit_rate', 100)
-        
-        # Calcular scores normalizados
-        # Fragmentación alta es problemática (>2.0)
-        frag_factor = max(0, min(1, (frag_ratio - 1.5) / 3.0))  # 1.5-4.5 rango
-        
-        # Hit rate baja es problemática (<85%)
-        hit_factor = max(0, min(1, (90 - hit_rate) / 30))  # 90-60% rango (invertido)
-        
-        # Ponderar más la fragmentación
-        return 0.7 * frag_factor + 0.3 * hit_factor
-    
-    def _generic_detection(self, data):
-        """Detección genérica basada en umbrales"""
-        total_score = 0.0
-        metrics_count = 0
-        
-        # Comprobar cada métrica contra su umbral
-        for metric, value in data.items():
-            if not isinstance(value, (int, float)) or metric == 'timestamp':
-                continue
-                
-            metrics_count += 1
-            
-            # Aplicar umbrales específicos si existen
-            if metric in self.thresholds:
-                threshold = self.thresholds[metric]
-                if metric == 'hit_rate':  # Caso especial (inverso)
-                    score = max(0, min(1, (threshold - value) / threshold))
-                else:
-                    score = max(0, min(1, (value - threshold * 0.8) / (threshold * 0.4)))
-                total_score += score
-            # Para métricas sin umbral específico
-            else:
-                # Asumir que valores altos pueden ser problemáticos
-                if value > 80:  # Umbral genérico
-                    score = (value - 80) / 20  # 80-100 rango
-                    total_score += score
-        
-        return total_score / max(1, metrics_count)
-    
-    def _analyze_metrics(self, data, anomaly_type):
-        """Analiza las métricas para proporcionar contexto detallado"""
-        analysis = {}
-        
-        if anomaly_type == "memory_leak":
-            metrics_to_check = ['memory_usage', 'gc_collection_time']
-        elif anomaly_type == "db_overload":
-            metrics_to_check = ['active_connections', 'connection_wait_time']
-        elif anomaly_type == "memory_fragmentation":
-            metrics_to_check = ['memory_fragmentation_ratio', 'hit_rate']
-        else:
-            metrics_to_check = list(data.keys())
-        
-        for metric in metrics_to_check:
-            if metric in data and isinstance(data[metric], (int, float)):
-                value = data[metric]
-                status = 'normal'
-                
-                # Verificar contra umbral si existe
-                if metric in self.thresholds:
-                    threshold = self.thresholds[metric]
-                    
-                    # Caso especial para hit_rate (inverso)
-                    if metric == 'hit_rate':
-                        if value < threshold * 0.9:
-                            status = 'critical'
-                        elif value < threshold:
-                            status = 'warning'
-                    else:
-                        if value > threshold * 1.2:
-                            status = 'critical'
-                        elif value > threshold:
-                            status = 'warning'
-                    
-                    analysis[metric] = {
-                        'value': value,
-                        'threshold': threshold,
-                        'status': status
-                    }
-                else:
-                    analysis[metric] = {
-                        'value': value,
-                        'status': 'unknown'
-                    }
-        
-        return analysis
-
-class AnomalyDetector:
-    """Detector de anomalías principal"""
-    
-    def __init__(self, config=None):
-        self.config = config or {}
-        self.anomaly_threshold = self.config.get('anomaly_threshold', 0.65)  # Umbral para considerar anomalía
-        self.ensemble_detector = AdaptiveEnsembleDetector()
-        logger.info("Detector de anomalías (simplificado) inicializado")
-    
-    def detect_anomalies(self, data):
-        """Detecta anomalías en los datos proporcionados"""
+        # Mantener hilo principal vivo
         try:
-            # Extraer métricas clave para análisis
-            metrics = {}
-            if isinstance(data, dict):
-                metrics = data
+            while self.running:
+                time.sleep(10)
+                
+                # Verificar estado de hilos
+                if not self.processing_thread.is_alive():
+                    logger.error("Hilo de procesamiento caído, reiniciando...")
+                    self.processing_thread = threading.Thread(target=self.process_metrics, daemon=True)
+                    self.processing_thread.start()
+                
+                if not self.health_thread.is_alive():
+                    logger.error("Hilo de monitoreo caído, reiniciando...")
+                    self.health_thread = threading.Thread(target=self.monitor_health, daemon=True)
+                    self.health_thread.start()
+                
+        except KeyboardInterrupt:
+            logger.info("Recibida señal de interrupción, deteniendo servicio...")
+            self.stop()
+    
+    def stop(self):
+        """Detiene el servicio de detección de anomalías"""
+        self.running = False
+        logger.info("Servicio de detección de anomalías detenido")
+    
+    def process_metrics(self):
+        """Procesa métricas de Kafka y detecta anomalías"""
+        consecutive_errors = 0
+        backoff_time = 1  # segundos
+        
+        while self.running:
+            try:
+                # Reinicio del backoff si no hay errores
+                if consecutive_errors == 0:
+                    backoff_time = 1
+                
+                # Leer mensajes
+                message_count = 0
+                message_batch = self.consumer.poll(timeout_ms=1000, max_records=100)
+                
+                # Procesar mensajes
+                for topic_partition, messages in message_batch.items():
+                    for message in messages:
+                        try:
+                            metrics_data = message.value
+                            
+                            if not isinstance(metrics_data, dict):
+                                logger.warning(f"Formato de mensaje inválido: {metrics_data}")
+                                continue
+                            
+                            # Extraer información básica
+                            service_id = metrics_data.get('service_id', 'unknown')
+                            timestamp = metrics_data.get('timestamp', None)
+                            
+                            # Detectar anomalías
+                            is_anomaly, anomaly_score, details = self.detector.detect_anomalies(metrics_data)
+                            
+                            # Actualizar estadísticas
+                            message_count += 1
+                            self.health_status['processed_messages'] += 1
+                            
+                            # Si se detectó una anomalía
+                            if is_anomaly:
+                                self.health_status['detected_anomalies'] += 1
+                                self.handle_anomaly(service_id, timestamp, anomaly_score, metrics_data, details)
+                        
+                        except Exception as e:
+                            logger.error(f"Error al procesar mensaje: {str(e)}")
+                            self.health_status['errors'] += 1
+                
+                # Resetear contador de errores consecutivos
+                if message_count > 0:
+                    consecutive_errors = 0
+                    backoff_time = 1
+                
+                # Breve pausa para evitar saturación de CPU si no hay mensajes
+                if message_count == 0:
+                    time.sleep(0.1)
+                
+            except Exception as e:
+                # Error al consumir mensajes
+                consecutive_errors += 1
+                self.health_status['errors'] += 1
+                logger.error(f"Error en el procesamiento de métricas (intento {consecutive_errors}): {str(e)}")
+                
+                # Aplicar backoff exponencial con jitter
+                sleep_time = min(60, backoff_time * (1 + 0.1 * (2 * np.random.random() - 1)))
+                logger.info(f"Esperando {sleep_time:.2f}s antes de reintentar")
+                time.sleep(sleep_time)
+                backoff_time = min(60, backoff_time * 2)
+    
+    def handle_anomaly(self, service_id, timestamp, anomaly_score, metrics_data, details):
+        """Maneja una anomalía detectada"""
+        try:
+            # Crear registro de anomalía
+            anomaly_record = {
+                'timestamp': timestamp or self.get_current_timestamp(),
+                'service_id': service_id,
+                'node_id': metrics_data.get('node_id', 'unknown'),
+                'anomaly_score': float(anomaly_score),
+                'anomaly_type': details.get('anomaly_type', 'unknown'),
+                'anomaly_details': json.dumps(details),
+                'metric_data': json.dumps(metrics_data)
+            }
             
-            # Detectar anomalías usando el ensemble
-            is_anomaly, anomaly_score, details = self.ensemble_detector.predict(
-                metrics, threshold=self.anomaly_threshold
-            )
+            # Almacenar en la base de datos
+            with self.engine.begin() as conn:
+                conn.execute(
+                    text("""
+                        INSERT INTO anomalies (
+                            timestamp, service_id, node_id, anomaly_score, 
+                            anomaly_details, metric_data
+                        ) VALUES (
+                            :timestamp, :service_id, :node_id, :anomaly_score, 
+                            :anomaly_details::jsonb, :metric_data::jsonb
+                        )
+                    """),
+                    {
+                        'timestamp': timestamp or self.get_current_timestamp(),
+                        'service_id': service_id,
+                        'node_id': metrics_data.get('node_id', 'unknown'),
+                        'anomaly_score': float(anomaly_score),
+                        'anomaly_details': json.dumps(details),
+                        'metric_data': json.dumps(metrics_data)
+                    }
+                )
             
-            if is_anomaly:
-                logger.info(f"Anomalía detectada con score {anomaly_score:.3f}")
+            # Enviar a Kafka para notificaciones y acciones
+            kafka_message = {
+                'timestamp': timestamp or self.get_current_timestamp(),
+                'service_id': service_id,
+                'anomaly_score': float(anomaly_score),
+                'anomaly_type': details.get('anomaly_type', 'unknown'),
+                'details': details,
+                'metrics': {k: v for k, v in metrics_data.items() if k not in ['timestamp', 'service_id', 'node_id']}
+            }
             
-            return is_anomaly, anomaly_score, details
+            self.producer.send('anomalies', kafka_message)
+            
+            logger.info(f"Anomalía detectada en {service_id}: {details.get('anomaly_type', 'unknown')} (score: {anomaly_score:.3f})")
             
         except Exception as e:
-            logger.error(f"Error al detectar anomalías: {str(e)}")
-            return False, 0, {"error": str(e)}
+            logger.error(f"Error al manejar anomalía: {str(e)}")
+            self.health_status['errors'] += 1
+    
+    def get_current_timestamp(self):
+        """Obtiene timestamp actual en formato ISO"""
+        return datetime.now().isoformat()
+    
+    def monitor_health(self):
+        """Monitorea la salud del servicio y publica métricas"""
+        while self.running:
+            try:
+                # Actualizar estado
+                self.health_status['status'] = 'healthy'
+                self.health_status['last_update'] = time.time()
+                
+                # Publicar métricas de salud
+                health_metrics = {
+                    'timestamp': self.get_current_timestamp(),
+                    'service': 'anomaly_detector',
+                    'status': self.health_status['status'],
+                    'metrics': {
+                        'processed_messages': self.health_status['processed_messages'],
+                        'detected_anomalies': self.health_status['detected_anomalies'],
+                        'errors': self.health_status['errors'],
+                        'uptime_seconds': time.time() - self.health_status.get('start_time', time.time())
+                    }
+                }
+                
+                self.producer.send('service_health', health_metrics)
+                
+                # Publicar métricas adicionales si es necesario
+                # Esperar antes de la próxima actualización
+                time.sleep(30)
+                
+            except Exception as e:
+                logger.error(f"Error en monitoreo de salud: {str(e)}")
+                time.sleep(5)  # Tiempo más corto para recuperarse rápido
+
+# Punto de entrada
+if __name__ == "__main__":
+    # Esperar a que Kafka y la base de datos estén disponibles (simple backoff)
+    max_retries = 10
+    retry_count = 0
+    
+    while retry_count < max_retries:
+        try:
+            # Probar conexión a base de datos
+            engine = create_engine(f"postgresql://{os.environ.get('DB_USER', 'predictor')}:{os.environ.get('DB_PASSWORD', 'predictor_password')}@{os.environ.get('DB_HOST', 'timescaledb')}:{os.environ.get('DB_PORT', '5432')}/{os.environ.get('DB_NAME', 'metrics_db')}")
+            with engine.connect() as conn:
+                conn.execute(text("SELECT 1"))
+            
+            logger.info("Conexión a base de datos establecida")
+            break
+        except Exception as e:
+            retry_count += 1
+            wait_time = 5 * retry_count
+            logger.warning(f"Error al conectar a la base de datos (intento {retry_count}/{max_retries}): {str(e)}")
+            logger.warning(f"Esperando {wait_time}s antes de reintentar...")
+            time.sleep(wait_time)
+    
+    if retry_count >= max_retries:
+        logger.error("No se pudo conectar a la base de datos después de varios intentos")
+        exit(1)
+    
+    # Iniciar servicio
+    service = AnomalyDetectorService()
+    service.start()

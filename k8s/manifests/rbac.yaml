@@ -1,0 +1,88 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: predictive-maintenance-sa
+  namespace: predictive-maintenance
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: predictive-maintenance-role
+  namespace: predictive-maintenance
+rules:
+  # Access to pods and logs
+  - apiGroups: [""]
+    resources: ["pods", "pods/log"]
+    verbs: ["get", "list", "watch"]
+  
+  # Access to execute commands in pods
+  - apiGroups: [""]
+    resources: ["pods/exec"]
+    verbs: ["create"]
+  
+  # Access to deployments/statefulsets for scaling and restarting
+  - apiGroups: ["apps"]
+    resources: ["deployments", "statefulsets"]
+    verbs: ["get", "list", "watch", "patch"]
+  
+  # Access to read services
+  - apiGroups: [""]
+    resources: ["services"]
+    verbs: ["get", "list", "watch"]
+  
+  # Access to metrics API
+  - apiGroups: ["metrics.k8s.io"]
+    resources: ["pods", "nodes"]
+    verbs: ["get", "list"]
+  
+  # Restricted access for scaling
+  - apiGroups: ["apps"]
+    resources: ["deployments/scale", "statefulsets/scale"]
+    verbs: ["get", "update"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: predictive-maintenance-rolebinding
+  namespace: predictive-maintenance
+subjects:
+- kind: ServiceAccount
+  name: predictive-maintenance-sa
+  namespace: predictive-maintenance
+roleRef:
+  kind: Role
+  name: predictive-maintenance-role
+  apiGroup: rbac.authorization.k8s.io
+---
+# Optional: For monitoring other namespaces
+# Create this only if needed and with careful consideration
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: predictive-maintenance-limited-monitoring
+rules:
+  # Limited monitoring access to other namespaces
+  - apiGroups: [""]
+    resources: ["pods", "services"]
+    verbs: ["get", "list", "watch"]
+  
+  - apiGroups: ["apps"]
+    resources: ["deployments", "statefulsets"]
+    verbs: ["get", "list", "watch"]
+  
+  - apiGroups: ["metrics.k8s.io"]
+    resources: ["pods"]
+    verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: predictive-maintenance-monitoring-binding
+subjects:
+- kind: ServiceAccount
+  name: predictive-maintenance-sa
+  namespace: predictive-maintenance
+roleRef:
+  kind: ClusterRole
+  name: predictive-maintenance-limited-monitoring
+  apiGroup: rbac.authorization.k8s.io

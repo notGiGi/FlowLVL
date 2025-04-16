@@ -1,30 +1,33 @@
-﻿FROM node:18-alpine as build
+﻿# Build stage
+FROM node:16-alpine AS build
 
 WORKDIR /app
 
-# Copiar solo package.json (sin requerir package-lock.json)
-COPY package.json ./
+# Copy package files and install dependencies
+COPY dashboard/package.json dashboard/package-lock.json* ./
+RUN npm ci
 
-# Instalar dependencias
-RUN npm install
+# Copy source code and build
+COPY dashboard/public ./public
+COPY dashboard/src ./src
+COPY dashboard/.env* ./
 
-# Copiar código fuente
-COPY . .
-
-# Construir la aplicación
+# Build app
 RUN npm run build
 
-# Imagen para producción
-FROM nginx:alpine
+# Serve stage
+FROM nginx:1.23-alpine
 
-# Copiar archivos estáticos desde la etapa de construcción
+# Copy built files from build stage
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Copiar configuración de nginx
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Copy nginx configuration
+COPY dashboard/nginx.conf /etc/nginx/conf.d/default.conf
 
-# Exponer puerto
-EXPOSE 80
+# Script to replace environment variables at runtime
+COPY dashboard/docker-entrypoint.sh /
+RUN chmod +x /docker-entrypoint.sh
 
-# Iniciar nginx
+# Replace environment variables in JS files at runtime
+ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["nginx", "-g", "daemon off;"]

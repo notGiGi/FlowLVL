@@ -1,176 +1,224 @@
-version: '3.8'
-
 services:
-  # Base de datos para almacenar métricas y eventos
+  # Base de datos para almacenar métricas históricas
   timescaledb:
     image: timescale/timescaledb:latest-pg14
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=predictive
+    volumes:
+      - timescaledb-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-    environment:
-      - POSTGRES_USER=predictor
-      - POSTGRES_PASSWORD=predictor_password
-      - POSTGRES_DB=metrics_db
-    volumes:
-      - timescaledb_data:/var/lib/postgresql/data
-      - ./db-init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
     restart: unless-stopped
-    networks:
-      - predictor_network
 
-  # Kafka para streaming de eventos
-  zookeeper:
-    image: confluentinc/cp-zookeeper:7.3.0
-    ports:
-      - "2181:2181"
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-    networks:
-      - predictor_network
-
-  kafka:
-    image: confluentinc/cp-kafka:7.3.0
-    depends_on:
-      - zookeeper
-    ports:
-      - "9092:9092"
-    environment:
-      KAFKA_BROKER_ID: 1
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:29092,PLAINTEXT_HOST://localhost:9092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
-    networks:
-      - predictor_network
-
-  # Prometheus para la recolección de métricas
-  prometheus:
-    image: prom/prometheus:v2.40.0
-    ports:
-      - "9090:9090"
+  # Cache distribuida y comunicación entre servicios
+  redis:
+    image: redis:7.0-alpine
+    command: redis-server --requirepass redis123
     volumes:
-      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
-      - prometheus_data:/prometheus
+      - redis-data:/data
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "redis123", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # Monitoreo con Prometheus
+  prometheus:
+    image: prom/prometheus:v2.41.0
+    volumes:
+      - ./config/prometheus:/etc/prometheus
+      - prometheus-data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
       - '--web.console.libraries=/usr/share/prometheus/console_libraries'
       - '--web.console.templates=/usr/share/prometheus/consoles'
-    networks:
-      - predictor_network
+      - '--web.enable-lifecycle'
+    ports:
+      - "9090:9090"
+    restart: unless-stopped
+    depends_on:
+      - pushgateway
 
-  # Grafana para visualización
+  # Gateway para métricas
+  pushgateway:
+    image: prom/pushgateway:v1.5.1
+    ports:
+      - "9091:9091"
+    restart: unless-stopped
+
+  # Visualización en Grafana
   grafana:
-    image: grafana/grafana:9.2.0
+    image: grafana/grafana:9.3.6
+    volumes:
+      - ./config/grafana/provisioning:/etc/grafana/provisioning
+      - grafana-data:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource
     ports:
       - "3000:3000"
-    volumes:
-      - ./grafana/provisioning:/etc/grafana/provisioning
-      - grafana_data:/var/lib/grafana
-    environment:
-      - GF_SECURITY_ADMIN_USER=${GRAFANA_ADMIN_USER:-admin}
-      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD:-admin}
-      - GF_USERS_ALLOW_SIGN_UP=false
+    restart: unless-stopped
     depends_on:
       - prometheus
-      - timescaledb
-    networks:
-      - predictor_network
 
-  # Recolector de datos
-  collector:
-    build:
-      context: ./collectors
-      dockerfile: Dockerfile
-    depends_on:
-      - kafka
-      - prometheus
-    volumes:
-      - ./collectors/config:/app/config
-    env_file:
-      - .env
-    networks:
-      - predictor_network
-    restart: unless-stopped
-
-  # Preprocesador de datos
-  preprocessor:
-    build:
-      context: ./preprocessor
-      dockerfile: Dockerfile
-    depends_on:
-      - kafka
-      - timescaledb
-    env_file:
-      - .env
-    networks:
-      - predictor_network
-    restart: unless-stopped
-
-  # Detector de anomalías
-  anomaly_detector:
-    build:
-      context: ./anomaly_detector
-      dockerfile: Dockerfile
-    depends_on:
-      - kafka
-      - timescaledb
-    env_file:
-      - .env
-    volumes:
-      - ./models:/app/models
-    networks:
-      - predictor_network
-    restart: unless-stopped
-
-  # Motor predictivo
-  predictive_engine:
-    build:
-      context: ./predictive_engine
-      dockerfile: Dockerfile
-    depends_on:
-      - kafka
-      - timescaledb
-    env_file:
-      - .env
-    volumes:
-      - ./models:/app/models
-    networks:
-      - predictor_network
-    restart: unless-stopped
-
-  # Recomendador de acciones
-  action_recommender:
-    build:
-      context: ./action_recommender
-      dockerfile: Dockerfile
-    depends_on:
-      - kafka
-      - predictive_engine
-    env_file:
-      - .env
-    volumes:
-      - ./models:/app/models
-      - ./action_recommender/policies:/app/policies
-    networks:
-      - predictor_network
-    restart: unless-stopped
-
-  # API REST
+  # API principal
   api:
     build:
-      context: ./api
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: api/Dockerfile
+    volumes:
+      - ./config:/app/config
+      - ./models:/app/models
+      - ./data:/app/data
+    environment:
+      - API_KEYS=test_key,development_key
+      - SECRET_KEY=your_secret_key_here
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=redis123
+      - DB_HOST=timescaledb
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=predictive
+      - PROMETHEUS_PUSH_GATEWAY=pushgateway:9091
+      - METRICS_ENABLED=true
+      - LOG_LEVEL=INFO
     ports:
       - "8000:8000"
     depends_on:
+      - redis
       - timescaledb
-      - action_recommender
-    env_file:
-      - .env
-    networks:
-      - predictor_network
+      - pushgateway
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    command: uvicorn api.controller:create_api_app --host 0.0.0.0 --port 8000
+
+  # Detector de anomalías
+  anomaly-detector:
+    build:
+      context: .
+      dockerfile: anomaly_detector/Dockerfile
+    volumes:
+      - ./config:/app/config
+      - ./models:/app/models
+      - ./data:/app/data
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=redis123
+      - DB_HOST=timescaledb
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=predictive
+      - PROMETHEUS_PUSH_GATEWAY=pushgateway:9091
+      - METRICS_ENABLED=true
+      - LOG_LEVEL=INFO
+    depends_on:
+      - redis
+      - timescaledb
+      - pushgateway
+    restart: unless-stopped
+
+  # Motor predictivo
+  predictive-engine:
+    build:
+      context: .
+      dockerfile: predictive_engine/Dockerfile
+    volumes:
+      - ./config:/app/config
+      - ./models:/app/models
+      - ./data:/app/data
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=redis123
+      - DB_HOST=timescaledb
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=predictive
+      - PROMETHEUS_PUSH_GATEWAY=pushgateway:9091
+      - METRICS_ENABLED=true
+      - LOG_LEVEL=INFO
+    depends_on:
+      - redis
+      - timescaledb
+      - pushgateway
+    restart: unless-stopped
+
+  # Recomendador de acciones
+  action-recommender:
+    build:
+      context: .
+      dockerfile: action_recommender/Dockerfile
+    volumes:
+      - ./config:/app/config
+      - ./models:/app/models
+      - ./data:/app/data
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=redis123
+      - DB_HOST=timescaledb
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=predictive
+      - PROMETHEUS_PUSH_GATEWAY=pushgateway:9091
+      - METRICS_ENABLED=true
+      - LOG_LEVEL=INFO
+      - ENABLE_K8S_INTEGRATION=${ENABLE_K8S_INTEGRATION:-false}
+    depends_on:
+      - redis
+      - timescaledb
+      - pushgateway
+    restart: unless-stopped
+
+  # Perfilador de servicios
+  service-profiler:
+    build:
+      context: .
+      dockerfile: monitoring/Dockerfile
+    volumes:
+      - ./config:/app/config
+      - ./models:/app/models
+      - ./data:/app/data
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=redis123
+      - DB_HOST=timescaledb
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=predictive
+      - PROMETHEUS_PUSH_GATEWAY=pushgateway:9091
+      - METRICS_ENABLED=true
+      - LOG_LEVEL=INFO
+    depends_on:
+      - redis
+      - timescaledb
+      - pushgateway
     restart: unless-stopped
 
   # Dashboard web
@@ -180,62 +228,37 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3001:80"
+    environment:
+      - API_URL=http://api:8000
+      - GRAFANA_URL=http://grafana:3000
     depends_on:
       - api
+    restart: unless-stopped
+
+  # Sistema de notificaciones
+  notification-service:
+    build:
+      context: ./notification_service
+      dockerfile: Dockerfile
     environment:
-      - REACT_APP_API_URL=${REACT_APP_API_URL:-http://localhost:8000}
-    networks:
-      - predictor_network
-    restart: unless-stopped
-
-  # Node exporter para métricas de host
-  node-exporter:
-    image: prom/node-exporter:latest
-    ports:
-      - "9100:9100"
-    volumes:
-      - /proc:/host/proc:ro
-      - /sys:/host/sys:ro
-      - /:/rootfs:ro
-    command:
-      - '--path.procfs=/host/proc'
-      - '--path.sysfs=/host/sys'
-      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
-    networks:
-      - predictor_network
-    restart: unless-stopped
-
-  # Kafka exporter para métricas de Kafka
-  kafka-exporter:
-    image: danielqsj/kafka-exporter:latest
-    ports:
-      - "9308:9308"
-    command:
-      - '--kafka.server=kafka:29092'
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=redis123
+      - EMAIL_SMTP_HOST=${EMAIL_SMTP_HOST:-smtp.example.com}
+      - EMAIL_SMTP_PORT=${EMAIL_SMTP_PORT:-587}
+      - EMAIL_USERNAME=${EMAIL_USERNAME:-user}
+      - EMAIL_PASSWORD=${EMAIL_PASSWORD:-password}
+      - SLACK_WEBHOOK_URL=${SLACK_WEBHOOK_URL:-https://hooks.slack.com/services/xxx}
+      - METRICS_ENABLED=true
+      - PROMETHEUS_PUSH_GATEWAY=pushgateway:9091
+      - LOG_LEVEL=INFO
     depends_on:
-      - kafka
-    networks:
-      - predictor_network
+      - redis
+      - pushgateway
     restart: unless-stopped
-
-  # Postgres exporter para métricas de TimescaleDB
-  timescaledb-exporter:
-    image: prometheuscommunity/postgres-exporter:latest
-    ports:
-      - "9187:9187"
-    environment:
-      - DATA_SOURCE_NAME=postgresql://predictor:predictor_password@timescaledb:5432/metrics_db?sslmode=disable
-    depends_on:
-      - timescaledb
-    networks:
-      - predictor_network
-    restart: unless-stopped
-
-networks:
-  predictor_network:
-    driver: bridge
 
 volumes:
-  timescaledb_data:
-  prometheus_data:
-  grafana_data:
+  timescaledb-data:
+  redis-data:
+  prometheus-data:
+  grafana-data:

@@ -1,0 +1,625 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api
+  namespace: predictive-maintenance
+  labels:
+    app: api
+    component: api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: api
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8000"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+      - name: api
+        image: ${DOCKER_REGISTRY}/api:${VERSION}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+          name: http
+        env:
+        - name: API_KEYS
+          valueFrom:
+            secretKeyRef:
+              name: api-credentials
+              key: api-key
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: api-credentials
+              key: secret-key
+        - name: REDIS_HOST
+          value: "redis"
+        - name: REDIS_PORT
+          value: "6379"
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: redis-password
+        - name: DB_HOST
+          value: "timescaledb"
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_USER
+          value: "postgres"
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: timescaledb-password
+        - name: DB_NAME
+          value: "predictive"
+        - name: PROMETHEUS_PUSH_GATEWAY
+          value: "pushgateway:9091"
+        - name: METRICS_ENABLED
+          value: "true"
+        - name: LOG_LEVEL
+          value: "INFO"
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+          requests:
+            cpu: "200m"
+            memory: "512Mi"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: http
+          initialDelaySeconds: 30
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: http
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        volumeMounts:
+        - name: config-volume
+          mountPath: /app/config
+        - name: models-volume
+          mountPath: /app/models
+        - name: data-volume
+          mountPath: /app/data
+      volumes:
+      - name: config-volume
+        configMap:
+          name: predictive-config
+      - name: models-volume
+        persistentVolumeClaim:
+          claimName: models-pvc
+      - name: data-volume
+        persistentVolumeClaim:
+          claimName: data-pvc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: anomaly-detector
+  namespace: predictive-maintenance
+  labels:
+    app: anomaly-detector
+    component: detector
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: anomaly-detector
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: anomaly-detector
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+      - name: anomaly-detector
+        image: ${DOCKER_REGISTRY}/anomaly-detector:${VERSION}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: metrics
+        env:
+        - name: REDIS_HOST
+          value: "redis"
+        - name: REDIS_PORT
+          value: "6379"
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: redis-password
+        - name: DB_HOST
+          value: "timescaledb"
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_USER
+          value: "postgres"
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: timescaledb-password
+        - name: DB_NAME
+          value: "predictive"
+        - name: PROMETHEUS_PUSH_GATEWAY
+          value: "pushgateway:9091"
+        - name: METRICS_ENABLED
+          value: "true"
+        - name: LOG_LEVEL
+          value: "INFO"
+        resources:
+          limits:
+            cpu: "2"
+            memory: "2Gi"
+          requests:
+            cpu: "500m"
+            memory: "1Gi"
+        volumeMounts:
+        - name: config-volume
+          mountPath: /app/config
+        - name: models-volume
+          mountPath: /app/models
+        - name: data-volume
+          mountPath: /app/data
+      volumes:
+      - name: config-volume
+        configMap:
+          name: predictive-config
+      - name: models-volume
+        persistentVolumeClaim:
+          claimName: models-pvc
+      - name: data-volume
+        persistentVolumeClaim:
+          claimName: data-pvc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: predictive-engine
+  namespace: predictive-maintenance
+  labels:
+    app: predictive-engine
+    component: engine
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: predictive-engine
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: predictive-engine
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+      - name: predictive-engine
+        image: ${DOCKER_REGISTRY}/predictive-engine:${VERSION}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: metrics
+        env:
+        - name: REDIS_HOST
+          value: "redis"
+        - name: REDIS_PORT
+          value: "6379"
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: redis-password
+        - name: DB_HOST
+          value: "timescaledb"
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_USER
+          value: "postgres"
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: timescaledb-password
+        - name: DB_NAME
+          value: "predictive"
+        - name: PROMETHEUS_PUSH_GATEWAY
+          value: "pushgateway:9091"
+        - name: METRICS_ENABLED
+          value: "true"
+        - name: LOG_LEVEL
+          value: "INFO"
+        resources:
+          limits:
+            cpu: "2"
+            memory: "4Gi"
+          requests:
+            cpu: "1"
+            memory: "2Gi"
+        volumeMounts:
+        - name: config-volume
+          mountPath: /app/config
+        - name: models-volume
+          mountPath: /app/models
+        - name: data-volume
+          mountPath: /app/data
+      volumes:
+      - name: config-volume
+        configMap:
+          name: predictive-config
+      - name: models-volume
+        persistentVolumeClaim:
+          claimName: models-pvc
+      - name: data-volume
+        persistentVolumeClaim:
+          claimName: data-pvc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: action-recommender
+  namespace: predictive-maintenance
+  labels:
+    app: action-recommender
+    component: recommender
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: action-recommender
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: action-recommender
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: predictive-maintenance-sa
+      containers:
+      - name: action-recommender
+        image: ${DOCKER_REGISTRY}/action-recommender:${VERSION}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: metrics
+        env:
+        - name: REDIS_HOST
+          value: "redis"
+        - name: REDIS_PORT
+          value: "6379"
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: redis-password
+        - name: DB_HOST
+          value: "timescaledb"
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_USER
+          value: "postgres"
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: timescaledb-password
+        - name: DB_NAME
+          value: "predictive"
+        - name: PROMETHEUS_PUSH_GATEWAY
+          value: "pushgateway:9091"
+        - name: METRICS_ENABLED
+          value: "true"
+        - name: LOG_LEVEL
+          value: "INFO"
+        - name: ENABLE_K8S_INTEGRATION
+          value: "true"
+        - name: ACTION_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: api-credentials
+              key: secret-key
+        resources:
+          limits:
+            cpu: "1"
+            memory: "1Gi"
+          requests:
+            cpu: "300m"
+            memory: "512Mi"
+        volumeMounts:
+        - name: config-volume
+          mountPath: /app/config
+        - name: models-volume
+          mountPath: /app/models
+        - name: data-volume
+          mountPath: /app/data
+      volumes:
+      - name: config-volume
+        configMap:
+          name: predictive-config
+      - name: models-volume
+        persistentVolumeClaim:
+          claimName: models-pvc
+      - name: data-volume
+        persistentVolumeClaim:
+          claimName: data-pvc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-profiler
+  namespace: predictive-maintenance
+  labels:
+    app: service-profiler
+    component: profiler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-profiler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: service-profiler
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+      - name: service-profiler
+        image: ${DOCKER_REGISTRY}/service-profiler:${VERSION}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: metrics
+        env:
+        - name: REDIS_HOST
+          value: "redis"
+        - name: REDIS_PORT
+          value: "6379"
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: redis-password
+        - name: DB_HOST
+          value: "timescaledb"
+        - name: DB_PORT
+          value: "5432"
+        - name: DB_USER
+          value: "postgres"
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: timescaledb-password
+        - name: DB_NAME
+          value: "predictive"
+        - name: PROMETHEUS_PUSH_GATEWAY
+          value: "pushgateway:9091"
+        - name: METRICS_ENABLED
+          value: "true"
+        - name: LOG_LEVEL
+          value: "INFO"
+        - name: PROFILES_DIR
+          value: "/app/data/profiles"
+        - name: MODELS_DIR
+          value: "/app/models/profiles"
+        resources:
+          limits:
+            cpu: "1"
+            memory: "2Gi"
+          requests:
+            cpu: "300m"
+            memory: "512Mi"
+        volumeMounts:
+        - name: config-volume
+          mountPath: /app/config
+        - name: models-volume
+          mountPath: /app/models
+        - name: data-volume
+          mountPath: /app/data
+      volumes:
+      - name: config-volume
+        configMap:
+          name: predictive-config
+      - name: models-volume
+        persistentVolumeClaim:
+          claimName: models-pvc
+      - name: data-volume
+        persistentVolumeClaim:
+          claimName: data-pvc
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notification-service
+  namespace: predictive-maintenance
+  labels:
+    app: notification-service
+    component: notifications
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: notification-service
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: notification-service
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8080"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+      - name: notification-service
+        image: ${DOCKER_REGISTRY}/notification-service:${VERSION}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+          name: metrics
+        env:
+        - name: REDIS_HOST
+          value: "redis"
+        - name: REDIS_PORT
+          value: "6379"
+        - name: REDIS_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: redis-password
+        - name: EMAIL_SMTP_HOST
+          valueFrom:
+            secretKeyRef:
+              name: notification-credentials
+              key: email-smtp-host
+              optional: true
+        - name: EMAIL_SMTP_PORT
+          valueFrom:
+            secretKeyRef:
+              name: notification-credentials
+              key: email-smtp-port
+              optional: true
+        - name: EMAIL_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: notification-credentials
+              key: email-username
+              optional: true
+        - name: EMAIL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: notification-credentials
+              key: email-password
+              optional: true
+        - name: SLACK_WEBHOOK_URL
+          valueFrom:
+            secretKeyRef:
+              name: notification-credentials
+              key: slack-webhook-url
+              optional: true
+        - name: PROMETHEUS_PUSH_GATEWAY
+          value: "pushgateway:9091"
+        - name: METRICS_ENABLED
+          value: "true"
+        - name: LOG_LEVEL
+          value: "INFO"
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
+      volumes:
+      - name: config-volume
+        configMap:
+          name: predictive-config
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dashboard
+  namespace: predictive-maintenance
+  labels:
+    app: dashboard
+    component: frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: dashboard
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: dashboard
+    spec:
+      containers:
+      - name: dashboard
+        image: ${DOCKER_REGISTRY}/dashboard:${VERSION}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+          name: http
+        env:
+        - name: API_URL
+          value: "http://api-service:8000"
+        - name: GRAFANA_URL
+          value: "http://grafana:3000"
+        - name: DEFAULT_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: api-credentials
+              key: api-key
+        resources:
+          limits:
+            cpu: "500m"
+            memory: "512Mi"
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 10
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 5
+          periodSeconds: 10

@@ -1,76 +1,54 @@
-<<<<<<< HEAD
-# Sistema Predictivo de Mantenimiento para Sistemas Distribuidos
+# Sistema Avanzado de Mantenimiento Predictivo para Sistemas Distribuidos
 
-Este proyecto implementa un sistema avanzado de IA para la predicción, detección y mitigación proactiva de fallos en sistemas distribuidos, utilizando técnicas de machine learning y análisis de datos en tiempo real.
+Este proyecto implementa una plataforma de IA para la predicción, detección y mitigación proactiva de fallos en sistemas distribuidos, utilizando técnicas avanzadas de machine learning y análisis de datos en tiempo real.
 
 ## Características Principales
 
-- **Detección de Anomalías en Tiempo Real**: Identificación de comportamientos anormales mediante algoritmos de machine learning.
-- **Predicción de Fallos**: Anticipa posibles fallos antes de que ocurran usando modelos LSTM y técnicas de aprendizaje profundo.
-- **Recomendación de Acciones**: Sugiere o ejecuta automáticamente acciones correctivas para resolver problemas.
+- **Detección Adaptativa de Anomalías**: Algoritmo de detección basado en perfiles dinámicos de servicio que se adaptan automáticamente al comportamiento normal específico de cada sistema.
+- **Predicción de Fallos**: Anticipa posibles problemas antes de que ocurran utilizando modelos LSTM, Gradient Boosting y técnicas de aprendizaje profundo.
+- **Recomendación Inteligente de Acciones**: Sistema de recomendación basado en políticas que aprende de la efectividad histórica de las acciones.
+- **Ejecución Segura de Acciones**: Orquestador de acciones con sistema de seguridad, validación y rollback automático.
 - **Monitoreo Centralizado**: Dashboard integrado para visualización y gestión del sistema distribuido.
-- **Arquitectura Escalable**: Basada en microservicios con Docker para fácil despliegue y escalabilidad.
+- **Sistema de Notificaciones**: Alertas y notificaciones configurables por múltiples canales (email, Slack, webhooks).
+- **Arquitectura Escalable**: Diseño basado en microservicios con Docker y Kubernetes para fácil despliegue y escalabilidad.
+- **Integración con Kubernetes**: Integración nativa para monitorear y ejecutar acciones correctivas en clusters de Kubernetes.
 
 ## Arquitectura del Sistema
 
 ![Arquitectura del Sistema](./docs/images/arquitectura.png)
 
-El sistema está compuesto por los siguientes componentes principales:
+### Componentes Principales
 
-1. **Recolector de datos**: Captura métricas, logs y eventos del sistema distribuido.
-2. **Preprocesador de datos**: Limpia, normaliza y prepara los datos para el análisis.
-3. **Detector de anomalías**: Identifica comportamientos inusuales en tiempo real.
-4. **Motor predictivo**: Predice posibles fallos futuros basados en patrones históricos.
-5. **Recomendador de acciones**: Sugiere o ejecuta automáticamente acciones correctivas.
+1. **Detector de Anomalías (anomaly_detector)**: Motor adaptativo de detección que utiliza perfiles específicos por servicio.
+2. **Motor Predictivo (predictive_engine)**: Sistema de predicción de fallos basado en modelos de series temporales.
+3. **Recomendador de Acciones (action_recommender)**: Recomienda acciones basadas en el contexto y aprendizaje continuo.
+4. **Orquestador de Acciones (action_orchestrator)**: Ejecuta acciones correctivas de forma segura y controlada.
+5. **Perfilador de Servicios (service_profiler)**: Aprende el comportamiento normal de cada servicio.
 6. **API REST**: Proporciona interfaces para la integración con otros sistemas.
-7. **Dashboard de visualización**: Interfaz para monitorear y controlar el sistema.
+7. **Dashboard**: Interfaz web para monitorear y controlar el sistema.
+8. **Servicio de Notificaciones**: Sistema de alertas por múltiples canales.
 
-## Requisitos
+## Inicio Rápido con Docker Compose
 
-- Docker y Docker Compose
-- Al menos 4GB de RAM disponible
-- Al menos 20GB de espacio en disco
-- Conexión a internet para la descarga de imágenes Docker
-
-## Instalación y Despliegue
-
-### Opción 1: Instalación Automática
+La forma más sencilla de probar el sistema es utilizando Docker Compose:
 
 ```bash
 # Clonar el repositorio
-git clone https://github.com/tu-usuario/predictive-maintenance.git
+git clone https://github.com/your-user/predictive-maintenance.git
 cd predictive-maintenance
 
-# Ejecutar script de instalación
-chmod +x setup.sh
-./setup.sh
+# Configurar variables de entorno
+cp .env.example .env
+# Editar .env según sea necesario
+
+# Iniciar los servicios
+docker-compose up -d
+
+# Verificar que todos los servicios estén en funcionamiento
+docker-compose ps
 ```
 
-### Opción 2: Instalación Manual
-
-1. **Clonar el repositorio**:
-   ```bash
-   git clone https://github.com/tu-usuario/predictive-maintenance.git
-   cd predictive-maintenance
-   ```
-
-2. **Configurar variables de entorno**:
-   ```bash
-   cp .env.example .env
-   # Editar el archivo .env según tus necesidades
-   ```
-
-3. **Iniciar los servicios**:
-   ```bash
-   docker-compose up -d
-   ```
-
-4. **Verificar el estado**:
-   ```bash
-   docker-compose ps
-   ```
-
-## Acceso a Interfaces
+### Acceso a las Interfaces
 
 - **Dashboard Web**: http://localhost:3001
 - **API REST**: http://localhost:8000
@@ -78,181 +56,148 @@ chmod +x setup.sh
 - **Grafana**: http://localhost:3000 (usuario: admin, contraseña: admin)
 - **Prometheus**: http://localhost:9090
 
-## Descripción de Componentes
+## Guía de Instalación en Kubernetes
 
-### Recolector de Datos
+Para despliegues en producción, se recomienda utilizar Kubernetes. Consulte nuestra [Guía de Despliegue](./docs/deployment-guide.md) para obtener instrucciones detalladas.
 
-El recolector de datos obtiene información de diversas fuentes:
+## Configuración
 
-- **Métricas de sistemas**: CPU, memoria, disco, red
-- **Logs de aplicaciones**: Errores, advertencias, información
-- **Eventos del sistema**: Inicios, paradas, cambios de configuración
-- **Métricas de aplicaciones**: Latencia, throughput, tasa de errores
+### Configuración de Servicios para Monitoreo
 
-El componente soporta múltiples formas de recolección:
-
-- Scraping de endpoints Prometheus
-- Lectura de logs del sistema
-- API REST para envío manual de métricas
-- Integración con sistemas de monitoreo existentes
-
-### Preprocesador de Datos
-
-El preprocesador realiza las siguientes tareas:
-
-- Limpieza de datos (eliminación de valores nulos, outliers)
-- Normalización y estandarización
-- Agregación de métricas
-- Extracción de características
-- Almacenamiento en TimescaleDB
-
-### Detector de Anomalías
-
-El detector de anomalías utiliza múltiples algoritmos:
-
-- **Isolation Forest**: Detecta outliers y puntos aislados
-- **Autoencoders**: Aprende patrones normales y detecta desviaciones
-- **Statistical Process Control**: Monitorea variaciones estadísticas
-
-El modelo combina las salidas de estos algoritmos para lograr mayor precisión y robustez.
-
-### Motor Predictivo
-
-El motor predictivo implementa modelos de aprendizaje profundo:
-
-- **LSTM (Long Short-Term Memory)**: Captura dependencias temporales en secuencias de métricas
-- **Gradient Boosting**: Clasifica patrones que preceden a fallos
-- **Ensemble Methods**: Combina predicciones de múltiples modelos
-
-El sistema mantiene modelos específicos por servicio y por tipo de fallo, que se reentrenan periódicamente.
-
-### Recomendador de Acciones
-
-Este componente:
-
-- Mantiene un catálogo de acciones posibles por tipo de problema
-- Evalúa la efectividad histórica de las acciones
-- Utiliza algoritmos de reinforcement learning para mejorar recomendaciones
-- Puede ejecutar acciones automáticamente según la configuración
-
-## Guías de Uso
-
-### Añadir un Nuevo Servicio para Monitoreo
-
-1. Registrar el servicio a través de la API:
-   ```bash
-   curl -X POST http://localhost:8000/services \
-     -H "Content-Type: application/json" \
-     -d '{"service_id": "nuevo_servicio", "service_name": "Nuevo Servicio", "service_type": "web_app"}'
-   ```
-
-2. Configurar la recolección de métricas según el tipo de servicio.
-
-3. Verificar en el dashboard que el servicio aparece y se están recolectando métricas.
-
-### Configurar Políticas de Acciones
-
-1. Navegar a la sección de "Acciones" en el dashboard.
-2. Crear una nueva política para el servicio deseado.
-3. Definir condiciones y acciones de remediación.
-4. Guardar la política.
-
-### Analizar Predicciones de Fallos
-
-1. Acceder a la sección "Predicciones" del dashboard.
-2. Filtrar por servicio si es necesario.
-3. Revisar probabilidades y horizontes de tiempo.
-4. Ver recomendaciones de acciones asociadas.
-
-## Mantenimiento del Sistema
-
-### Backup y Restauración
+Para registrar un nuevo servicio a monitorear:
 
 ```bash
-# Realizar copia de seguridad
-./backup.sh
-
-# Restaurar desde copia de seguridad
-./restore.sh ./backups/backup_20250215_123045.tar.gz
+curl -X POST http://localhost:8000/register-service \
+  -H "X-API-Key: test_key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "service_id": "my-web-service",
+    "service_name": "My Web Service",
+    "service_type": "web_service",
+    "description": "Aplicación web principal"
+  }'
 ```
 
-### Verificación del Estado
+### Configuración de Políticas de Acción
+
+Las políticas de acción definen qué acciones se pueden tomar para resolver diferentes tipos de problemas:
+
+1. Edite el archivo `config/action_policies.json`
+2. Reinicie el servicio de recomendación de acciones: `docker-compose restart action-recommender`
+
+Ejemplo de política:
+
+```json
+{
+  "my-web-service": {
+    "description": "Acciones para mi servicio web",
+    "actions": {
+      "scale_up": {
+        "description": "Escala horizontalmente el servicio",
+        "command": "kubectl scale deployment ${service_id} --replicas=$(kubectl get deployment ${service_id} -o=jsonpath='{.spec.replicas}'+1)",
+        "conditions": {
+          "metrics": {
+            "cpu_usage": "> 80",
+            "response_time_ms": "> 500"
+          },
+          "anomaly_score": "> 0.6"
+        },
+        "priority": "medium"
+      }
+    }
+  }
+}
+```
+
+## Envío de Métricas
+
+### Usando la API REST
 
 ```bash
-./check_system.sh
+curl -X POST http://localhost:8000/submit-metrics \
+  -H "X-API-Key: test_key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "service_id": "my-web-service",
+    "metrics": {
+      "cpu_usage": 82.5,
+      "memory_usage": 65.3,
+      "response_time_ms": 350,
+      "error_rate": 0.2
+    }
+  }'
 ```
 
-### Actualización del Sistema
+### Integración con Prometheus
+
+El sistema puede configurarse para extraer métricas directamente de Prometheus. Consulte la [Guía de Integración con Prometheus](./docs/prometheus-integration.md).
+
+## Desarrollo
+
+### Requisitos para Desarrollo
+
+- Python 3.9+
+- Node.js 16+
+- Docker y Docker Compose
+- Kubernetes (opcional, para pruebas de integración completas)
+
+### Configuración del Entorno de Desarrollo
 
 ```bash
-git pull
-docker-compose down
-docker-compose build
-docker-compose up -d
+# Crear entorno virtual
+python -m venv venv
+source venv/bin/activate  # En Windows: venv\Scripts\activate
+
+# Instalar dependencias
+pip install -r requirements-dev.txt
+
+# Configurar pre-commit hooks
+pre-commit install
+
+# Iniciar servicios de desarrollo
+docker-compose -f docker-compose.dev.yml up -d
 ```
 
-## Personalización y Extensión
+### Ejecución de Pruebas
 
-El sistema es altamente personalizable:
+```bash
+# Ejecutar todas las pruebas
+pytest
 
-- **Algoritmos de detección**: Modifica los modelos en `/anomaly_detector`
-- **Modelos predictivos**: Ajusta los parámetros en `/predictive_engine`
-- **Políticas de acción**: Edita los archivos YAML en `/action_recommender/policies`
-- **Dashboard**: Personaliza la interfaz en `/dashboard`
+# Ejecutar pruebas específicas
+pytest tests/unit
+pytest tests/integration_test_scenarios.py
 
-## Tecnologías Utilizadas
+# Ejecutar pruebas con cobertura
+pytest --cov=.
+```
 
-- **Backend**: Python, FastAPI, Kafka, TimescaleDB
-- **Machine Learning**: TensorFlow, PyTorch, scikit-learn
-- **Frontend**: React, Recharts, Tailwind CSS
-- **Monitoreo**: Prometheus, Grafana
-- **Orquestación**: Docker, Docker Compose
+## Casos de Uso
 
-## Solución de Problemas
+El sistema está diseñado para abordar diversos escenarios:
 
-### Problemas Comunes
+1. **Fugas de Memoria**: Detección temprana y reinicio automático de servicios.
+2. **Sobrecarga de BD**: Ajuste automático de parámetros de conexión y recursos.
+3. **Fragmentación de Memoria en Redis**: Purga automática cuando es necesario.
+4. **Alta Latencia**: Escalado automático o reinicio de componentes lentos.
+5. **Problemas de Disco**: Limpieza automática y generación de alertas.
 
-1. **Los contenedores no inician correctamente**:
-   - Verificar logs: `docker-compose logs [servicio]`
-   - Asegurar que los puertos no estén en uso por otras aplicaciones
-   - Verificar la conectividad entre contenedores
+## Documentación Adicional
 
-2. **No se recogen métricas**:
-   - Verificar la configuración del recolector
-   - Comprobar conexión a las fuentes de datos
-   - Revisar logs del recolector
+- [Arquitectura Detallada](./docs/architecture.md)
+- [API Reference](./docs/api-reference.md)
+- [Guía de Configuración Avanzada](./docs/advanced-configuration.md)
+- [Desarrollo de Nuevos Detectores](./docs/custom-detectors.md)
+- [Integración con Sistemas Externos](./docs/integrations.md)
 
-3. **Modelos no detectan anomalías**:
-   - Verificar que hay suficientes datos de entrenamiento
-   - Ajustar umbral de detección en la configuración
-   - Reentrenar modelos manualmente
+## Contribuir
 
-### Obteniendo Ayuda
-
-- Crear un issue en el repositorio de GitHub
-- Consultar la documentación completa en `/docs`
-- Contactar al equipo de soporte
-
-## Contribuir al Proyecto
-
-1. Fork del repositorio
-2. Crear una rama para tu característica (`git checkout -b feature/amazing-feature`)
-3. Commit de tus cambios (`git commit -m 'Add some amazing feature'`)
-4. Push a la rama (`git push origin feature/amazing-feature`)
-5. Abrir un Pull Request
+Las contribuciones son bienvenidas. Por favor, lea [CONTRIBUTING.md](./CONTRIBUTING.md) para obtener detalles sobre nuestro código de conducta y el proceso para enviarnos pull requests.
 
 ## Licencia
 
 Este proyecto está licenciado bajo la licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
 
-## Autores
+## Contacto
 
-- Tu Nombre - Trabajo Inicial - [tu-usuario](https://github.com/tu-usuario)
-
-## Agradecimientos
-
-- Menciona a cualquier persona que haya contribuido al proyecto
-- Inspiraciones, recursos utilizados, etc.
-=======
-# FlowLVL
->>>>>>> 82e020785ff2e209e6c370029755b2301ecf50f5
+Si tiene preguntas o comentarios, por favor abra un issue en GitHub o contacte a los mantenedores del proyecto.
