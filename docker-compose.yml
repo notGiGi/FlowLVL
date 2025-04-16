@@ -75,11 +75,11 @@ services:
     depends_on:
       - prometheus
 
-  # API principal
+  # API principal (se asume que su Dockerfile y demás archivos están en ./api)
   api:
     build:
-      context: .
-      dockerfile: api/Dockerfile
+      context: ./api
+      dockerfile: Dockerfile
     volumes:
       - ./config:/app/config
       - ./models:/app/models
@@ -112,11 +112,11 @@ services:
       retries: 3
     command: uvicorn api.controller:create_api_app --host 0.0.0.0 --port 8000
 
-  # Detector de anomalías
+  # Detector de anomalías (se asume que su Dockerfile y requirements.txt están en ./anomaly_detector)
   anomaly-detector:
     build:
-      context: .
-      dockerfile: anomaly_detector/Dockerfile
+      context: ./anomaly_detector
+      dockerfile: Dockerfile
     volumes:
       - ./config:/app/config
       - ./models:/app/models
@@ -139,7 +139,10 @@ services:
       - pushgateway
     restart: unless-stopped
 
-  # Motor predictivo
+  # Motor predictivo  
+  # Se establece el contexto en la raíz para que el Dockerfile pueda copiar archivos desde:
+  # - predictive_engine/ (el propio código y requirements)
+  # - utils/ (carpeta común al nivel superior)
   predictive-engine:
     build:
       context: .
@@ -166,11 +169,11 @@ services:
       - pushgateway
     restart: unless-stopped
 
-  # Recomendador de acciones
+  # Recomendador de acciones (se asume que su Dockerfile y archivos están en ./action_recommender)
   action-recommender:
     build:
-      context: .
-      dockerfile: action_recommender/Dockerfile
+      context: ./action_recommender
+      dockerfile: Dockerfile
     volumes:
       - ./config:/app/config
       - ./models:/app/models
@@ -194,7 +197,10 @@ services:
       - pushgateway
     restart: unless-stopped
 
-  # Perfilador de servicios
+  # Perfilador de servicios  
+  # Se establece el contexto en la raíz para que el Dockerfile pueda copiar:
+  # - monitoring/ (el propio código y requirements)
+  # - utils/ y config/ (carpetas comunes)
   service-profiler:
     build:
       context: .
@@ -221,7 +227,7 @@ services:
       - pushgateway
     restart: unless-stopped
 
-  # Dashboard web
+  # Dashboard web (se asume que su Dockerfile y archivos están en ./dashboard)
   dashboard:
     build:
       context: ./dashboard
@@ -235,11 +241,12 @@ services:
       - api
     restart: unless-stopped
 
-  # Sistema de notificaciones
+  # Sistema de notificaciones  
+  # Se utiliza la raíz como contexto para acceder, entre otros, a la carpeta utils/
   notification-service:
     build:
-      context: ./notification_service
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: notification_service/Dockerfile
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
