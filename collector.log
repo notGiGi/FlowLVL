@@ -1,0 +1,763 @@
+2025-04-18 18:44:19,003 - predictive_maintenance - INFO - Inicializando sistema de mantenimiento predictivo...
+2025-04-18 18:44:19,005 - simple_collector - ERROR - Error al cargar configuración: expected str, bytes or os.PathLike object, not dict
+2025-04-18 18:44:19,005 - simple_collector - INFO - Colector inicializado
+2025-04-18 18:44:19,005 - simple_detector - INFO - Detector de anomalías simple inicializado
+2025-04-18 18:44:19,006 - simple_recommender - INFO - Políticas de acción cargadas: 5 servicios
+2025-04-18 18:44:19,007 - simple_recommender - INFO - Recomendador de acciones simple inicializado (modo: simulation)
+2025-04-18 18:44:19,007 - predictive_maintenance - INFO - Sistema inicializado correctamente
+2025-04-18 18:44:19,007 - predictive_maintenance - INFO - Iniciando sistema...
+2025-04-18 18:44:19,008 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 18:44:19,008 - predictive_maintenance - INFO - Sistema iniciado correctamente
+2025-04-18 18:44:19,167 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 18:44:20,363 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.101:5000
+2025-04-18 18:44:20,363 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-18 18:44:33,632 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:44:33] "GET / HTTP/1.1" 200 -
+2025-04-18 18:44:33,914 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:44:33] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:44:34,225 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:44:34] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:44:34,225 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:44:34] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:44:34,239 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:44:34] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2025-04-18 18:44:42,560 - simple_recommender - INFO - Modo de ejecución cambiado a: simulation
+2025-04-18 18:44:42,560 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:44:42] "POST /api/mode HTTP/1.1" 200 -
+2025-04-18 18:44:45,567 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:44:45] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:44:51,016 - simple_recommender - INFO - Modo de ejecución cambiado a: real
+2025-04-18 18:44:51,016 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:44:51] "POST /api/mode HTTP/1.1" 200 -
+2025-04-18 18:44:53,049 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:44:53] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:44:59,992 - simple_recommender - INFO - Modo de ejecución cambiado a: simulation
+2025-04-18 18:44:59,992 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:44:59] "POST /api/mode HTTP/1.1" 200 -
+2025-04-18 18:45:01,176 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:45:01] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:45:04,220 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:45:04] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:45:04,220 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:45:04] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:45:04,230 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:45:04] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:45:19,187 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 18:45:19,245 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 18:45:34,222 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:45:34] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:45:34,224 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:45:34] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:45:34,226 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:45:34] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:46:04,423 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:46:04] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:46:04,425 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:46:04] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:46:04,429 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:46:04] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:46:19,267 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 18:46:19,348 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 18:46:35,406 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:46:35] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:46:35,408 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:46:35] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:46:35,412 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:46:35] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:47:06,411 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:47:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:47:06,412 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:47:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:47:06,414 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:47:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:47:19,363 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 18:47:19,427 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 18:47:36,417 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:47:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:47:36,418 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:47:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:47:36,420 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:47:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:47:48,962 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:47:48] "GET /api/service/example-service HTTP/1.1" 200 -
+2025-04-18 18:48:06,421 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:48:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:48:06,423 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:48:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:48:06,424 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:48:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:48:19,484 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 18:48:19,537 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 18:48:20,203 - simple_recommender - INFO - Modo de ejecución cambiado a: real
+2025-04-18 18:48:20,203 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:48:20] "POST /api/mode HTTP/1.1" 200 -
+2025-04-18 18:48:21,276 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:48:21] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:48:36,436 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:48:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:48:36,438 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:48:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:48:36,440 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:48:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:49:06,433 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:49:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:49:06,435 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:49:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:49:06,439 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:49:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:49:19,141 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 18:49:19,572 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 18:49:19,618 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 18:49:36,444 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:49:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:49:36,445 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:49:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:49:36,446 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:49:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:50:06,454 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:50:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:50:06,455 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:50:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:50:06,458 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:50:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:50:19,150 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 18:50:19,645 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 18:50:19,695 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 18:50:36,467 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:50:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:50:36,468 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:50:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:50:36,471 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:50:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:51:06,486 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:51:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:51:06,488 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:51:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:51:06,493 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:51:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:51:19,172 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 18:51:19,719 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 18:51:19,762 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 18:51:36,189 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:51:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:51:36,504 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:51:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:51:36,506 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:51:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:52:06,500 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:52:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:52:06,502 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:52:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:52:06,506 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:52:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:52:19,181 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 18:52:19,781 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 18:52:19,810 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 18:52:36,196 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:52:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:52:36,503 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:52:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:52:36,505 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:52:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:53:06,519 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:53:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:53:06,521 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:53:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:53:06,523 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:53:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:53:19,194 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 18:53:19,842 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 18:53:19,859 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 18:53:36,215 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:53:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:53:36,525 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:53:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:53:36,527 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:53:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:54:06,529 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:54:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:54:06,531 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:54:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:54:06,534 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:54:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:54:19,204 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 18:54:19,895 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 18:54:19,939 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 18:54:36,244 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:54:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:54:36,556 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:54:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:54:36,560 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:54:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:55:06,556 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:55:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:55:06,558 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:55:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:55:06,560 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:55:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:55:19,219 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 18:55:19,970 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 18:55:20,040 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 18:55:36,251 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:55:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:55:36,553 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:55:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:55:36,554 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:55:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:56:06,582 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:56:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:56:06,584 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:56:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:56:06,587 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:56:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:56:19,226 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 18:56:20,072 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 18:56:20,125 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 18:56:36,269 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:56:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:56:36,576 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:56:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:56:36,579 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:56:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:57:06,569 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:57:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:57:06,570 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:57:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:57:06,572 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:57:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:57:19,236 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 18:57:20,159 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 18:57:20,185 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 18:57:36,283 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:57:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:57:36,584 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:57:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:57:36,586 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:57:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:58:06,605 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:58:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:58:06,606 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:58:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:58:06,606 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:58:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:58:19,249 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 18:58:20,213 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 18:58:20,240 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 18:58:36,300 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:58:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:58:36,614 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:58:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:58:36,616 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:58:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:59:06,612 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:59:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:59:06,613 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:59:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:59:06,618 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:59:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 18:59:19,264 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 18:59:20,270 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 18:59:20,314 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 18:59:36,316 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:59:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 18:59:36,620 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:59:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 18:59:36,621 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 18:59:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:00:06,626 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:00:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:00:06,628 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:00:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:00:06,633 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:00:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:00:19,270 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:00:20,337 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:00:20,422 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:00:36,325 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:00:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:00:36,637 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:00:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:00:36,639 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:00:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:01:06,650 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:01:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:01:06,652 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:01:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:01:06,655 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:01:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:01:19,281 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:01:20,464 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:01:20,514 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:01:36,351 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:01:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:01:36,664 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:01:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:01:36,666 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:01:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:02:06,669 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:02:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:02:06,670 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:02:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:02:06,671 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:02:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:02:19,294 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:02:20,532 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:02:20,590 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:02:36,377 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:02:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:02:36,684 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:02:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:02:36,685 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:02:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:03:06,699 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:03:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:03:06,701 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:03:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:03:06,706 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:03:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:03:19,301 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:03:20,624 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:03:20,704 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:03:36,398 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:03:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:03:36,701 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:03:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:03:36,704 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:03:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:04:06,722 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:04:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:04:06,723 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:04:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:04:06,724 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:04:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:04:19,313 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:04:20,736 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:04:20,796 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:04:36,431 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:04:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:04:36,744 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:04:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:04:36,746 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:04:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:05:06,725 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:05:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:05:06,725 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:05:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:05:06,726 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:05:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:05:19,323 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:05:20,822 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:05:20,914 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:05:36,436 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:05:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:05:36,748 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:05:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:05:36,749 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:05:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:06:06,750 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:06:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:06:06,750 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:06:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:06:06,751 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:06:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:06:19,338 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:06:20,969 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:06:21,013 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:06:36,445 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:06:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:06:36,757 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:06:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:06:36,759 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:06:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:07:06,771 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:07:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:07:06,772 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:07:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:07:06,778 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:07:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:07:19,354 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:07:21,045 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:07:21,065 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:07:36,470 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:07:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:07:36,778 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:07:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:07:36,780 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:07:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:08:06,795 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:08:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:08:06,796 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:08:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:08:06,799 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:08:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:08:19,366 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:08:21,110 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:08:21,147 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:08:36,493 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:08:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:08:36,800 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:08:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:08:36,802 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:08:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:09:06,814 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:09:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:09:06,815 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:09:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:09:06,817 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:09:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:09:19,385 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:09:21,184 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:09:21,245 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:09:36,518 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:09:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:09:36,831 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:09:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:09:36,831 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:09:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:10:06,831 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:10:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:10:06,833 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:10:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:10:06,836 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:10:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:10:19,403 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:10:21,266 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:10:21,309 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:10:36,536 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:10:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:10:36,838 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:10:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:10:36,841 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:10:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:11:06,848 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:11:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:11:06,848 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:11:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:11:06,852 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:11:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:11:19,409 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:11:21,348 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:11:21,396 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:11:36,559 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:11:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:11:36,867 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:11:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:11:36,871 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:11:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:12:06,873 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:12:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:12:06,876 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:12:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:12:06,881 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:12:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:12:19,422 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:12:21,427 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:12:21,469 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:12:36,883 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:12:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:12:36,884 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:12:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:12:36,885 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:12:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:13:06,584 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:13:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:13:06,893 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:13:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:13:06,894 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:13:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:13:19,431 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:13:21,506 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:13:21,577 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:13:36,903 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:13:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:13:36,905 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:13:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:13:36,909 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:13:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:13:48,125 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:13:48] "GET /api/service/example-service HTTP/1.1" 200 -
+2025-04-18 19:14:06,912 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:14:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:14:06,914 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:14:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:14:06,918 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:14:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:14:19,448 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:14:21,609 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:14:21,667 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:14:36,931 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:14:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 19:14:36,932 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:14:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 19:14:36,935 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 19:14:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 19:15:19,457 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:15:21,700 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:15:21,766 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:16:19,463 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:16:21,801 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:16:21,842 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:17:19,475 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:17:21,869 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:17:21,922 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:18:19,480 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:18:21,952 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:18:22,011 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:19:19,501 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:19:22,035 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:19:22,097 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:20:19,519 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:20:22,132 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:20:22,211 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:21:19,537 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:21:22,257 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:21:22,320 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:22:19,546 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:22:22,362 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:22:22,414 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:23:19,554 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:23:22,454 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:23:22,494 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:24:19,574 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:24:22,546 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:24:22,579 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:25:19,588 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:25:22,626 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:25:22,730 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:26:19,609 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:26:22,772 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:26:22,840 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:27:19,626 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:27:22,871 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:27:22,919 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:28:19,636 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:28:22,959 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:28:23,015 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:29:19,645 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:29:23,041 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:29:23,106 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:30:19,654 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:30:23,129 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:30:23,191 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:31:19,660 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:31:23,219 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:31:23,270 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:32:19,667 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:32:23,311 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:32:23,381 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:33:19,683 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:33:23,434 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:33:23,506 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:34:19,702 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:34:23,533 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:34:23,608 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:35:19,718 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:35:23,641 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:35:23,690 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:36:19,729 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:36:23,722 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:36:23,774 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:37:19,751 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:37:23,804 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:37:23,829 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:38:19,759 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:38:23,865 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:38:23,940 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:39:19,766 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:39:23,973 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:39:24,019 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:40:19,785 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:40:24,052 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:40:24,104 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:41:19,789 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:41:24,137 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:41:24,205 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:42:19,797 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:42:24,230 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:42:24,296 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:43:19,806 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:43:24,334 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:43:24,401 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:44:19,820 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:44:24,437 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:44:24,489 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:45:19,830 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:45:24,531 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:45:24,621 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:46:19,842 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:46:24,664 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:46:24,715 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:47:19,845 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:47:24,740 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:47:24,793 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:48:19,856 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:48:24,812 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:48:24,877 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:49:19,877 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:49:24,924 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:49:24,977 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:50:19,891 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:50:25,021 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:50:25,086 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:51:19,901 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:51:25,134 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:51:25,180 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:52:19,903 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:52:25,210 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:52:25,272 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:53:19,916 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:53:25,305 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:53:25,362 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:54:19,926 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:54:25,415 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:54:25,505 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:55:19,936 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:55:25,550 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:55:25,606 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:56:19,955 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:56:25,636 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:56:25,711 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:57:19,965 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:57:25,739 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:57:25,813 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:58:19,970 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:58:25,855 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:58:25,919 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 19:59:19,985 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 19:59:25,945 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 19:59:25,998 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:00:19,988 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:00:26,048 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:00:26,098 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:01:19,993 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:01:26,152 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:01:26,197 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:02:20,003 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:02:26,221 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:02:26,284 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:03:20,015 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:03:26,311 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:03:26,371 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:04:20,018 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:04:26,413 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:04:26,463 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:05:20,033 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:05:26,495 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:05:26,553 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:06:20,037 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:06:26,592 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:06:26,641 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:07:20,047 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:07:26,674 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:07:26,732 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:08:20,052 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:08:26,757 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:08:26,834 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:09:20,065 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:09:26,868 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:09:26,929 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:10:20,074 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:10:26,957 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:10:27,006 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:11:20,084 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:11:27,039 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:11:27,088 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:12:20,088 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:12:27,114 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:12:27,164 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:13:20,094 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:13:27,224 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:13:27,267 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:14:20,106 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:14:27,307 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:14:27,364 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:15:20,114 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:15:27,410 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:15:27,474 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:16:20,128 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:16:27,514 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:16:27,574 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:17:20,149 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:17:27,627 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:17:27,647 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:18:20,159 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:18:27,687 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:18:27,749 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:19:20,175 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:19:27,789 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:19:27,855 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:20:20,181 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:20:27,878 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:20:27,919 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:21:20,184 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:21:27,940 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:21:27,993 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:22:20,199 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:22:28,031 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:22:28,094 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:23:20,204 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:23:28,119 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:23:28,168 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:24:20,227 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:24:28,209 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:24:28,278 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:25:20,229 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:25:28,319 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:25:28,393 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:26:20,249 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:26:28,429 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:26:28,490 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:27:20,258 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:27:28,511 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:27:28,567 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:28:20,269 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:28:28,602 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:28:28,665 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:29:20,279 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:29:28,691 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:29:28,736 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 20:29:44,055 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 20:29:44] "GET / HTTP/1.1" 200 -
+2025-04-18 20:29:44,151 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 20:29:44] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 20:29:44,279 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 20:29:44] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 20:29:44,459 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 20:29:44] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 20:30:01,398 - simple_recommender - INFO - Modo de ejecución cambiado a: simulation
+2025-04-18 20:30:01,403 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 20:30:01] "POST /api/mode HTTP/1.1" 200 -
+2025-04-18 20:30:02,610 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 20:30:02] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 20:30:14,466 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 20:30:14] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 20:30:14,466 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 20:30:14] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 20:30:14,476 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 20:30:14] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 20:30:20,285 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 20:30:28,761 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 20:30:28,810 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 22:05:03,114 - predictive_maintenance - INFO - Inicializando sistema de mantenimiento predictivo...
+2025-04-18 22:05:03,115 - simple_collector - ERROR - Error al cargar configuración: expected str, bytes or os.PathLike object, not dict
+2025-04-18 22:05:03,116 - simple_collector - INFO - Colector inicializado
+2025-04-18 22:05:03,132 - simple_detector - INFO - Umbrales cargados desde ./data\thresholds.json
+2025-04-18 22:05:03,132 - simple_detector - INFO - Detector de anomalías simple inicializado
+2025-04-18 22:05:03,135 - simple_recommender - INFO - Políticas de acción cargadas: 5 servicios
+2025-04-18 22:05:03,136 - simple_recommender - INFO - Recomendador de acciones simple inicializado (modo: simulation)
+2025-04-18 22:05:03,136 - predictive_maintenance - INFO - Sistema inicializado correctamente
+2025-04-18 22:05:03,137 - predictive_maintenance - INFO - Iniciando sistema...
+2025-04-18 22:05:03,137 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 22:05:03,138 - predictive_maintenance - INFO - Sistema iniciado correctamente
+2025-04-18 22:05:03,237 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 22:05:04,499 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.101:5000
+2025-04-18 22:05:04,499 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-18 22:05:22,313 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:05:22] "GET / HTTP/1.1" 200 -
+2025-04-18 22:05:28,935 - simple_recommender - INFO - Modo de ejecución cambiado a: simulation
+2025-04-18 22:05:28,935 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:05:28] "POST /api/mode HTTP/1.1" 200 -
+2025-04-18 22:05:30,558 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:05:30] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:05:52,939 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:05:52] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:05:53,245 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:05:53] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 22:05:53,246 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:05:53] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 22:06:03,263 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 22:06:03,315 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 22:06:24,248 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:06:24] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:06:24,248 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:06:24] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 22:06:24,251 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:06:24] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 22:08:19,128 - predictive_maintenance - INFO - Inicializando sistema de mantenimiento predictivo...
+2025-04-18 22:08:19,128 - simple_collector - ERROR - Error al cargar configuración: expected str, bytes or os.PathLike object, not dict
+2025-04-18 22:08:19,129 - simple_collector - INFO - Colector inicializado
+2025-04-18 22:08:19,129 - simple_detector - INFO - Umbrales cargados desde ./data\thresholds.json
+2025-04-18 22:08:19,129 - simple_detector - INFO - Detector de anomalías simple inicializado
+2025-04-18 22:08:19,130 - simple_recommender - INFO - Políticas de acción cargadas: 5 servicios
+2025-04-18 22:08:19,130 - simple_recommender - INFO - Recomendador de acciones simple inicializado (modo: simulation)
+2025-04-18 22:08:19,130 - predictive_maintenance - INFO - Sistema inicializado correctamente
+2025-04-18 22:08:19,130 - predictive_maintenance - INFO - Iniciando sistema...
+2025-04-18 22:08:19,131 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 22:08:19,131 - predictive_maintenance - INFO - Sistema iniciado correctamente
+2025-04-18 22:08:19,203 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 22:08:20,435 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.101:5000
+2025-04-18 22:08:20,436 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-18 22:08:25,336 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:08:25] "GET / HTTP/1.1" 200 -
+2025-04-18 22:08:25,368 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:08:25] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:08:25,581 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:08:25] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 22:08:25,676 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:08:25] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 22:08:27,421 - simple_recommender - INFO - Modo de ejecución cambiado a: simulation
+2025-04-18 22:08:27,422 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:08:27] "POST /api/mode HTTP/1.1" 200 -
+2025-04-18 22:08:28,744 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:08:28] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:08:56,248 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:08:56] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:08:56,248 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:08:56] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 22:08:56,250 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:08:56] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 22:09:19,225 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 22:09:19,276 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 22:09:26,936 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:09:26] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:09:27,236 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:09:27] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 22:09:27,238 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:09:27] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 22:09:58,255 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:09:58] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:09:58,257 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:09:58] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 22:09:58,259 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:09:58] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 22:10:19,306 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 22:10:19,373 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 22:10:28,255 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:10:28] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:10:28,256 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:10:28] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 22:10:28,257 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:10:28] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 22:10:59,262 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:10:59] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:10:59,263 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:10:59] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 22:10:59,265 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:10:59] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 22:11:19,398 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 22:11:19,447 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 22:11:28,955 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:11:28] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:11:29,260 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:11:29] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 22:11:29,261 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:11:29] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 22:12:00,260 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:12:00] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:12:00,262 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:12:00] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 22:12:00,266 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:12:00] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 22:12:19,480 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 22:12:19,520 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 22:12:31,246 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:12:31] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:12:31,250 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:12:31] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 22:12:31,252 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:12:31] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 22:13:02,254 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:13:02] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:13:02,256 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:13:02] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 22:13:02,259 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:13:02] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 22:13:19,165 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:13:19,548 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 22:13:19,617 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 22:13:31,298 - predictive_maintenance - INFO - Inicializando sistema de mantenimiento predictivo...
+2025-04-18 22:13:31,492 - simple_collector - ERROR - Error al cargar configuración: expected str, bytes or os.PathLike object, not dict
+2025-04-18 22:13:31,492 - simple_collector - INFO - Colector inicializado
+2025-04-18 22:13:31,495 - simple_detector - INFO - Umbrales cargados desde ./data\thresholds.json
+2025-04-18 22:13:31,495 - simple_detector - INFO - Detector de anomalías simple inicializado
+2025-04-18 22:13:31,495 - simple_recommender - INFO - Políticas de acción cargadas: 5 servicios
+2025-04-18 22:13:31,495 - simple_recommender - INFO - Recomendador de acciones simple inicializado (modo: simulation)
+2025-04-18 22:13:31,495 - predictive_maintenance - INFO - Sistema inicializado correctamente
+2025-04-18 22:13:31,499 - predictive_maintenance - INFO - Iniciando sistema...
+2025-04-18 22:13:31,500 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 22:13:31,502 - predictive_maintenance - INFO - Sistema iniciado correctamente
+2025-04-18 22:13:31,567 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 22:13:32,810 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.101:5000
+2025-04-18 22:13:32,810 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-04-18 22:13:33,259 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:13:33] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:13:33,260 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:13:33] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 22:13:33,261 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:13:33] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 22:13:37,131 - simple_recommender - INFO - Modo de ejecución cambiado a: simulation
+2025-04-18 22:13:37,131 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:13:37] "POST /api/mode HTTP/1.1" 200 -
+2025-04-18 22:13:39,124 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:13:39] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:14:03,939 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:14:03] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:14:04,244 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:14:04] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 22:14:04,245 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:14:04] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 22:14:21,557 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:14:31,562 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:14:31,611 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 22:14:31,654 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 22:14:35,246 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:14:35] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:14:35,247 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:14:35] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 22:14:35,248 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:14:35] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 22:14:41,569 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:14:51,578 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:15:01,583 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:15:11,591 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:15:21,597 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:15:31,605 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:15:31,682 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 22:15:31,721 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 22:15:36,265 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:15:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:15:36,267 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:15:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 22:15:36,268 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:15:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 22:15:41,610 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:15:51,618 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:16:01,633 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:16:06,253 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:16:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:16:06,254 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:16:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 22:16:06,255 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:16:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 22:16:11,644 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:16:21,650 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:16:31,660 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:16:31,762 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 22:16:31,796 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 22:16:35,806 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:16:35] "GET /api/service/example-service HTTP/1.1" 200 -
+2025-04-18 22:16:36,057 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:16:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:16:36,278 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:16:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 22:16:36,278 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:16:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 22:16:41,673 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:16:51,679 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:17:01,686 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:17:06,283 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:17:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:17:06,283 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:17:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 22:17:06,294 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:17:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 22:17:11,700 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:17:21,711 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:17:31,725 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:17:31,833 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 22:17:31,863 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 22:17:36,303 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:17:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:17:36,304 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:17:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 22:17:36,304 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:17:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 22:17:41,729 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:17:47,474 - simple_recommender - INFO - Modo de ejecución cambiado a: real
+2025-04-18 22:17:47,476 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:17:47] "POST /api/mode HTTP/1.1" 200 -
+2025-04-18 22:17:48,622 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:17:48] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:17:51,737 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:18:01,752 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:18:06,298 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:18:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:18:06,298 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:18:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 22:18:06,307 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:18:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 22:18:11,770 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:18:21,784 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:18:31,787 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:18:31,890 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 22:18:31,930 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 22:18:36,326 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:18:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:18:36,326 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:18:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 22:18:36,327 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:18:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 22:18:41,797 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:18:51,813 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:19:01,821 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:19:06,330 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:19:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:19:06,330 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:19:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 22:19:06,339 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:19:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 22:19:11,831 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:19:21,843 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:19:31,848 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:19:31,959 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 22:19:31,991 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 22:19:36,025 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:19:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:19:36,330 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:19:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 22:19:36,330 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:19:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 22:19:41,858 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:19:51,862 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:20:01,869 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:20:06,336 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:20:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:20:06,343 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:20:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 22:20:06,356 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:20:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 22:20:11,879 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:20:21,883 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:20:31,890 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:20:32,015 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 22:20:32,084 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 22:20:36,042 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:20:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:20:36,358 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:20:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 22:20:36,358 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:20:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 22:20:41,896 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:20:51,902 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:21:01,916 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:21:06,368 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:21:06] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:21:06,368 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:21:06] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 22:21:06,368 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:21:06] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 22:21:11,933 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:21:21,946 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:21:31,973 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json
+2025-04-18 22:21:32,106 - simple_collector - INFO - Recolectando métricas para example-service (prometheus)
+2025-04-18 22:21:32,138 - simple_collector - INFO - Recolectadas 7 métricas de Prometheus
+2025-04-18 22:21:36,060 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:21:36] "GET /api/status HTTP/1.1" 200 -
+2025-04-18 22:21:36,372 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:21:36] "GET /api/services HTTP/1.1" 200 -
+2025-04-18 22:21:36,374 - werkzeug - INFO - 127.0.0.1 - - [18/Apr/2025 22:21:36] "GET /api/events?limit=5 HTTP/1.1" 200 -
+2025-04-18 22:21:41,980 - simple_detector - INFO - Umbrales guardados en ./data\thresholds.json

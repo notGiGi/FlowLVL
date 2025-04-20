@@ -75,10 +75,10 @@ services:
     depends_on:
       - prometheus
 
-  # API principal - Corregido el contexto de build
+  # API principal (se asume que su Dockerfile y demás archivos están en ./api)
   api:
     build:
-      context: .  # Cambiado de ./api a . para acceder a todos los directorios
+      context: .
       dockerfile: api/Dockerfile
     volumes:
       - ./config:/app/config
@@ -112,11 +112,11 @@ services:
       retries: 3
     command: uvicorn api.controller:create_api_app --host 0.0.0.0 --port 8000
 
-  # Detector de anomalías - Corregido el contexto
+  # Detector de anomalías (se asume que su Dockerfile y requirements.txt están en ./anomaly_detector)
   anomaly-detector:
     build:
-      context: .  # Cambiado a raíz para consistencia
-      dockerfile: anomaly_detector/Dockerfile
+      context: ./anomaly_detector
+      dockerfile: Dockerfile
     volumes:
       - ./config:/app/config
       - ./models:/app/models
@@ -140,9 +140,12 @@ services:
     restart: unless-stopped
 
   # Motor predictivo  
+  # Se establece el contexto en la raíz para que el Dockerfile pueda copiar archivos desde:
+  # - predictive_engine/ (el propio código y requirements)
+  # - utils/ (carpeta común al nivel superior)
   predictive-engine:
     build:
-      context: .  # Ya está correcto
+      context: .
       dockerfile: predictive_engine/Dockerfile
     volumes:
       - ./config:/app/config
@@ -166,11 +169,11 @@ services:
       - pushgateway
     restart: unless-stopped
 
-  # Recomendador de acciones - Corregido el contexto
+  # Recomendador de acciones (se asume que su Dockerfile y archivos están en ./action_recommender)
   action-recommender:
     build:
-      context: .  # Cambiado a raíz para consistencia
-      dockerfile: action_recommender/Dockerfile
+      context: ./action_recommender
+      dockerfile: Dockerfile
     volumes:
       - ./config:/app/config
       - ./models:/app/models
@@ -195,9 +198,12 @@ services:
     restart: unless-stopped
 
   # Perfilador de servicios  
+  # Se establece el contexto en la raíz para que el Dockerfile pueda copiar:
+  # - monitoring/ (el propio código y requirements)
+  # - utils/ y config/ (carpetas comunes)
   service-profiler:
     build:
-      context: .  # Ya está correcto
+      context: .
       dockerfile: monitoring/Dockerfile
     volumes:
       - ./config:/app/config
@@ -221,25 +227,25 @@ services:
       - pushgateway
     restart: unless-stopped
 
-  # Dashboard web
+  # Dashboard web (se asume que su Dockerfile y archivos están en ./dashboard)
   dashboard:
     build:
-      context: ./dashboard
-      dockerfile: Dockerfile  # Este es correcto tal como está
+      context: .
+      dockerfile: dashboard/Dockerfile
     ports:
       - "3001:80"
     environment:
       - API_URL=http://api:8000
       - GRAFANA_URL=http://grafana:3000
-      - DEFAULT_API_KEY=test_key
     depends_on:
       - api
     restart: unless-stopped
 
   # Sistema de notificaciones  
+  # Se utiliza la raíz como contexto para acceder, entre otros, a la carpeta utils/
   notification-service:
     build:
-      context: .  # Ya está correcto
+      context: .
       dockerfile: notification_service/Dockerfile
     environment:
       - REDIS_HOST=redis

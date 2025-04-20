@@ -1,0 +1,10 @@
+collection_interval: 60  # segundos
+services:
+  - service_id: "servicio-web-ejemplo"  # Nombre de tu servicio
+    endpoint_type: "prometheus"         # O "direct" para API
+    endpoint: "http://prometheus:9090"  # URL de tu Prometheus
+    metrics:                           
+      - "memory_usage"
+      - "cpu_usage"
+      - "response_time_ms"
+      - "error_rate"

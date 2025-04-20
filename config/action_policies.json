@@ -1,6 +1,6 @@
 {
-  "order-processing-service": {
-    "description": "Acciones para servicios de procesamiento de órdenes",
+  "web-service": {
+    "description": "Políticas para servicios web (NodeJS, Java, Python, etc.)",
     "actions": {
       "memory_leak_restart": {
         "description": "Reinicia el servicio para resolver fuga de memoria",
@@ -10,30 +10,89 @@
         },
         "conditions": {
           "metrics": {
-            "memory_usage": "> 65",
-            "gc_collection_time": "> 400"
+            "memory_usage": "> 70",
+            "gc_collection_time": "> 300"
+          },
+          "anomaly_score": "> 0.6"
+        },
+        "priority": "high"
+      },
+      "cpu_scale_up": {
+        "description": "Escala horizontalmente cuando hay alta carga",
+        "remediation": {
+          "type": "command",
+          "command": "kubectl scale deployment ${service_id} --replicas=$(kubectl get deployment ${service_id} -o=jsonpath='{.spec.replicas}'+1)"
+        },
+        "conditions": {
+          "metrics": {
+            "cpu_usage": "> 75",
+            "response_time_ms": "> 300"
+          },
+          "anomaly_score": "> 0.6"
+        },
+        "priority": "medium"
+      },
+      "log_diagnostic": {
+        "description": "Recopila logs para diagnóstico (no destructivo)",
+        "remediation": {
+          "type": "command",
+          "command": "kubectl logs deployment/${service_id} --tail=500 > /tmp/diagnostic_${service_id}_$(date +%Y%m%d%H%M%S).log"
+        },
+        "conditions": {
+          "metrics": {
+            "error_rate": "> 2"
           },
           "anomaly_score": "> 0.5"
         },
-        "priority": "high"
+        "priority": "low"
       }
     }
   },
-  "postgres-main": {
-    "description": "Acciones para servicios PostgreSQL",
+  
+  "api-gateway": {
+    "description": "Políticas específicas para API Gateway",
     "actions": {
-      "connection_pool_increase": {
-        "description": "Aumenta el pool de conexiones",
+      "clear_cache": {
+        "description": "Limpia la caché del gateway",
+        "remediation": {
+          "type": "api",
+          "method": "POST",
+          "endpoint": "http://${service_id}/admin/cache/clear",
+          "headers": {
+            "Authorization": "Bearer ${admin_token}"
+          },
+          "payload": {}
+        },
+        "conditions": {
+          "metrics": {
+            "cache_miss_rate": "> 30",
+            "response_time_ms": "> 400"
+          },
+          "anomaly_score": "> 0.6"
+        },
+        "parameters": {
+          "admin_token": "REPLACE_WITH_REAL_TOKEN"
+        },
+        "priority": "medium"
+      }
+    }
+  },
+  
+  "database": {
+    "description": "Políticas para bases de datos",
+    "actions": {
+      "connection_pool_adjustment": {
+        "description": "Ajusta pool de conexiones",
         "remediation": {
           "type": "command",
-          "command": "kubectl exec ${service_id}-0 -- psql -c \"ALTER SYSTEM SET max_connections = ${max_connections}; SELECT pg_reload_conf();\""
+          "command": "kubectl exec ${service_id}-0 -- sh -c \"echo 'ALTER SYSTEM SET max_connections = ${max_connections};' | psql -U postgres && echo 'SELECT pg_reload_conf();' | psql -U postgres\""
         },
         "conditions": {
           "metrics": {
             "active_connections": "> 70",
             "connection_wait_time": "> 100"
           },
-          "anomaly_score": "> 0.3"
+          "anomaly_score": "> 0.6"
         },
         "parameters": {
           "max_connections": "200"
@@ -41,227 +100,75 @@
         "priority": "high"
       },
       "vacuum_analyze": {
-        "description": "Ejecuta vacuum analyze para mejorar rendimiento",
+        "description": "Ejecuta vacuum analyze (bajo impacto)",
         "remediation": {
           "type": "command",
-          "command": "kubectl exec ${service_id}-0 -- psql -c \"VACUUM ANALYZE;\""
+          "command": "kubectl exec ${service_id}-0 -- sh -c \"echo 'VACUUM ANALYZE;' | psql -U postgres\""
         },
         "conditions": {
           "metrics": {
-            "query_time_avg": "> 200",
+            "query_time_avg": "> 300",
             "index_bloat": "> 30"
           },
-          "anomaly_score": "> 0.4"
+          "anomaly_score": "> 0.5"
         },
         "priority": "medium"
       }
     }
   },
-  "redis-cache-01": {
-    "description": "Acciones para servicios Redis",
+  
+  "cache": {
+    "description": "Políticas para servicios de caché (Redis, Memcached)",
     "actions": {
-      "redis_memory_purge": {
-        "description": "Purga de memoria de Redis",
+      "purge_memory": {
+        "description": "Comando para purgar memoria en Redis",
         "remediation": {
           "type": "command",
           "command": "kubectl exec ${service_id}-0 -- redis-cli MEMORY PURGE"
         },
         "conditions": {
           "metrics": {
-            "memory_fragmentation_ratio": "> 1.8"
-          },
-          "anomaly_score": "> 0.3"
-        },
-        "priority": "high"
-      },
-      "redis_config_adjust": {
-        "description": "Ajustar configuración para mejorar rendimiento",
-        "remediation": {
-          "type": "command",
-          "command": "kubectl exec ${service_id}-0 -- redis-cli CONFIG SET maxmemory-policy ${policy}"
-        },
-        "conditions": {
-          "metrics": {
-            "eviction_rate": "> 100",
-            "hit_rate": "< 80"
-          },
-          "anomaly_score": "> 0.4"
-        },
-        "parameters": {
-          "policy": "allkeys-lru"
-        },
-        "priority": "medium"
-      }
-    }
-  },
-  "default_web_service": {
-    "description": "Acciones genéricas para servicios web",
-    "actions": {
-      "scale_up": {
-        "description": "Escala horizontalmente el servicio",
-        "remediation": {
-          "type": "command",
-          "command": "kubectl scale deployment ${service_id} --replicas=$(kubectl get deployment ${service_id} -o=jsonpath='{.spec.replicas}'+1)"
-        },
-        "conditions": {
-          "metrics": {
-            "cpu_usage": "> 80",
-            "response_time_ms": "> 500"
+            "memory_fragmentation_ratio": "> 1.5"
           },
           "anomaly_score": "> 0.6"
         },
         "priority": "medium"
       },
-      "memory_restart": {
-        "description": "Reinicia el servicio por problemas de memoria",
+      "clear_cache_partial": {
+        "description": "Limpia parcialmente la caché (bajo impacto)",
         "remediation": {
           "type": "command",
-          "command": "kubectl rollout restart deployment ${service_id}"
+          "command": "kubectl exec ${service_id}-0 -- redis-cli --scan --pattern 'session:*' | xargs -L 100 kubectl exec ${service_id}-0 -- redis-cli DEL"
         },
         "conditions": {
           "metrics": {
-            "memory_usage": "> 80"
+            "memory_usage": "> 80",
+            "hit_rate": "< 70"
           },
           "anomaly_score": "> 0.7"
         },
-        "priority": "high"
+        "priority": "medium"
       }
     }
   },
-  "default_database": {
-    "description": "Acciones genéricas para bases de datos",
+  
+  "generic_web_service": {
+    "description": "Políticas genéricas para servicios web",
     "actions": {
-      "vacuum_analyze": {
-        "description": "Ejecuta vacuum analyze",
+      "diagnostic_gather": {
+        "description": "Recopila diagnóstico (NO destructivo)",
         "remediation": {
           "type": "command",
-          "command": "kubectl exec ${service_id}-0 -- psql -c 'VACUUM ANALYZE;'"
+          "command": "sh -c 'kubectl top pod -l app=${service_id} > /tmp/${service_id}_metrics_$(date +%Y%m%d%H%M%S).txt && kubectl logs -l app=${service_id} --tail=200 > /tmp/${service_id}_logs_$(date +%Y%m%d%H%M%S).txt'"
         },
         "conditions": {
           "metrics": {
-            "query_time_avg": "> 500",
-            "index_bloat": "> 30"
+            "cpu_usage": "> 70",
+            "memory_usage": "> 70"
           },
           "anomaly_score": "> 0.5"
         },
         "priority": "low"
-      },
-      "connection_tuning": {
-        "description": "Ajuste de parámetros de conexión",
-        "remediation": {
-          "type": "command",
-          "command": "kubectl exec ${service_id}-0 -- psql -c \"ALTER SYSTEM SET work_mem = '${work_mem}'; ALTER SYSTEM SET shared_buffers = '${shared_buffers}'; SELECT pg_reload_conf();\""
-        },
-        "conditions": {
-          "metrics": {
-            "query_time_avg": "> 1000",
-            "temp_files": "> 10"
-          },
-          "anomaly_score": "> 0.6"
-        },
-        "parameters": {
-          "work_mem": "16MB",
-          "shared_buffers": "1GB"
-        },
-        "priority": "medium"
-      }
-    }
-  },
-  "default_queue_service": {
-    "description": "Acciones genéricas para servicios de colas",
-    "actions": {
-      "purge_old_messages": {
-        "description": "Purga mensajes antiguos para liberar espacio",
-        "remediation": {
-          "type": "api",
-          "method": "POST",
-          "endpoint": "http://${service_id}:8080/admin/purge",
-          "headers": {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer ${admin_token}"
-          },
-          "payload": {
-            "olderThan": "${age_hours}",
-            "queue": "${queue_name}"
-          }
-        },
-        "conditions": {
-          "metrics": {
-            "queue_size": "> 10000",
-            "disk_usage": "> 80"
-          },
-          "anomaly_score": "> 0.5"
-        },
-        "parameters": {
-          "age_hours": "48",
-          "queue_name": "all",
-          "admin_token": "system_token"
-        },
-        "priority": "medium"
-      },
-      "increase_consumers": {
-        "description": "Aumenta el número de consumidores",
-        "remediation": {
-          "type": "command",
-          "command": "kubectl scale deployment ${service_id}-consumer --replicas=$(kubectl get deployment ${service_id}-consumer -o=jsonpath='{.spec.replicas}'+1)"
-        },
-        "conditions": {
-          "metrics": {
-            "queue_size": "> 5000",
-            "consumer_lag": "> 1000"
-          },
-          "anomaly_score": "> 0.6"
-        },
-        "priority": "high"
-      }
-    }
-  },
-  "default_cache_service": {
-    "description": "Acciones genéricas para servicios de caché",
-    "actions": {
-      "flush_cache": {
-        "description": "Limpia la caché completamente",
-        "remediation": {
-          "type": "command",
-          "command": "kubectl exec ${service_id}-0 -- redis-cli FLUSHALL"
-        },
-        "conditions": {
-          "metrics": {
-            "memory_usage": "> 90",
-            "hit_rate": "< 50"
-          },
-          "anomaly_score": "> 0.8"
-        },
-        "priority": "critical"
-      },
-      "adjust_ttl": {
-        "description": "Ajusta TTL para claves con mayor impacto",
-        "remediation": {
-          "type": "api",
-          "method": "POST",
-          "endpoint": "http://${service_id}:8080/admin/adjust-ttl",
-          "headers": {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer ${admin_token}"
-          },
-          "payload": {
-            "pattern": "${key_pattern}",
-            "ttl": "${ttl_seconds}"
-          }
-        },
-        "conditions": {
-          "metrics": {
-            "memory_usage": "> 75",
-            "hit_rate": "< 70"
-          },
-          "anomaly_score": "> 0.5"
-        },
-        "parameters": {
-          "key_pattern": "session:*",
-          "ttl_seconds": "3600",
-          "admin_token": "system_token"
-        },
-        "priority": "medium"
       }
     }
   }

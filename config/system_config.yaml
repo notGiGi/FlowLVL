@@ -1,0 +1,4 @@
+anomaly_threshold: 0.3
+execution_mode: simulation
+auto_remediation: false
+processing_interval: 10

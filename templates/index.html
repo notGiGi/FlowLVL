@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Mantenimiento Predictivo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .card-anomaly { border-left: 4px solid #dc3545; }
+        .card-recommendation { border-left: 4px solid #fd7e14; }
+        .card-action { border-left: 4px solid #0d6efd; }
+        .bg-simulation { background-color: #e2f3fc !important; }
+        .bg-real { background-color: #ffecb5 !important; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Sistema de Mantenimiento Predictivo</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" id="navDashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="navServices">Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="navEvents">Eventos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="navActions">Acciones</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="navConfig">Configuración</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <!-- Dashboard View -->
+        <div id="dashboardView">
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <h2>Estado del Sistema</h2>
+                    <div id="systemStatus" class="card p-3 bg-simulation">
+                        <h5>Cargando estado...</h5>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h2>Controles</h2>
+                    <div class="card p-3">
+                        <div class="mb-3">
+                            <label class="form-label">Modo de Ejecución</label>
+                            <div class="input-group">
+                                <select id="executionMode" class="form-select">
+                                    <option value="simulation">Simulación</option>
+                                    <option value="real">Real (producción)</option>
+                                </select>
+                                <button id="setExecutionMode" class="btn btn-primary">Aplicar</button>
+                            </div>
+                            <div class="form-text">En modo simulación no se ejecutan acciones reales</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <h3>Servicios Monitoreados</h3>
+                    <div class="table-responsive">
+                        <table class="table table-striped" id="servicesTable">
+                            <thead>
+                                <tr>
+                                    <th>Servicio</th>
+                                    <th>Estado</th>
+                                    <th>Métricas Clave</th>
+                                    <th>Última Actualización</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="5" class="text-center">Cargando servicios...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Eventos Recientes</h3>
+                    <div id="recentEvents">
+                        <p class="text-center">Cargando eventos...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Services View -->
+        <div id="servicesView" style="display:none;">
+            <h2>Detalle de Servicios</h2>
+            <div id="serviceDetails">
+                <p>Selecciona un servicio para ver detalles</p>
+            </div>
+        </div>
+
+        <!-- Events View -->
+        <div id="eventsView" style="display:none;">
+            <h2>Historial de Eventos</h2>
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <label class="form-label">Filtrar por tipo</label>
+                    <select id="eventTypeFilter" class="form-select">
+                        <option value="">Todos</option>
+                        <option value="anomaly_detection">Detección de anomalías</option>
+                        <option value="recommendation">Recomendaciones</option>
+                        <option value="action_execution">Ejecución de acciones</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Filtrar por servicio</label>
+                    <select id="eventServiceFilter" class="form-select">
+                        <option value="">Todos</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label class="form-label">Número de eventos</label>
+                    <select id="eventLimitFilter" class="form-select">
+                        <option value="50">50</option>
+                        <option value="100">100</option>
+                        <option value="200">200</option>
+                    </select>
+                </div>
+            </div>
+            <div id="eventsHistory">
+                <p class="text-center">Cargando eventos...</p>
+            </div>
+        </div>
+
+        <!-- Actions View -->
+        <div id="actionsView" style="display:none;">
+            <h2>Historial de Acciones</h2>
+            <div class="table-responsive">
+                <table class="table table-striped" id="actionsTable">
+                    <thead>
+                        <tr>
+                            <th>Fecha/Hora</th>
+                            <th>Servicio</th>
+                            <th>Acción</th>
+                            <th>Resultado</th>
+                            <th>Modo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="5" class="text-center">Cargando acciones...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Configuration View -->
+        <div id="configView" style="display:none;">
+            <h2>Configuración</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h5>Configuración de Umbrales</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="form-label">Servicio</label>
+                                <select id="thresholdService" class="form-select">
+                                    <option value="">Selecciona un servicio</option>
+                                </select>
+                            </div>
+                            <div id="thresholdControls">
+                                <p>Selecciona un servicio para ver sus umbrales</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Función para formatear fechas
+        function formatDate(dateString) {
+            if (!dateString) return 'N/A';
+            const date = new Date(dateString);
+            return date.toLocaleString();
+        }
+
+        // Función para cambiar de vista
+        function showView(viewId) {
+            document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.container > div[id$="View"]').forEach(view => {
+                view.style.display = 'none';
+            });
+            
+            document.getElementById(viewId).style.display = 'block';
+            document.getElementById('nav' + viewId.replace('View', '')).classList.add('active');
+        }
+
+        // Obtener estado del sistema
+        function loadSystemStatus() {
+            fetch('/api/status')
+                .then(response => response.json())
+                .then(data => {
+                    const statusEl = document.getElementById('systemStatus');
+                    statusEl.innerHTML = `
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5>Estado: ${data.status.toUpperCase()}</h5>
+                            <span class="badge ${data.execution_mode === 'simulation' ? 'bg-info' : 'bg-warning'}">
+                                Modo: ${data.execution_mode.toUpperCase()}
+                            </span>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <p><strong>Servicios monitoreados:</strong> ${data.services_monitored}</p>
+                                <p><strong>Anomalías detectadas:</strong> ${data.anomalies_detected}</p>
+                            </div>
+                            <div class="col-6">
+                                <p><strong>Recomendaciones:</strong> ${data.recommendations_made}</p>
+                                <p><strong>Acciones ejecutadas:</strong> ${data.actions_executed} (Éxito: ${(data.action_success_rate * 100).toFixed(0)}%)</p>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Actualizar clase de fondo según modo
+                    if (data.execution_mode === 'simulation') {
+                        statusEl.classList.remove('bg-real');
+                        statusEl.classList.add('bg-simulation');
+                    } else {
+                        statusEl.classList.remove('bg-simulation');
+                        statusEl.classList.add('bg-real');
+                    }
+                    
+                    // Actualizar selector de modo
+                    document.getElementById('executionMode').value = data.execution_mode;
+                })
+                .catch(error => console.error('Error al cargar estado:', error));
+        }
+
+        // Cargar servicios
+        function loadServices() {
+            fetch('/api/services')
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.querySelector('#servicesTable tbody');
+                    if (data.length === 0) {
+                        tableBody.innerHTML = '<tr><td colspan="5" class="text-center">No hay servicios monitoreados</td></tr>';
+                        return;
+                    }
+                    
+                    tableBody.innerHTML = '';
+                    data.forEach(service => {
+                        let metricsHtml = '';
+                        for (const [key, value] of Object.entries(service.metrics)) {
+                            if (metricsHtml.length < 120) { // Limitar a unos pocos
+                                metricsHtml += `<div><strong>${key}:</strong> ${value.toFixed(2)}</div>`;
+                            }
+                        }
+                        
+                        tableBody.innerHTML += `
+                            <tr>
+                                <td>${service.service_id}</td>
+                                <td><span class="badge bg-success">Activo</span></td>
+                                <td>${metricsHtml}</td>
+                                <td>${formatDate(service.last_update)}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary service-details" data-id="${service.service_id}">
+                                        Detalles
+                                    </button>
+                                </td>
+                            </tr>
+                        `;
+                    });
+                    
+                    // Actualizar selector de servicios en filtros
+                    const serviceSelector = document.getElementById('eventServiceFilter');
+                    serviceSelector.innerHTML = '<option value="">Todos</option>';
+                    data.forEach(service => {
+                        serviceSelector.innerHTML += `<option value="${service.service_id}">${service.service_id}</option>`;
+                    });
+                    
+                    // Actualizar selector de servicios en umbrales
+                    const thresholdSelector = document.getElementById('thresholdService');
+                    thresholdSelector.innerHTML = '<option value="">Selecciona un servicio</option>';
+                    data.forEach(service => {
+                        thresholdSelector.innerHTML += `<option value="${service.service_id}">${service.service_id}</option>`;
+                    });
+                    
+                    // Manejar clics en botón de detalles
+                    document.querySelectorAll('.service-details').forEach(button => {
+                        button.addEventListener('click', () => {
+                            const serviceId = button.getAttribute('data-id');
+                            loadServiceDetails(serviceId);
+                            showView('servicesView');
+                        });
+                    });
+                })
+                .catch(error => console.error('Error al cargar servicios:', error));
+        }
+
+        // Cargar eventos recientes
+        function loadRecentEvents() {
+            fetch('/api/events?limit=5')
+                .then(response => response.json())
+                .then(data => {
+                    const eventsEl = document.getElementById('recentEvents');
+                    if (data.length === 0) {
+                        eventsEl.innerHTML = '<p class="text-center">No hay eventos recientes</p>';
+                        return;
+                    }
+                    
+                    eventsEl.innerHTML = '';
+                    data.forEach(event => {
+                        let cardClass = '';
+                        let title = '';
+                        let details = '';
+                        
+                        if (event.type === 'anomaly_detection') {
+                            cardClass = event.is_anomaly ? 'card-anomaly' : '';
+                            title = `Anomalía en ${event.service_id}`;
+                            details = event.is_anomaly 
+                                ? `Detectada con score: ${event.anomaly_score.toFixed(3)}` 
+                                : 'No se detectó anomalía';
+                        } else if (event.type === 'recommendation') {
+                            cardClass = 'card-recommendation';
+                            title = `Recomendación para ${event.service_id}`;
+                            if (event.recommendation && event.recommendation.recommended_action) {
+                                details = `Acción: ${event.recommendation.recommended_action.action_id}`;
+                            } else {
+                                details = 'Sin acción recomendada';
+                            }
+                        } else if (event.type === 'action_execution') {
+                            cardClass = 'card-action';
+                            title = `Acción ejecutada en ${event.service_id}`;
+                            details = `${event.action_id}: ${event.success ? 'Éxito' : 'Fallo'}`;
+                        }
+                        
+                        eventsEl.innerHTML += `
+                            <div class="card mb-2 ${cardClass}">
+                                <div class="card-body py-2">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="card-title mb-1">${title}</h5>
+                                        <small>${formatDate(event.timestamp)}</small>
+                                    </div>
+                                    <p class="card-text mb-0">${details}</p>
+                                </div>
+                            </div>
+                        `;
+                    });
+                })
+                .catch(error => console.error('Error al cargar eventos recientes:', error));
+        }
+
+        // Cargar detalles de un servicio
+        function loadServiceDetails(serviceId) {
+            fetch(`/api/service/${serviceId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const detailsEl = document.getElementById('serviceDetails');
+                    
+                    if (data.error) {
+                        detailsEl.innerHTML = `<div class="alert alert-danger">${data.error}</div>`;
+                        return;
+                    }
+                    
+                    // Crear HTML para métricas y umbrales
+                    let metricsHtml = '<div class="row">';
+                    for (const [key, value] of Object.entries(data.metrics)) {
+                        const threshold = data.thresholds[key] || '—';
+                        let statusClass = 'bg-secondary';
+                        
+                        if (key in data.thresholds) {
+                            if (key === 'hit_rate') {
+                                // Para hit_rate, valores menores son problemáticos
+                                if (value < threshold * 0.9) {
+                                    statusClass = 'bg-danger';
+                                } else if (value < threshold) {
+                                    statusClass = 'bg-warning';
+                                } else {
+                                    statusClass = 'bg-success';
+                                }
+                            } else {
+                                // Para otras métricas, valores mayores son problemáticos
+                                if (value > threshold * 1.2) {
+                                    statusClass = 'bg-danger';
+                                } else if (value > threshold) {
+                                    statusClass = 'bg-warning';
+                                } else {
+                                    statusClass = 'bg-success';
+                                }
+                            }
+                        }
+                        
+                        metricsHtml += `
+                            <div class="col-md-4 mb-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h5 class="card-title">${key}</h5>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h3>${typeof value === 'number' ? value.toFixed(2) : value}</h3>
+                                            <span class="badge ${statusClass}">Umbral: ${threshold}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    metricsHtml += '</div>';
+                    
+                    // Crear HTML para eventos
+                    let eventsHtml = '<div class="mt-4">';
+                    if (data.events.length === 0) {
+                        eventsHtml += '<p>No hay eventos para este servicio</p>';
+                    } else {
+                        eventsHtml += '<h4>Eventos recientes</h4>';
+                        data.events.forEach(event => {
+                            let cardClass = '';
+                            let title = '';
+                            let details = '';
+                            
+                            if (event.type === 'anomaly_detection') {
+                                cardClass = event.is_anomaly ? 'card-anomaly' : '';
+                                title = `Detección de anomalía`;
+                                details = event.is_anomaly 
+                                    ? `Detectada con score: ${event.anomaly_score.toFixed(3)}` 
+                                    : 'No se detectó anomalía';
+                            } else if (event.type === 'recommendation') {
+                                cardClass = 'card-recommendation';
+                                title = `Recomendación`;
+                                if (event.recommendation && event.recommendation.recommended_action) {
+                                    details = `Acción: ${event.recommendation.recommended_action.action_id}`;
+                                } else {
+                                    details = 'Sin acción recomendada';
+                                }
+                            } else if (event.type === 'action_execution') {
+                                cardClass = 'card-action';
+                                title = `Acción ejecutada`;
+                                details = `${event.action_id}: ${event.success ? 'Éxito' : 'Fallo'}`;
+                            }
+                            
+                            eventsHtml += `
+                                <div class="card mb-2 ${cardClass}">
+                                    <div class="card-body py-2">
+                                        <div class="d-flex justify-content-between">
+                                            <h5 class="card-title mb-1">${title}</h5>
+                                            <small>${formatDate(event.timestamp)}</small>
+                                        </div>
+                                        <p class="card-text mb-0">${details}</p>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                    }
+                    eventsHtml += '</div>';
+                    
+                    // Actualizar el contenido
+                    detailsEl.innerHTML = `
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h3>${serviceId}</h3>
+                            <span>Última actualización: ${formatDate(data.last_update)}</span>
+                        </div>
+                        <h4>Métricas actuales</h4>
+                        ${metricsHtml}
+                        ${eventsHtml}
+                    `;
+                })
+                .catch(error => console.error(`Error al cargar detalles del servicio ${serviceId}:`, error));
+        }
+
+        // Cargar historial de eventos
+        function loadEvents() {
+            const eventType = document.getElementById('eventTypeFilter').value;
+            const serviceId = document.getElementById('eventServiceFilter').value;
+            const limit = document.getElementById('eventLimitFilter').value;
+            
+            let url = `/api/events?limit=${limit}`;
+            if (eventType) url += `&type=${eventType}`;
+            if (serviceId) url += `&service_id=${serviceId}`;
+            
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    const eventsEl = document.getElementById('eventsHistory');
+                    if (data.length === 0) {
+                        eventsEl.innerHTML = '<p class="text-center">No hay eventos que coincidan con los filtros</p>';
+                        return;
+                    }
+                    
+                    eventsEl.innerHTML = '';
+                    data.forEach(event => {
+                        let cardClass = '';
+                        let title = '';
+                        let details = '';
+                        
+                        if (event.type === 'anomaly_detection') {
+                            cardClass = event.is_anomaly ? 'card-anomaly' : '';
+                            title = `Anomalía en ${event.service_id}`;
+                            details = event.is_anomaly 
+                                ? `Detectada con score: ${event.anomaly_score.toFixed(3)}` 
+                                : 'No se detectó anomalía';
+                                
+                            if (event.details && event.details.anomaly_type) {
+                                details += ` (Tipo: ${event.details.anomaly_type})`;
+                            }
+                        } else if (event.type === 'recommendation') {
+                            cardClass = 'card-recommendation';
+                            title = `Recomendación para ${event.service_id}`;
+                            if (event.recommendation && event.recommendation.recommended_action) {
+                                const action = event.recommendation.recommended_action;
+                                details = `Acción: ${action.action_id} (Prioridad: ${action.priority || 'media'})`;
+                                
+                                if (action.description) {
+                                    details += `<br><small>${action.description}</small>`;
+                                }
+                            } else {
+                                details = 'Sin acción recomendada';
+                            }
+                        } else if (event.type === 'action_execution') {
+                            cardClass = 'card-action';
+                            title = `Acción ejecutada en ${event.service_id}`;
+                            details = `${event.action_id}: ${event.success ? 'Éxito' : 'Fallo'}`;
+                        }
+                        
+                        eventsEl.innerHTML += `
+                            <div class="card mb-2 ${cardClass}">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="card-title">${title}</h5>
+                                        <small>${formatDate(event.timestamp)}</small>
+                                    </div>
+                                    <p class="card-text">${details}</p>
+                                </div>
+                            </div>
+                        `;
+                    });
+                })
+                .catch(error => console.error('Error al cargar eventos:', error));
+        }
+
+        // Cargar historial de acciones
+        function loadActions() {
+            fetch('/api/actions')
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.querySelector('#actionsTable tbody');
+                    if (data.length === 0) {
+                        tableBody.innerHTML = '<tr><td colspan="5" class="text-center">No hay acciones ejecutadas</td></tr>';
+                        return;
+                    }
+                    
+                    tableBody.innerHTML = '';
+                    data.forEach(action => {
+                        tableBody.innerHTML += `
+                            <tr>
+                                <td>${formatDate(action.timestamp)}</td>
+                                <td>${action.service_id}</td>
+                                <td>${action.action_id}</td>
+                                <td>
+                                    <span class="badge ${action.success ? 'bg-success' : 'bg-danger'}">
+                                        ${action.success ? 'Éxito' : 'Fallo'}
+                                    </span>
+                                </td>
+                                <td>
+                                    <span class="badge ${action.execution_mode === 'simulation' ? 'bg-info' : 'bg-warning'}">
+                                        ${action.execution_mode}
+                                    </span>
+                                </td>
+                            </tr>
+                        `;
+                    });
+                })
+                .catch(error => console.error('Error al cargar acciones:', error));
+        }
+
+        // Cargar umbrales para un servicio
+        function loadThresholds(serviceId) {
+            fetch(`/api/service/${serviceId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const thresholdControls = document.getElementById('thresholdControls');
+                    
+                    if (data.error) {
+                        thresholdControls.innerHTML = `<div class="alert alert-danger">${data.error}</div>`;
+                        return;
+                    }
+                    
+                    if (Object.keys(data.thresholds).length === 0) {
+                        thresholdControls.innerHTML = '<p>No hay umbrales definidos para este servicio</p>';
+                        return;
+                    }
+                    
+                    let html = '';
+                    for (const [metric, threshold] of Object.entries(data.thresholds)) {
+                        const currentValue = data.metrics[metric] || '—';
+                        
+                        html += `
+                            <div class="mb-3">
+                                <label class="form-label">${metric}</label>
+                                <div class="input-group">
+                                    <input type="number" class="form-control threshold-value" 
+                                           data-metric="${metric}" 
+                                           step="0.1" 
+                                           value="${threshold}">
+                                    <span class="input-group-text">Actual: ${currentValue}</span>
+                                    <button class="btn btn-primary save-threshold" 
+                                            data-service="${serviceId}" 
+                                            data-metric="${metric}">
+                                        Guardar
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    
+                    thresholdControls.innerHTML = html;
+                    
+                    // Manejar clics en botones de guardar
+                    document.querySelectorAll('.save-threshold').forEach(button => {
+                        button.addEventListener('click', () => {
+                            const serviceId = button.getAttribute('data-service');
+                            const metric = button.getAttribute('data-metric');
+                            const value = document.querySelector(`.threshold-value[data-metric="${metric}"]`).value;
+                            
+                            setThreshold(serviceId, metric, value);
+                        });
+                    });
+                })
+                .catch(error => console.error(`Error al cargar umbrales del servicio ${serviceId}:`, error));
+        }
+
+        // Establecer umbral
+        function setThreshold(serviceId, metric, value) {
+            fetch('/api/threshold', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    service_id: serviceId,
+                    metric: metric,
+                    value: parseFloat(value)
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(`Umbral de ${metric} actualizado correctamente`);
+                    loadThresholds(serviceId);
+                } else {
+                    alert(`Error al actualizar umbral: ${data.error || 'Error desconocido'}`);
+                }
+            })
+            .catch(error => {
+                console.error('Error al establecer umbral:', error);
+                alert('Error al establecer umbral. Consulta la consola para más detalles.');
+            });
+        }
+
+        // Cambiar modo de ejecución
+        function setExecutionMode(mode) {
+            fetch('/api/mode', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ mode })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(`Modo de ejecución cambiado a: ${mode}`);
+                    loadSystemStatus();
+                } else {
+                    alert(`Error al cambiar modo: ${data.error || 'Error desconocido'}`);
+                }
+            })
+            .catch(error => {
+                console.error('Error al cambiar modo:', error);
+                alert('Error al cambiar modo. Consulta la consola para más detalles.');
+            });
+        }
+
+        // Configurar navegación
+        document.getElementById('navDashboard').addEventListener('click', () => showView('dashboardView'));
+        document.getElementById('navServices').addEventListener('click', () => showView('servicesView'));
+        document.getElementById('navEvents').addEventListener('click', () => {
+            showView('eventsView');
+            loadEvents();
+        });
+        document.getElementById('navActions').addEventListener('click', () => {
+            showView('actionsView');
+            loadActions();
+        });
+        document.getElementById('navConfig').addEventListener('click', () => showView('configView'));
+        
+        // Configurar filtros de eventos
+        document.getElementById('eventTypeFilter').addEventListener('change', loadEvents);
+        document.getElementById('eventServiceFilter').addEventListener('change', loadEvents);
+        document.getElementById('eventLimitFilter').addEventListener('change', loadEvents);
+        
+        // Configurar selector de servicio para umbrales
+        document.getElementById('thresholdService').addEventListener('change', function() {
+            const serviceId = this.value;
+            if (serviceId) {
+                loadThresholds(serviceId);
+            } else {
+                document.getElementById('thresholdControls').innerHTML = '<p>Selecciona un servicio para ver sus umbrales</p>';
+            }
+        });
+        
+        // Configurar botón de modo de ejecución
+        document.getElementById('setExecutionMode').addEventListener('click', function() {
+            const mode = document.getElementById('executionMode').value;
+            if (mode === 'real') {
+                if (confirm('¿Estás seguro de cambiar a modo REAL? Se ejecutarán acciones en el entorno real.')) {
+                    setExecutionMode(mode);
+                }
+            } else {
+                setExecutionMode(mode);
+            }
+        });
+        
+        // Actualizar datos periódicamente
+        function periodicUpdate() {
+            loadSystemStatus();
+            loadServices();
+            loadRecentEvents();
+            
+            // Actualizar vista actual si es necesario
+            const activeView = document.querySelector('.container > div[id$="View"]:not([style*="display: none"])').id;
+            if (activeView === 'actionsView') {
+                loadActions();
+            } else if (activeView === 'eventsView') {
+                loadEvents();
+            }
+            
+            setTimeout(periodicUpdate, 30000); // Actualizar cada 30 segundos
+        }
+        
+        // Iniciar carga de datos
+        loadSystemStatus();
+        loadServices();
+        loadRecentEvents();
+        
+        // Iniciar actualizaciones periódicas
+        setTimeout(periodicUpdate, 30000);
+    </script>
+</body>
+</html>

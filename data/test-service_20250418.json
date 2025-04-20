@@ -1,0 +1,281 @@
+[
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:09:19.272084",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:10:27.925675",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:10:32.043958",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:11:34.626006",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:15:53.829928",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:15:56.710079",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:17:21.094713",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:17:21.658276",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:17:22.192695",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:17:22.563428",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:17:22.981116",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:17:23.281269",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:17:23.594255",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:17:23.901797",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:17:24.199479",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:17:24.457324",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:17:24.709248",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:17:25.015470",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:17:54.524846",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:17:55.134388",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:17:55.597710",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:17:55.996355",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:17:56.322703",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:17:57.209352",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:17:57.619389",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:17:58.273421",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:17:58.731913",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:17:59.170502",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:18:00.401089",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:18:00.947353",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  },
+  {
+    "service_id": "test-service",
+    "timestamp": "2025-04-18T22:18:01.566014",
+    "memory_usage": 90.5,
+    "cpu_usage": 95.2,
+    "gc_collection_time": 850,
+    "response_time_ms": 750,
+    "error_rate": 8.5
+  }
+]

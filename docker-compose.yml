@@ -78,8 +78,8 @@ services:
   # API principal (se asume que su Dockerfile y demás archivos están en ./api)
   api:
     build:
-      context: ./api
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: api/Dockerfile
     volumes:
       - ./config:/app/config
       - ./models:/app/models
@@ -230,8 +230,8 @@ services:
   # Dashboard web (se asume que su Dockerfile y archivos están en ./dashboard)
   dashboard:
     build:
-      context: ./dashboard
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: dashboard/Dockerfile
     ports:
       - "3001:80"
     environment:
@@ -269,3 +269,14 @@ volumes:
   redis-data:
   prometheus-data:
   grafana-data:
+
+  # Minimal API for testing
+  minimal-api:
+    build:
+      context: .
+      dockerfile: minimal-api/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - LOG_LEVEL=DEBUG
+    restart: unless-stopped
