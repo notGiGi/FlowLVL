@@ -1,0 +1,40 @@
+[
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-20T17:53:43.617938",
+    "prediction_horizon": 8,
+    "predicted_metrics": {
+      "memory_usage": 73.39878750059256,
+      "cpu_usage": 62.24706557188299,
+      "active_connections": 220.4539072975034,
+      "query_time_avg": 241.79928478445655
+    },
+    "influential_metrics": {
+      "memory_usage": 73.39878750059256,
+      "cpu_usage": 62.24706557188299,
+      "active_connections": 220.4539072975034,
+      "query_time_avg": 241.79928478445655
+    },
+    "probability": 0.9661493758520703,
+    "confidence": 1.0
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-20T17:53:43.645354",
+    "prediction_horizon": 8,
+    "predicted_metrics": {
+      "memory_usage": 73.39879064941078,
+      "cpu_usage": 62.24706844765407,
+      "active_connections": 220.45392155678337,
+      "query_time_avg": 241.79929733299312
+    },
+    "influential_metrics": {
+      "memory_usage": 73.39879064941078,
+      "cpu_usage": 62.24706844765407,
+      "active_connections": 220.45392155678337,
+      "query_time_avg": 241.79929733299312
+    },
+    "probability": 0.9661493810386281,
+    "confidence": 1.0
+  }
+]

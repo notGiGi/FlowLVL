@@ -1,0 +1,85 @@
+{
+  "app-server": {
+    "memory_usage": {
+      "coef": [
+        -0.028093019793963087
+      ],
+      "intercept": 90.18041237113403,
+      "last_trained": "2025-04-20T17:58:18.919126"
+    },
+    "cpu_usage": {
+      "coef": [
+        -0.9056910696430711
+      ],
+      "intercept": 94.16082474226806,
+      "last_trained": "2025-04-20T17:58:18.868819"
+    },
+    "response_time_ms": {
+      "coef": [
+        13.39726328591781
+      ],
+      "intercept": 808.7628865979382,
+      "last_trained": "2025-04-20T17:58:18.929616"
+    },
+    "error_rate": {
+      "coef": [
+        0.8633446903820994
+      ],
+      "intercept": 10.376288659793815,
+      "last_trained": "2025-04-20T17:58:18.894241"
+    }
+  },
+  "database": {
+    "memory_usage": {
+      "coef": [
+        5.057415908682284
+      ],
+      "intercept": 59.78227848101268,
+      "last_trained": "2025-04-20T17:58:18.947803"
+    },
+    "cpu_usage": {
+      "coef": [
+        6.504993841794836
+      ],
+      "intercept": 49.4860759493671,
+      "last_trained": "2025-04-20T17:58:18.940973"
+    },
+    "active_connections": {
+      "coef": [
+        48.18299042046134
+      ],
+      "intercept": 142.81012658227849,
+      "last_trained": "2025-04-20T17:58:18.935858"
+    },
+    "query_time_avg": {
+      "coef": [
+        47.53080546519322
+      ],
+      "intercept": 150.51898734177215,
+      "last_trained": "2025-04-20T17:58:18.951320"
+    }
+  },
+  "prediction": {
+    "prediction_horizon": {
+      "coef": [
+        0.0
+      ],
+      "intercept": 8.0,
+      "last_trained": "2025-04-20T17:58:18.957686"
+    },
+    "probability": {
+      "coef": [
+        0.031719084855361894
+      ],
+      "intercept": 0.8994538840608727,
+      "last_trained": "2025-04-20T17:58:18.965012"
+    },
+    "confidence": {
+      "coef": [
+        0.0
+      ],
+      "intercept": 1.0,
+      "last_trained": "2025-04-20T17:58:18.970292"
+    }
+  }
+}

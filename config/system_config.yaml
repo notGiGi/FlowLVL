@@ -1,4 +1,7 @@
-anomaly_threshold: 0.3
-execution_mode: simulation
+anomaly_threshold: 0.1
 auto_remediation: false
-processing_interval: 10
+execution_mode: simulation
+prediction_horizon: 8
+prediction_interval: 1800
+prediction_threshold: 0.4
+processing_interval: 5

@@ -1,0 +1,546 @@
+[
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:32:22.824107",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:32:26.043676",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:33:22.850672",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:33:26.084213",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:34:22.894160",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:34:26.134536",
+    "service_id": "database"
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-19T19:35:10.840858",
+    "memory_usage": 95,
+    "cpu_usage": 98,
+    "active_connections": 200,
+    "query_time_avg": 250
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:35:22.944686",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:35:26.189320",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:36:22.991472",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:36:26.243213",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:37:23.047187",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:37:26.293294",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:38:23.108747",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:38:26.348811",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:39:23.163214",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:39:26.399199",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:40:23.207191",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:40:26.460441",
+    "service_id": "database"
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-19T19:41:22.861593",
+    "memory_usage": 99.9,
+    "cpu_usage": 99.9,
+    "active_connections": 500,
+    "query_time_avg": 600
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:41:23.257329",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:41:26.531030",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:41:52.862893",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:41:56.088039",
+    "service_id": "database"
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-19T19:42:29.908887",
+    "memory_usage": 99.9,
+    "cpu_usage": 99.9,
+    "active_connections": 500,
+    "query_time_avg": 600
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:42:52.910452",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:42:56.127139",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:43:26.849144",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:43:30.335546",
+    "service_id": "database"
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-19T19:43:43.269047",
+    "memory_usage": 99.9,
+    "cpu_usage": 99.9,
+    "active_connections": 500,
+    "query_time_avg": 600
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:44:11.020397",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:44:13.998977",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:45:11.063170",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:45:14.024813",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:46:11.115666",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:46:14.082087",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:47:11.179400",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:47:14.155770",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:48:11.234310",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:48:14.215939",
+    "service_id": "database"
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-19T19:48:36.384136",
+    "memory_usage": 99.9,
+    "cpu_usage": 99.9,
+    "active_connections": 500,
+    "query_time_avg": 600
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:49:11.299830",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:49:14.282755",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:49:24.452944",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:49:27.652252",
+    "service_id": "database"
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-19T19:49:40.709675",
+    "memory_usage": 99.9,
+    "cpu_usage": 99.9,
+    "active_connections": 500,
+    "query_time_avg": 600
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:50:24.503520",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:50:27.695779",
+    "service_id": "database"
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-19T19:50:40.393470",
+    "memory_usage": 99.9,
+    "cpu_usage": 99.9,
+    "active_connections": 500,
+    "query_time_avg": 600
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:51:24.565170",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:51:27.751728",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:52:00.634146",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:52:04.082133",
+    "service_id": "database"
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-19T19:52:04.833172",
+    "memory_usage": 99.9,
+    "cpu_usage": 99.9,
+    "active_connections": 500,
+    "query_time_avg": 600
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:53:00.675891",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:53:04.130449",
+    "service_id": "database"
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-19T19:53:06.131148",
+    "memory_usage": 99.9,
+    "cpu_usage": 99.9,
+    "active_connections": 500,
+    "query_time_avg": 600
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:54:00.730196",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:54:04.201679",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:55:00.799831",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:55:04.265926",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:56:00.870188",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:56:04.324780",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:56:36.270704",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:56:39.022622",
+    "service_id": "database"
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-19T19:56:50.522859",
+    "memory_usage": 99.9,
+    "cpu_usage": 99.9,
+    "active_connections": 500,
+    "query_time_avg": 600
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:57:36.317026",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 64,
+    "cpu_usage": 37.8,
+    "memory_usage": 50.6,
+    "query_time_avg": 57.0,
+    "timestamp": "2025-04-19T19:57:39.073750",
+    "service_id": "database"
+  }
+]

@@ -1,0 +1,228 @@
+[
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-19T19:41:52.873456",
+    "prediction_horizon": 8,
+    "predicted_metrics": {
+      "memory_usage": 58.780703099374136,
+      "cpu_usage": 46.72915164569634,
+      "active_connections": 106.22596341299825,
+      "query_time_avg": 107.05208458884948
+    },
+    "influential_metrics": {
+      "memory_usage": 58.780703099374136,
+      "cpu_usage": 46.72915164569634,
+      "active_connections": 106.22596341299825,
+      "query_time_avg": 107.05208458884948
+    },
+    "probability": 0.8799291993656543,
+    "confidence": 1.0
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-19T19:41:56.102945",
+    "prediction_horizon": 8,
+    "predicted_metrics": {
+      "memory_usage": 58.53278750442172,
+      "cpu_usage": 46.41359657322762,
+      "active_connections": 104.74577576036842,
+      "query_time_avg": 105.16736084415155
+    },
+    "influential_metrics": {
+      "memory_usage": 58.53278750442172,
+      "cpu_usage": 46.41359657322762,
+      "active_connections": 104.74577576036842,
+      "query_time_avg": 105.16736084415155
+    },
+    "probability": 0.8657523044014939,
+    "confidence": 1.0
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-19T19:43:26.864603",
+    "prediction_horizon": 8,
+    "predicted_metrics": {
+      "memory_usage": 60.36379494319172,
+      "cpu_usage": 48.70578369122026,
+      "active_connections": 123.26589924574697,
+      "query_time_avg": 128.08773585280989
+    },
+    "influential_metrics": {
+      "memory_usage": 60.36379494319172,
+      "cpu_usage": 48.70578369122026,
+      "active_connections": 123.26589924574697,
+      "query_time_avg": 128.08773585280989
+    },
+    "probability": 0.9402813567306325,
+    "confidence": 1.0
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-19T19:43:30.350713",
+    "prediction_horizon": 8,
+    "predicted_metrics": {
+      "memory_usage": 60.10342174060486,
+      "cpu_usage": 48.375694341472794,
+      "active_connections": 121.46041098251087,
+      "query_time_avg": 125.81082174543613
+    },
+    "influential_metrics": {
+      "memory_usage": 60.10342174060486,
+      "cpu_usage": 48.375694341472794,
+      "active_connections": 121.46041098251087,
+      "query_time_avg": 125.81082174543613
+    },
+    "probability": 0.9387030195284087,
+    "confidence": 1.0
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-19T19:44:11.037878",
+    "prediction_horizon": 8,
+    "predicted_metrics": {
+      "memory_usage": 62.0427585579467,
+      "cpu_usage": 50.8131338444502,
+      "active_connections": 139.49557294119876,
+      "query_time_avg": 148.21697798203965
+    },
+    "influential_metrics": {
+      "memory_usage": 62.0427585579467,
+      "active_connections": 139.49557294119876,
+      "query_time_avg": 148.21697798203965
+    },
+    "probability": 0.9337585181754646,
+    "confidence": 1.0
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-19T19:44:14.010145",
+    "prediction_horizon": 8,
+    "predicted_metrics": {
+      "memory_usage": 61.75467627355755,
+      "cpu_usage": 50.44860030133717,
+      "active_connections": 137.35992298943177,
+      "query_time_avg": 145.53400371291883
+    },
+    "influential_metrics": {
+      "memory_usage": 61.75467627355755,
+      "active_connections": 137.35992298943177,
+      "query_time_avg": 145.53400371291883
+    },
+    "probability": 0.9322621849276304,
+    "confidence": 1.0
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-19T19:49:24.469520",
+    "prediction_horizon": 8,
+    "predicted_metrics": {
+      "memory_usage": 61.04374661391207,
+      "cpu_usage": 49.528791384687544,
+      "active_connections": 134.50868005954263,
+      "query_time_avg": 141.7598263177076
+    },
+    "influential_metrics": {
+      "memory_usage": 61.04374661391207,
+      "cpu_usage": 49.528791384687544,
+      "active_connections": 134.50868005954263,
+      "query_time_avg": 141.7598263177076
+    },
+    "probability": 0.94437563652972,
+    "confidence": 1.0
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-19T19:49:27.667809",
+    "prediction_horizon": 8,
+    "predicted_metrics": {
+      "memory_usage": 60.85532283443745,
+      "cpu_usage": 49.290956190814605,
+      "active_connections": 133.05987533383774,
+      "query_time_avg": 139.9442932542771
+    },
+    "influential_metrics": {
+      "memory_usage": 60.85532283443745,
+      "cpu_usage": 49.290956190814605,
+      "active_connections": 133.05987533383774,
+      "query_time_avg": 139.9442932542771
+    },
+    "probability": 0.9440000467876936,
+    "confidence": 1.0
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-19T19:52:00.654080",
+    "prediction_horizon": 8,
+    "predicted_metrics": {
+      "memory_usage": 62.712504437444785,
+      "cpu_usage": 51.62161438803864,
+      "active_connections": 150.7207719563838,
+      "query_time_avg": 161.85916439798464
+    },
+    "influential_metrics": {
+      "memory_usage": 62.712504437444785,
+      "cpu_usage": 51.62161438803864,
+      "active_connections": 150.7207719563838,
+      "query_time_avg": 161.85916439798464
+    },
+    "probability": 0.9476885774627126,
+    "confidence": 1.0
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-19T19:52:04.101628",
+    "prediction_horizon": 8,
+    "predicted_metrics": {
+      "memory_usage": 62.519305645773294,
+      "cpu_usage": 51.378056087935654,
+      "active_connections": 149.1721875385718,
+      "query_time_avg": 159.92278998077708
+    },
+    "influential_metrics": {
+      "memory_usage": 62.519305645773294,
+      "cpu_usage": 51.378056087935654,
+      "active_connections": 149.1721875385718,
+      "query_time_avg": 159.92278998077708
+    },
+    "probability": 0.94730377124231,
+    "confidence": 1.0
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-19T19:56:36.288847",
+    "prediction_horizon": 8,
+    "predicted_metrics": {
+      "memory_usage": 63.24438681020369,
+      "cpu_usage": 52.27946949901985,
+      "active_connections": 156.92496457258042,
+      "query_time_avg": 169.48421145390307
+    },
+    "influential_metrics": {
+      "memory_usage": 63.24438681020369,
+      "cpu_usage": 52.27946949901985,
+      "active_connections": 156.92496457258042,
+      "query_time_avg": 169.48421145390307
+    },
+    "probability": 0.9487353931017493,
+    "confidence": 1.0
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-19T19:56:39.043321",
+    "prediction_horizon": 8,
+    "predicted_metrics": {
+      "memory_usage": 63.07523036414408,
+      "cpu_usage": 52.06654744207587,
+      "active_connections": 155.53986462241565,
+      "query_time_avg": 167.75463846060495
+    },
+    "influential_metrics": {
+      "memory_usage": 63.07523036414408,
+      "cpu_usage": 52.06654744207587,
+      "active_connections": 155.53986462241565,
+      "query_time_avg": 167.75463846060495
+    },
+    "probability": 0.948398797923601,
+    "confidence": 1.0
+  }
+]

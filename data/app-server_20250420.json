@@ -1,0 +1,618 @@
+[
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-20T17:53:43.588360",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-20T17:53:43.590816",
+    "service_id": "app-server"
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-20T17:54:03.007658",
+    "memory_usage": 99.9,
+    "cpu_usage": 99.9,
+    "response_time_ms": 1500,
+    "error_rate": 25
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-20T17:54:43.646134",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-20T17:55:43.674290",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-20T17:56:43.729024",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 99,
+    "error_rate": 20,
+    "memory_usage": 99,
+    "response_time_ms": 1000,
+    "timestamp": "2025-04-20T17:57:43.807642",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 99,
+    "error_rate": 20,
+    "memory_usage": 99,
+    "response_time_ms": 1000,
+    "timestamp": "2025-04-20T17:58:16.315978",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 99,
+    "error_rate": 20,
+    "memory_usage": 99,
+    "response_time_ms": 1000,
+    "timestamp": "2025-04-20T17:58:18.866295",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 99,
+    "error_rate": 20,
+    "memory_usage": 99,
+    "response_time_ms": 1000,
+    "timestamp": "2025-04-20T17:59:16.342053",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 99,
+    "error_rate": 20,
+    "memory_usage": 99,
+    "response_time_ms": 1000,
+    "timestamp": "2025-04-20T17:59:18.911734",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 99,
+    "error_rate": 20,
+    "memory_usage": 99,
+    "response_time_ms": 1000,
+    "timestamp": "2025-04-20T18:00:16.402949",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 99,
+    "error_rate": 20,
+    "memory_usage": 99,
+    "response_time_ms": 1000,
+    "timestamp": "2025-04-20T18:00:18.973980",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 99,
+    "error_rate": 20,
+    "memory_usage": 99,
+    "response_time_ms": 1000,
+    "timestamp": "2025-04-20T18:01:16.493357",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 99,
+    "error_rate": 20,
+    "memory_usage": 99,
+    "response_time_ms": 1000,
+    "timestamp": "2025-04-20T18:01:19.058309",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 99,
+    "error_rate": 20,
+    "memory_usage": 99,
+    "response_time_ms": 1000,
+    "timestamp": "2025-04-20T18:02:16.582227",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 99,
+    "error_rate": 20,
+    "memory_usage": 99,
+    "response_time_ms": 1000,
+    "timestamp": "2025-04-20T18:02:19.118194",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 99,
+    "error_rate": 20,
+    "memory_usage": 99,
+    "response_time_ms": 1000,
+    "timestamp": "2025-04-20T18:03:16.660193",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 99,
+    "error_rate": 20,
+    "memory_usage": 99,
+    "response_time_ms": 1000,
+    "timestamp": "2025-04-20T18:03:19.180171",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 99,
+    "error_rate": 20,
+    "memory_usage": 99,
+    "response_time_ms": 1000,
+    "timestamp": "2025-04-20T18:04:16.742495",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 99,
+    "error_rate": 20,
+    "memory_usage": 99,
+    "response_time_ms": 1000,
+    "timestamp": "2025-04-20T18:04:19.234971",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:36:00.807942",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:36:04.168066",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:37:00.845371",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:37:04.198674",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:38:00.931073",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:38:04.297053",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:39:01.011293",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:39:04.371121",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:40:01.072197",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:40:04.433024",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:41:01.147572",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:41:04.503892",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:41:48.835581",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:41:51.404076",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:42:48.861822",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:42:51.431609",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:43:48.961856",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:43:51.509036",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:44:49.040661",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:44:51.597303",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:45:13.262364",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:45:16.064131",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:46:13.293026",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:46:16.087779",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:47:13.400371",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:47:16.166290",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:48:13.495444",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:48:16.271413",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:49:13.571143",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:49:16.340081",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:50:13.655530",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:50:16.423943",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:50:38.411905",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:50:41.129949",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:51:38.452235",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:51:41.158083",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:52:38.589941",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:52:41.249860",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:53:38.670233",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:53:41.312699",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:54:38.748103",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:54:41.395753",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:55:38.844792",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:55:41.484966",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:56:38.945804",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:56:41.561776",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:57:39.048588",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:57:41.620532",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:58:39.147100",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:58:41.681111",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:59:39.250936",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T18:59:41.738466",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T19:00:39.416210",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T19:00:41.821276",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T19:01:39.510940",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 68.96693804448859,
+    "error_rate": 2.6461017498030595,
+    "memory_usage": 67.17957276007093,
+    "response_time_ms": 258.87488957741647,
+    "timestamp": "2025-04-20T19:01:41.890380",
+    "service_id": "app-server"
+  }
+]

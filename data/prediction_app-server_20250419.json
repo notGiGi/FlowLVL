@@ -1,0 +1,267 @@
+[
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:32:22.811697",
+    "prediction_horizon": 8,
+    "predicted_metrics": {
+      "memory_usage": 81.19175324738343,
+      "cpu_usage": 75.27927930526414,
+      "response_time_ms": 523.4791441864872,
+      "error_rate": 5.736609725097127
+    },
+    "influential_metrics": {
+      "memory_usage": 81.19175324738343,
+      "response_time_ms": 523.4791441864872,
+      "error_rate": 5.736609725097127
+    },
+    "probability": 0.9101219301731149,
+    "confidence": 1.0
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:32:26.023192",
+    "prediction_horizon": 8,
+    "predicted_metrics": {
+      "memory_usage": 90.95519136354432,
+      "cpu_usage": 91.26327831673713,
+      "response_time_ms": 696.2346045746688,
+      "error_rate": 8.007370276930747
+    },
+    "influential_metrics": {
+      "memory_usage": 90.95519136354432,
+      "cpu_usage": 91.26327831673713,
+      "response_time_ms": 696.2346045746688,
+      "error_rate": 8.007370276930747
+    },
+    "probability": 0.9415056570842978,
+    "confidence": 1.0
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:41:52.854155",
+    "prediction_horizon": 8,
+    "predicted_metrics": {
+      "memory_usage": 109.34982274318571,
+      "cpu_usage": 121.1495654376994,
+      "response_time_ms": 1058.091309930504,
+      "error_rate": 13.288862034799688
+    },
+    "influential_metrics": {
+      "memory_usage": 109.34982274318571,
+      "cpu_usage": 121.1495654376994,
+      "response_time_ms": 1058.091309930504,
+      "error_rate": 13.288862034799688
+    },
+    "probability": 0.7517527648448744,
+    "confidence": 1.0
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:41:56.077513",
+    "prediction_horizon": 8,
+    "predicted_metrics": {
+      "memory_usage": 109.4431890543739,
+      "cpu_usage": 121.31276285424943,
+      "response_time_ms": 1058.3570986030643,
+      "error_rate": 13.271945096323245
+    },
+    "influential_metrics": {
+      "memory_usage": 109.4431890543739,
+      "cpu_usage": 121.31276285424943,
+      "response_time_ms": 1058.3570986030643,
+      "error_rate": 13.271945096323245
+    },
+    "probability": 0.7510978133014338,
+    "confidence": 1.0
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:43:26.841424",
+    "prediction_horizon": 8,
+    "predicted_metrics": {
+      "memory_usage": 110.30364277005359,
+      "cpu_usage": 122.17744593654729,
+      "response_time_ms": 1099.7860946762723,
+      "error_rate": 14.101558844789022
+    },
+    "influential_metrics": {
+      "memory_usage": 110.30364277005359,
+      "cpu_usage": 122.17744593654729,
+      "response_time_ms": 1099.7860946762723,
+      "error_rate": 14.101558844789022
+    },
+    "probability": 0.7916870366740189,
+    "confidence": 1.0
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:43:30.327053",
+    "prediction_horizon": 8,
+    "predicted_metrics": {
+      "memory_usage": 110.35044918713407,
+      "cpu_usage": 122.28030265625479,
+      "response_time_ms": 1098.642332905452,
+      "error_rate": 14.060728839023747
+    },
+    "influential_metrics": {
+      "memory_usage": 110.35044918713407,
+      "cpu_usage": 122.28030265625479,
+      "response_time_ms": 1098.642332905452,
+      "error_rate": 14.060728839023747
+    },
+    "probability": 0.7898283916395957,
+    "confidence": 1.0
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:44:11.006974",
+    "prediction_horizon": 8,
+    "predicted_metrics": {
+      "memory_usage": 110.9136910496913,
+      "cpu_usage": 122.7279267415754,
+      "response_time_ms": 1133.1796751294592,
+      "error_rate": 14.789288635298615
+    },
+    "influential_metrics": {
+      "memory_usage": 110.9136910496913,
+      "cpu_usage": 122.7279267415754,
+      "response_time_ms": 1133.1796751294592,
+      "error_rate": 14.789288635298615
+    },
+    "probability": 0.9850681605176153,
+    "confidence": 1.0
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:44:13.986955",
+    "prediction_horizon": 8,
+    "predicted_metrics": {
+      "memory_usage": 110.9375945140321,
+      "cpu_usage": 122.80447631305424,
+      "response_time_ms": 1131.132738841837,
+      "error_rate": 14.731430809705849
+    },
+    "influential_metrics": {
+      "memory_usage": 110.9375945140321,
+      "cpu_usage": 122.80447631305424,
+      "response_time_ms": 1131.132738841837,
+      "error_rate": 14.731430809705849
+    },
+    "probability": 0.9851241088818348,
+    "confidence": 1.0
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:49:24.446970",
+    "prediction_horizon": 8,
+    "predicted_metrics": {
+      "memory_usage": 110.47410334799112,
+      "cpu_usage": 122.9384022846361,
+      "response_time_ms": 1110.5651681753043,
+      "error_rate": 14.471110639700477
+    },
+    "influential_metrics": {
+      "memory_usage": 110.47410334799112,
+      "cpu_usage": 122.9384022846361,
+      "response_time_ms": 1110.5651681753043,
+      "error_rate": 14.471110639700477
+    },
+    "probability": 0.8094435838255635,
+    "confidence": 1.0
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:49:27.642195",
+    "prediction_horizon": 8,
+    "predicted_metrics": {
+      "memory_usage": 110.49607370993382,
+      "cpu_usage": 122.98100411969163,
+      "response_time_ms": 1109.6650223810243,
+      "error_rate": 14.439939122578878
+    },
+    "influential_metrics": {
+      "memory_usage": 110.49607370993382,
+      "cpu_usage": 122.98100411969163,
+      "response_time_ms": 1109.6650223810243,
+      "error_rate": 14.439939122578878
+    },
+    "probability": 0.8080034070049991,
+    "confidence": 1.0
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:52:00.604850",
+    "prediction_horizon": 8,
+    "predicted_metrics": {
+      "memory_usage": 111.21504608861532,
+      "cpu_usage": 123.61223735368092,
+      "response_time_ms": 1145.3023105893978,
+      "error_rate": 15.144799178100183
+    },
+    "influential_metrics": {
+      "memory_usage": 111.21504608861532,
+      "cpu_usage": 123.61223735368092,
+      "response_time_ms": 1145.3023105893978,
+      "error_rate": 15.144799178100183
+    },
+    "probability": 0.842465161752347,
+    "confidence": 1.0
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:52:04.073118",
+    "prediction_horizon": 8,
+    "predicted_metrics": {
+      "memory_usage": 111.22150160720027,
+      "cpu_usage": 123.63764483225245,
+      "response_time_ms": 1143.930700980267,
+      "error_rate": 15.106210193122452
+    },
+    "influential_metrics": {
+      "memory_usage": 111.22150160720027,
+      "cpu_usage": 123.63764483225245,
+      "response_time_ms": 1143.930700980267,
+      "error_rate": 15.106210193122452
+    },
+    "probability": 0.8406500606815713,
+    "confidence": 1.0
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:56:36.261187",
+    "prediction_horizon": 8,
+    "predicted_metrics": {
+      "memory_usage": 110.93575434254734,
+      "cpu_usage": 123.5362204158755,
+      "response_time_ms": 1140.3253375402123,
+      "error_rate": 15.164999332066664
+    },
+    "influential_metrics": {
+      "memory_usage": 110.93575434254734,
+      "cpu_usage": 123.5362204158755,
+      "response_time_ms": 1140.3253375402123,
+      "error_rate": 15.164999332066664
+    },
+    "probability": 0.8429915302011082,
+    "confidence": 1.0
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:56:39.007243",
+    "prediction_horizon": 8,
+    "predicted_metrics": {
+      "memory_usage": 110.94275916845294,
+      "cpu_usage": 123.55462746894827,
+      "response_time_ms": 1139.3128345119865,
+      "error_rate": 15.134813498423213
+    },
+    "influential_metrics": {
+      "memory_usage": 110.94275916845294,
+      "cpu_usage": 123.55462746894827,
+      "response_time_ms": 1139.3128345119865,
+      "error_rate": 15.134813498423213
+    },
+    "probability": 0.8415749393925993,
+    "confidence": 1.0
+  }
+]

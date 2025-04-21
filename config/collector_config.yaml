@@ -1,10 +1,18 @@
-collection_interval: 60  # segundos
+collection_interval: 60
 services:
-  - service_id: "servicio-web-ejemplo"  # Nombre de tu servicio
-    endpoint_type: "prometheus"         # O "direct" para API
-    endpoint: "http://prometheus:9090"  # URL de tu Prometheus
-    metrics:                           
-      - "memory_usage"
-      - "cpu_usage"
-      - "response_time_ms"
-      - "error_rate"
+- endpoint: file://./data/app-server_data.json
+  endpoint_type: file
+  metrics_map:
+    cpu_usage: cpu_usage
+    error_rate: error_rate
+    memory_usage: memory_usage
+    response_time_ms: response_time_ms
+  service_id: app-server
+- endpoint: file://./data/database_data.json
+  endpoint_type: file
+  metrics_map:
+    active_connections: active_connections
+    cpu_usage: cpu_usage
+    memory_usage: memory_usage
+    query_time_avg: query_time_avg
+  service_id: database

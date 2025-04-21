@@ -7,7 +7,7 @@ from datetime import datetime
 import subprocess
 import requests
 
-# Configuración de logging
+# ConfiguraciÃ³n de logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -24,7 +24,7 @@ class SimpleActionRecommender:
     def __init__(self, config=None):
         self.config = config or {}
         
-        # Cargar políticas de acción
+        # Cargar polÃ­ticas de acciÃ³n
         self.config_dir = self.config.get('config_dir', './config')
         self.action_policies = self.load_action_policies()
         
@@ -32,34 +32,34 @@ class SimpleActionRecommender:
         self.action_history = []
         self.max_history = self.config.get('max_history_items', 100)
         
-        # Modo de ejecución (real o simulación)
+        # Modo de ejecuciÃ³n (real o simulaciÃ³n)
         self.execution_mode = self.config.get('execution_mode', 'simulation')
         
         logger.info(f"Recomendador de acciones simple inicializado (modo: {self.execution_mode})")
     
     def load_action_policies(self):
-        """Carga políticas de acción desde archivo JSON"""
+        """Carga polÃ­ticas de acciÃ³n desde archivo JSON"""
         try:
             policy_file = os.path.join(self.config_dir, 'action_policies.json')
             
             if os.path.exists(policy_file):
-                with open(policy_file, 'r') as f:
+                with open(policy_file, 'r', encoding='utf-8-sig') as f:
                     policies = json.load(f)
-                logger.info(f"Políticas de acción cargadas: {len(policies)} servicios")
+                logger.info(f"PolÃ­ticas de acciÃ³n cargadas: {len(policies)} servicios")
                 return policies
             else:
-                logger.warning("Archivo de políticas no encontrado, usando valores por defecto")
+                logger.warning("Archivo de polÃ­ticas no encontrado, usando valores por defecto")
                 return self.get_default_policies()
                 
         except Exception as e:
-            logger.error(f"Error al cargar políticas: {str(e)}")
+            logger.error(f"Error al cargar polÃ­ticas: {str(e)}")
             return self.get_default_policies()
     
     def get_default_policies(self):
-        """Devuelve políticas por defecto"""
+        """Devuelve polÃ­ticas por defecto"""
         return {
             "generic_web_service": {
-                "description": "Acciones para servicios web genéricos",
+                "description": "Acciones para servicios web genÃ©ricos",
                 "actions": {
                     "memory_restart": {
                         "description": "Reinicia el servicio para resolver problemas de memoria",
@@ -92,7 +92,7 @@ class SimpleActionRecommender:
                 }
             },
             "generic_database": {
-                "description": "Acciones para bases de datos genéricas",
+                "description": "Acciones para bases de datos genÃ©ricas",
                 "actions": {
                     "connection_pool_increase": {
                         "description": "Aumenta el pool de conexiones",
@@ -117,28 +117,28 @@ class SimpleActionRecommender:
         }
     
     def check_condition(self, condition, metrics):
-        """Verifica si una condición se cumple con las métricas dadas"""
+        """Verifica si una condiciÃ³n se cumple con las mÃ©tricas dadas"""
         try:
-            # Extraer el nombre de la métrica y el valor umbral
+            # Extraer el nombre de la mÃ©trica y el valor umbral
             matches = re.match(r'([a-zA-Z_]+)\s*([<>=!]+)\s*(.+)', condition)
             if not matches:
                 return False
             
             metric_name, operator, threshold = matches.groups()
             
-            # Obtener valor de la métrica
+            # Obtener valor de la mÃ©trica
             if metric_name not in metrics:
                 return False
             
             metric_value = metrics[metric_name]
             
-            # Convertir threshold a número si es posible
+            # Convertir threshold a nÃºmero si es posible
             try:
                 threshold = float(threshold)
             except ValueError:
                 pass
             
-            # Evaluar condición
+            # Evaluar condiciÃ³n
             if operator == '>':
                 return metric_value > threshold
             elif operator == '>=':
@@ -155,12 +155,12 @@ class SimpleActionRecommender:
                 return False
                 
         except Exception as e:
-            logger.error(f"Error al verificar condición {condition}: {str(e)}")
+            logger.error(f"Error al verificar condiciÃ³n {condition}: {str(e)}")
             return False
     
     def check_conditions(self, conditions, metrics):
         """Verifica si todas las condiciones se cumplen"""
-        # Verificar métricas
+        # Verificar mÃ©tricas
         if 'metrics' in conditions:
             metrics_conditions_met = 0
             total_metrics_conditions = len(conditions['metrics'])
@@ -170,16 +170,16 @@ class SimpleActionRecommender:
                 if self.check_condition(full_condition, metrics):
                     metrics_conditions_met += 1
             
-            # Al menos 70% de condiciones métricas deben cumplirse
+            # Al menos 70% de condiciones mÃ©tricas deben cumplirse
             if metrics_conditions_met / total_metrics_conditions < 0.7:
                 return False
         
-        # Verificar anomaly_score si está presente
+        # Verificar anomaly_score si estÃ¡ presente
         if 'anomaly_score' in conditions and 'anomaly_score' in metrics:
             if not self.check_condition(f"anomaly_score {conditions['anomaly_score']}", metrics):
                 return False
         
-        # Verificar failure_probability si está presente
+        # Verificar failure_probability si estÃ¡ presente
         if 'failure_probability' in conditions and 'failure_probability' in metrics:
             if not self.check_condition(f"failure_probability {conditions['failure_probability']}", metrics):
                 return False
@@ -188,46 +188,46 @@ class SimpleActionRecommender:
         return True
     
     def find_matching_actions(self, service_id, metrics):
-        """Encuentra acciones que coinciden con las métricas actuales"""
+        """Encuentra acciones que coinciden con las mÃ©tricas actuales"""
         matching_actions = []
         
-        # Verificar si tenemos políticas para este servicio
+        # Verificar si tenemos polÃ­ticas para este servicio
         if service_id in self.action_policies:
             service_actions = self.action_policies[service_id].get('actions', {})
             
-            # Verificar cada acción
+            # Verificar cada acciÃ³n
             for action_id, action_def in service_actions.items():
                 # Verificar condiciones
                 if 'conditions' in action_def:
                     if self.check_conditions(action_def['conditions'], metrics):
-                        # Crear copia de la acción
+                        # Crear copia de la acciÃ³n
                         action = action_def.copy()
                         action['action_id'] = action_id
                         action['service_id'] = service_id
                         
-                        # Añadir a lista de coincidentes
+                        # AÃ±adir a lista de coincidentes
                         matching_actions.append(action)
         
-        # Si no hay acciones específicas para este servicio, buscar genéricas
+        # Si no hay acciones especÃ­ficas para este servicio, buscar genÃ©ricas
         if not matching_actions:
-            # Determinar tipo de servicio por métricas
+            # Determinar tipo de servicio por mÃ©tricas
             service_type = self._get_service_type(metrics)
             generic_id = f"generic_{service_type}"
             
             if generic_id in self.action_policies:
                 generic_actions = self.action_policies[generic_id].get('actions', {})
                 
-                # Verificar cada acción
+                # Verificar cada acciÃ³n
                 for action_id, action_def in generic_actions.items():
                     if 'conditions' in action_def:
                         if self.check_conditions(action_def['conditions'], metrics):
-                            # Crear copia de la acción
+                            # Crear copia de la acciÃ³n
                             action = action_def.copy()
                             action['action_id'] = action_id
                             action['service_id'] = service_id  # Usar el ID real
                             action['is_generic'] = True
                             
-                            # Añadir a lista de coincidentes
+                            # AÃ±adir a lista de coincidentes
                             matching_actions.append(action)
         
         # Ordenar por prioridad
@@ -245,12 +245,12 @@ class SimpleActionRecommender:
         return matching_actions
     
     def _get_service_type(self, metrics):
-        """Determina tipo de servicio basado en métricas disponibles"""
-        # Verificar si hay métricas específicas de bases de datos
+        """Determina tipo de servicio basado en mÃ©tricas disponibles"""
+        # Verificar si hay mÃ©tricas especÃ­ficas de bases de datos
         if any(m in metrics for m in ['active_connections', 'query_time_avg', 'connection_wait_time']):
             return 'database'
         
-        # Verificar si hay métricas específicas de Redis/caché
+        # Verificar si hay mÃ©tricas especÃ­ficas de Redis/cachÃ©
         if any(m in metrics for m in ['memory_fragmentation_ratio', 'hit_rate', 'eviction_rate']):
             return 'cache'
         
@@ -258,16 +258,16 @@ class SimpleActionRecommender:
         return 'web_service'
     
     def process_and_recommend(self, anomaly_data=None, prediction_data=None):
-        """Procesa datos de anomalías o predicciones y recomienda acciones"""
+        """Procesa datos de anomalÃ­as o predicciones y recomienda acciones"""
         try:
             # Determinar tipo de entrada
             if anomaly_data:
-                # Procesar anomalía
+                # Procesar anomalÃ­a
                 service_id = anomaly_data.get('service_id', 'unknown_service')
                 metrics = anomaly_data.get('details', {}).get('metrics', {})
                 metrics['anomaly_score'] = anomaly_data.get('anomaly_score', 0)
                 
-                # Recomendar acción
+                # Recomendar acciÃ³n
                 recommended_action = self.recommend_action(service_id, metrics, 'anomaly')
                 
                 if recommended_action:
@@ -281,12 +281,12 @@ class SimpleActionRecommender:
                     }
             
             elif prediction_data:
-                # Procesar predicción
+                # Procesar predicciÃ³n
                 service_id = prediction_data.get('service_id', 'unknown_service')
                 metrics = prediction_data.get('influential_metrics', {})
                 metrics['failure_probability'] = prediction_data.get('probability', 0)
                 
-                # Recomendar acción
+                # Recomendar acciÃ³n
                 recommended_action = self.recommend_action(service_id, metrics, 'prediction')
                 
                 if recommended_action:
@@ -301,7 +301,7 @@ class SimpleActionRecommender:
                     }
             
             return {
-                'error': 'No se proporcionaron datos de anomalía o predicción',
+                'error': 'No se proporcionaron datos de anomalÃ­a o predicciÃ³n',
                 'timestamp': datetime.now().isoformat()
             }
                 
@@ -313,40 +313,40 @@ class SimpleActionRecommender:
             }
     
     def recommend_action(self, service_id, metrics, issue_type):
-        """Recomienda la mejor acción para un problema detectado"""
+        """Recomienda la mejor acciÃ³n para un problema detectado"""
         try:
-            logger.info(f"Buscando acción para {service_id} con issue_type={issue_type}")
+            logger.info(f"Buscando acciÃ³n para {service_id} con issue_type={issue_type}")
             
-            # Encontrar acciones que coinciden con las métricas
+            # Encontrar acciones que coinciden con las mÃ©tricas
             matching_actions = self.find_matching_actions(service_id, metrics)
             
             if not matching_actions:
                 logger.warning(f"No hay acciones disponibles para {service_id}")
                 return None
             
-            # Devolver la primera acción coincidente (la de mayor prioridad según el ordenamiento)
+            # Devolver la primera acciÃ³n coincidente (la de mayor prioridad segÃºn el ordenamiento)
             return matching_actions[0]
                 
         except Exception as e:
-            logger.error(f"Error al recomendar acción: {str(e)}")
+            logger.error(f"Error al recomendar acciÃ³n: {str(e)}")
             return None
     
     def execute_action(self, action, metrics):
-        """Ejecuta una acción correctiva"""
+        """Ejecuta una acciÃ³n correctiva"""
         if not action:
-            logger.warning("No se proporcionó acción para ejecutar")
+            logger.warning("No se proporcionÃ³ acciÃ³n para ejecutar")
             return False
         
-        # Extraer información
+        # Extraer informaciÃ³n
         action_id = action.get('action_id', 'unknown_action')
         service_id = action.get('service_id', 'unknown_service')
         
-        # Obtener detalles de remediación
+        # Obtener detalles de remediaciÃ³n
         remediation = action.get('remediation', {})
         remediation_type = remediation.get('type', 'command')
         
-        # Verificar modo de ejecución
-        logger.info(f"Ejecutando acción {action_id} para {service_id} (modo: {self.execution_mode})")
+        # Verificar modo de ejecuciÃ³n
+        logger.info(f"Ejecutando acciÃ³n {action_id} para {service_id} (modo: {self.execution_mode})")
         
         # Guardar en historial
         history_item = {
@@ -360,10 +360,10 @@ class SimpleActionRecommender:
         
         try:
             if self.execution_mode == 'simulation':
-                # En modo simulación, solo registrar la acción
-                logger.info(f"[SIMULACIÓN] {remediation_type}: {remediation}")
+                # En modo simulaciÃ³n, solo registrar la acciÃ³n
+                logger.info(f"[SIMULACIÃ“N] {remediation_type}: {remediation}")
                 
-                # Marcar como éxito en simulación
+                # Marcar como Ã©xito en simulaciÃ³n
                 history_item['success'] = True
                 history_item['simulation'] = True
                 
@@ -371,7 +371,7 @@ class SimpleActionRecommender:
                 return True
             
             elif self.execution_mode == 'real':
-                # En modo real, ejecutar la acción
+                # En modo real, ejecutar la acciÃ³n
                 if remediation_type == 'command':
                     # Ejecutar comando
                     command = remediation.get('command', '')
@@ -447,22 +447,22 @@ class SimpleActionRecommender:
                     self._add_to_history(history_item)
                     
                     if success:
-                        logger.info(f"API respondió correctamente: {response.status_code}")
+                        logger.info(f"API respondiÃ³ correctamente: {response.status_code}")
                         return True
                     else:
                         logger.error(f"Error en respuesta API: {response.status_code}")
                         return False
                 
                 else:
-                    logger.error(f"Tipo de remediación desconocido: {remediation_type}")
+                    logger.error(f"Tipo de remediaciÃ³n desconocido: {remediation_type}")
                     return False
             
             else:
-                logger.error(f"Modo de ejecución desconocido: {self.execution_mode}")
+                logger.error(f"Modo de ejecuciÃ³n desconocido: {self.execution_mode}")
                 return False
                 
         except Exception as e:
-            logger.error(f"Error al ejecutar acción: {str(e)}")
+            logger.error(f"Error al ejecutar acciÃ³n: {str(e)}")
             
             # Actualizar entrada de historial
             history_item['success'] = False
@@ -478,18 +478,18 @@ class SimpleActionRecommender:
             
         result = template
         
-        # Sustituir variables de acción
+        # Sustituir variables de acciÃ³n
         replacements = {
             "${service_id}": action.get('service_id', ''),
             "${action_id}": action.get('action_id', '')
         }
         
-        # Añadir parámetros de la acción
+        # AÃ±adir parÃ¡metros de la acciÃ³n
         params = action.get('parameters', {})
         for param_name, param_value in params.items():
             replacements[f"${{{param_name}}}"] = str(param_value)
         
-        # Añadir variables de contexto
+        # AÃ±adir variables de contexto
         for key, value in context.items():
             if isinstance(value, (str, int, float, bool)):
                 replacements[f"${{{key}}}"] = str(value)
@@ -501,10 +501,10 @@ class SimpleActionRecommender:
         return result
     
     def _add_to_history(self, item):
-        """Añade una acción al historial"""
+        """AÃ±ade una acciÃ³n al historial"""
         self.action_history.append(item)
         
-        # Limitar tamaño del historial
+        # Limitar tamaÃ±o del historial
         if len(self.action_history) > self.max_history:
             self.action_history = self.action_history[-self.max_history:]
     
@@ -519,7 +519,7 @@ class SimpleActionRecommender:
         else:
             filtered_history = self.action_history
         
-        # Ordenar por más reciente primero
+        # Ordenar por mÃ¡s reciente primero
         sorted_history = sorted(
             filtered_history,
             key=lambda x: x.get('timestamp', ''),
@@ -529,20 +529,20 @@ class SimpleActionRecommender:
         return sorted_history[:limit]
     
     def set_execution_mode(self, mode):
-        """Establece el modo de ejecución (simulation o real)"""
+        """Establece el modo de ejecuciÃ³n (simulation o real)"""
         if mode in ['simulation', 'real']:
             self.execution_mode = mode
-            logger.info(f"Modo de ejecución cambiado a: {mode}")
+            logger.info(f"Modo de ejecuciÃ³n cambiado a: {mode}")
             return True
         else:
-            logger.error(f"Modo de ejecución inválido: {mode}")
+            logger.error(f"Modo de ejecuciÃ³n invÃ¡lido: {mode}")
             return False
 
 # Script principal
 if __name__ == "__main__":
     recommender = SimpleActionRecommender()
     
-    # Ejemplo de recomendación
+    # Ejemplo de recomendaciÃ³n
     test_anomaly = {
         "service_id": "test-service",
         "anomaly_score": 0.8,

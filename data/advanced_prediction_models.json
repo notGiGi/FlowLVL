@@ -1,0 +1,11 @@
+{
+  "app-server": {
+    "metrics": [
+      "cpu_usage",
+      "error_rate",
+      "memory_usage",
+      "response_time_ms"
+    ],
+    "last_trained": "2025-04-20T18:50:41.157454"
+  }
+}

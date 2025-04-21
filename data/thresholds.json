@@ -2,26 +2,9 @@
   "default": {
     "memory_usage": 70,
     "cpu_usage": 80,
-    "gc_collection_time": 400,
-    "active_connections": 80,
-    "connection_wait_time": 200,
-    "memory_fragmentation_ratio": 1.5,
-    "hit_rate": 80
-  },
-  "example-service": {
-    "memory_usage": 70,
-    "cpu_usage": 80,
-    "gc_collection_time": 400,
-    "active_connections": 80,
-    "connection_wait_time": 200,
-    "memory_fragmentation_ratio": 1.5,
-    "hit_rate": 80,
-    "up_action-recommender_8080": 0.0,
-    "up_anomaly-detector_8080": 0.0,
-    "up_api_8000": 0.0,
-    "up_localhost_9090": 1.0,
-    "up_predictive-engine_8080": 0.0,
-    "up_pushgateway_9091": 1.0,
-    "up_service-profiler_8080": 0.0
+    "response_time_ms": 300,
+    "error_rate": 5,
+    "active_connections": 90,
+    "query_time_avg": 100
   }
 }

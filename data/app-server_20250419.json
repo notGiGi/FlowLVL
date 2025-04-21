@@ -1,0 +1,698 @@
+[
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:32:22.814937",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:32:26.032225",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:33:22.836097",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:33:26.058812",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:34:22.868962",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:34:26.106836",
+    "service_id": "app-server"
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:34:59.544318",
+    "memory_usage": 85,
+    "cpu_usage": 90,
+    "response_time_ms": 650,
+    "error_rate": 8
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:35:06.422777",
+    "memory_usage": 85,
+    "cpu_usage": 90,
+    "response_time_ms": 650,
+    "error_rate": 8
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:35:22.912374",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:35:26.160793",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:36:22.970823",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:36:26.214166",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:37:23.021679",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:37:26.268822",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:38:23.069087",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:38:26.309992",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:39:23.138852",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:39:26.378851",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:40:23.184211",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:40:26.419200",
+    "service_id": "app-server"
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:41:22.861593",
+    "memory_usage": 99.9,
+    "cpu_usage": 99.9,
+    "response_time_ms": 1500,
+    "error_rate": 25
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:41:23.231454",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:41:26.496237",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:41:52.856682",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:41:56.081054",
+    "service_id": "app-server"
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:42:29.908887",
+    "memory_usage": 99.9,
+    "cpu_usage": 99.9,
+    "response_time_ms": 1500,
+    "error_rate": 25
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:42:52.881160",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:42:56.101154",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:43:26.841424",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:43:30.324509",
+    "service_id": "app-server"
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:43:43.269047",
+    "memory_usage": 99.9,
+    "cpu_usage": 99.9,
+    "response_time_ms": 1500,
+    "error_rate": 25
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:44:11.003960",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:44:13.992409",
+    "service_id": "app-server"
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:44:56.204895",
+    "memory_usage": 85,
+    "cpu_usage": 90,
+    "response_time_ms": 650,
+    "error_rate": 8
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:45:09.209088",
+    "memory_usage": 85,
+    "cpu_usage": 90,
+    "response_time_ms": 650,
+    "error_rate": 8
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:45:10.819174",
+    "memory_usage": 85,
+    "cpu_usage": 90,
+    "response_time_ms": 650,
+    "error_rate": 8
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:45:11.042365",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:45:14.006071",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:46:11.089376",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:46:14.054310",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:47:11.151827",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:47:14.127073",
+    "service_id": "app-server"
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:47:55.922282",
+    "memory_usage": 85,
+    "cpu_usage": 90,
+    "response_time_ms": 650,
+    "error_rate": 8
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:47:56.922123",
+    "memory_usage": 85,
+    "cpu_usage": 90,
+    "response_time_ms": 650,
+    "error_rate": 8
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:47:57.409303",
+    "memory_usage": 85,
+    "cpu_usage": 90,
+    "response_time_ms": 650,
+    "error_rate": 8
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:47:57.839508",
+    "memory_usage": 85,
+    "cpu_usage": 90,
+    "response_time_ms": 650,
+    "error_rate": 8
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:48:11.204988",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:48:14.189695",
+    "service_id": "app-server"
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:48:36.384136",
+    "memory_usage": 99.9,
+    "cpu_usage": 99.9,
+    "response_time_ms": 1500,
+    "error_rate": 25
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:49:11.269456",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:49:14.253912",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:49:24.446371",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:49:27.645187",
+    "service_id": "app-server"
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:49:40.709675",
+    "memory_usage": 99.9,
+    "cpu_usage": 99.9,
+    "response_time_ms": 1500,
+    "error_rate": 25
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:50:24.476417",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:50:27.665218",
+    "service_id": "app-server"
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:50:40.393470",
+    "memory_usage": 99.9,
+    "cpu_usage": 99.9,
+    "response_time_ms": 1500,
+    "error_rate": 25
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:51:24.535134",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:51:27.721709",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:52:00.603062",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:52:04.072120",
+    "service_id": "app-server"
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:52:04.833172",
+    "memory_usage": 99.9,
+    "cpu_usage": 99.9,
+    "response_time_ms": 1500,
+    "error_rate": 25
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:53:00.645888",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:53:04.093175",
+    "service_id": "app-server"
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:53:04.819731",
+    "memory_usage": 85,
+    "cpu_usage": 90,
+    "response_time_ms": 650,
+    "error_rate": 8
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:53:05.462570",
+    "memory_usage": 85,
+    "cpu_usage": 90,
+    "response_time_ms": 650,
+    "error_rate": 8
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:53:06.131148",
+    "memory_usage": 99.9,
+    "cpu_usage": 99.9,
+    "response_time_ms": 1500,
+    "error_rate": 25
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:53:56.937871",
+    "memory_usage": 85,
+    "cpu_usage": 90,
+    "response_time_ms": 650,
+    "error_rate": 8
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:53:57.957639",
+    "memory_usage": 85,
+    "cpu_usage": 90,
+    "response_time_ms": 650,
+    "error_rate": 8
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:53:58.609976",
+    "memory_usage": 85,
+    "cpu_usage": 90,
+    "response_time_ms": 650,
+    "error_rate": 8
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:53:59.066391",
+    "memory_usage": 85,
+    "cpu_usage": 90,
+    "response_time_ms": 650,
+    "error_rate": 8
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:53:59.543729",
+    "memory_usage": 85,
+    "cpu_usage": 90,
+    "response_time_ms": 650,
+    "error_rate": 8
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:54:00.057077",
+    "memory_usage": 85,
+    "cpu_usage": 90,
+    "response_time_ms": 650,
+    "error_rate": 8
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:54:00.703178",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:54:04.173623",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:55:00.757276",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:55:04.237732",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:56:00.833618",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:56:04.298971",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:56:36.261187",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:56:39.007243",
+    "service_id": "app-server"
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:56:47.495870",
+    "memory_usage": 85,
+    "cpu_usage": 90,
+    "response_time_ms": 650,
+    "error_rate": 8
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:56:48.657119",
+    "memory_usage": 85,
+    "cpu_usage": 90,
+    "response_time_ms": 650,
+    "error_rate": 8
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:56:49.338210",
+    "memory_usage": 85,
+    "cpu_usage": 90,
+    "response_time_ms": 650,
+    "error_rate": 8
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-19T19:56:50.522859",
+    "memory_usage": 99.9,
+    "cpu_usage": 99.9,
+    "response_time_ms": 1500,
+    "error_rate": 25
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:57:36.281776",
+    "service_id": "app-server"
+  },
+  {
+    "cpu_usage": 95.2,
+    "error_rate": 8.5,
+    "memory_usage": 90.5,
+    "response_time_ms": 750,
+    "timestamp": "2025-04-19T19:57:39.045108",
+    "service_id": "app-server"
+  }
+]

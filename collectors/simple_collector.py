@@ -72,6 +72,8 @@ class SimpleCollector:
                     # Recolectar según tipo de endpoint
                     if endpoint_type == 'prometheus':
                         metrics = self.collect_from_prometheus(service)
+                    elif endpoint_type == 'file':
+                        metrics = self.collect_from_file(service)
                     elif endpoint_type == 'direct':
                         metrics = self.collect_direct(service)
                     else:
@@ -101,6 +103,49 @@ class SimpleCollector:
             except Exception as e:
                 logger.error(f"Error en recolección: {str(e)}")
                 time.sleep(30)  # Esperar antes de reintentar
+    
+    def collect_from_file(self, service):
+        """Recolecta métricas desde un archivo local"""
+        try:
+            endpoint = service.get('endpoint', '')
+            if endpoint.startswith('file://'):
+                file_path = endpoint[7:]  # Quitar 'file://'
+                
+                if os.path.exists(file_path):
+                    with open(file_path, 'r', encoding='utf-8-sig') as f:
+                        data = json.load(f)
+                    
+                    if data and isinstance(data, list) and len(data) > 0:
+                        # Tomar el último punto de datos
+                        latest_data = data[-1]
+                        
+                        # Extraer métricas según configuración
+                        metrics = {}
+                        metrics_map = service.get('metrics_map', {})
+                        
+                        if metrics_map:
+                            # Mapeo personalizado
+                            for dest_key, source_key in metrics_map.items():
+                                if source_key in latest_data:
+                                    metrics[dest_key] = latest_data[source_key]
+                        else:
+                            # Sin mapeo, tomar todos los valores numéricos
+                            for key, value in latest_data.items():
+                                if isinstance(value, (int, float)) and key not in ['service_id', 'timestamp']:
+                                    metrics[key] = value
+                        
+                        logger.info(f"Recolectadas {len(metrics)} métricas desde archivo local")
+                        return metrics
+                else:
+                    logger.error(f"Archivo no encontrado: {file_path}")
+            else:
+                logger.error(f"URL de archivo inválida: {endpoint}")
+            
+            return {}
+                
+        except Exception as e:
+            logger.error(f"Error al recolectar desde archivo: {str(e)}")
+            return {}
     
     def collect_from_prometheus(self, service):
         """Recolecta métricas desde un endpoint Prometheus"""

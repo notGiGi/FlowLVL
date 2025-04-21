@@ -1,0 +1,98 @@
+[
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-20T06:30:14.945570",
+    "memory_usage": 35.00122499846141,
+    "cpu_usage": 24.34585143833851,
+    "active_connections": 39.30764948954999,
+    "query_time_avg": 37.267811898842275
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-20T07:30:14.945570",
+    "memory_usage": 36.29172983186782,
+    "cpu_usage": 27.256613070519442,
+    "active_connections": 45.03745722838685,
+    "query_time_avg": 40.75220314207332
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-20T08:30:14.945570",
+    "memory_usage": 37.49605409849902,
+    "cpu_usage": 29.4928119570288,
+    "active_connections": 46.6612885356694,
+    "query_time_avg": 43.32604621884253
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-20T09:30:14.945570",
+    "memory_usage": 39.25103893688805,
+    "cpu_usage": 32.40374362111141,
+    "active_connections": 53.80283735448083,
+    "query_time_avg": 45.098666394325285
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-20T10:30:14.945570",
+    "memory_usage": 41.96727248887635,
+    "cpu_usage": 34.22966451121862,
+    "active_connections": 56.97537362091873,
+    "query_time_avg": 47.809375859207336
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-20T11:30:14.945570",
+    "memory_usage": 42.72139977361365,
+    "cpu_usage": 36.49989527719895,
+    "active_connections": 62.954608932916635,
+    "query_time_avg": 52.01223795210662
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-20T12:30:14.945570",
+    "memory_usage": 44.29286713254152,
+    "cpu_usage": 36.634087731722445,
+    "active_connections": 66.57430504984633,
+    "query_time_avg": 54.491986642661
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-20T13:30:14.945570",
+    "memory_usage": 45.91115419773258,
+    "cpu_usage": 38.52395762690836,
+    "active_connections": 74.25542165335874,
+    "query_time_avg": 56.20120997463218
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-20T14:30:14.945570",
+    "memory_usage": 46.88648040616238,
+    "cpu_usage": 40.21633795007545,
+    "active_connections": 80.16384649604102,
+    "query_time_avg": 56.52130007319916
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-20T15:30:14.945570",
+    "memory_usage": 48.8567001068799,
+    "cpu_usage": 42.228072639617224,
+    "active_connections": 83.938431596162,
+    "query_time_avg": 56.876136094787064
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-20T16:30:14.945570",
+    "memory_usage": 49.97781873676106,
+    "cpu_usage": 45.17739417164068,
+    "active_connections": 89.30369031746268,
+    "query_time_avg": 61.10725725997242
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-20T17:30:14.945570",
+    "memory_usage": 52.429911483425634,
+    "cpu_usage": 45.58866129580872,
+    "active_connections": 94.67533997190256,
+    "query_time_avg": 62.05261455690736
+  }
+]
