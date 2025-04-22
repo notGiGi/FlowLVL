@@ -65,16 +65,6 @@ class AdvancedPredictor:
             'active_connections': 150, # máximo 150 conexiones
             'query_time_avg': 200   # máximo 200ms
         }
-        # Lista de campos calculados a excluir del modelado porque son resultados, no métricas
-        self.excluded_metrics = [
-            'first_anomaly_in',     # Hora de primera anomalía calculada
-            'prediction_horizon',    # Horizonte de predicción
-            'probability',           # Probabilidad calculada
-            'confidence',            # Confianza calculada
-            'predicted_anomalies'    # Lista de anomalías
-        ]
-        
-
         
         logger.info("Predictor avanzado mejorado inicializado - Detección proactiva activada")
     
@@ -444,10 +434,6 @@ class AdvancedPredictor:
             # Entrenar o actualizar modelos para cada métrica
             for metric, values in metrics_data.items():
                 if len(values) >= self.min_history_points:
-                    # Saltar métricas excluidas
-                    if metric in self.excluded_metrics:
-                        continue
-                        
                     if (service_id not in self.models or
                         metric not in self.models[service_id]):
                         self.train_advanced_model(service_id, metric, values, timestamps)
@@ -661,4 +647,3 @@ class AdvancedPredictor:
             
         except Exception as e:
             logger.error(f"Error al guardar predicción: {str(e)}")
-

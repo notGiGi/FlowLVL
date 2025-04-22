@@ -1,0 +1,610 @@
+[
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:30:07.103058",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:31:07.192722",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:32:07.255004",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:33:19.811395",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:34:19.848111",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:35:19.888030",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:36:19.976479",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:36:54.471771",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:36:57.443227",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:37:54.542795",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:37:57.480539",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:38:54.608367",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:38:57.556406",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:39:54.703035",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:39:57.623963",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:40:54.762760",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:40:57.696956",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:41:54.818884",
+    "service_id": "database"
+  },
+  {
+    "service_id": "database",
+    "timestamp": "2025-04-21T18:41:55.331162",
+    "memory_usage": 95,
+    "cpu_usage": 98,
+    "active_connections": 200,
+    "query_time_avg": 250
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:41:57.756479",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:42:54.882978",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:42:57.820192",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:43:54.955695",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:43:57.868714",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:44:55.032037",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:44:57.938158",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:45:45.458112",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:45:48.537139",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:46:45.472748",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:46:48.563331",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:47:45.528415",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:47:48.597059",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:50:49.789251",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:50:52.237333",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:51:56.822656",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:51:59.689968",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:52:52.550743",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:52:56.106137",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:53:29.319591",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:53:32.291277",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:54:29.348964",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:54:32.320881",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:55:29.397742",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:55:32.378358",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:56:29.454713",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:56:32.442211",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:57:29.509576",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:57:32.499214",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:58:29.574081",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:58:32.546669",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:59:29.627507",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T18:59:32.590629",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T19:00:29.680137",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T19:00:32.645048",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T19:01:29.743976",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T19:01:32.700820",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T19:02:29.800523",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T19:02:32.757948",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T19:03:29.850292",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T19:03:32.811936",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T19:04:29.916425",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T19:04:32.865219",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T19:05:29.964289",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T19:05:32.932784",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T19:06:30.030294",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T19:06:32.990838",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T19:07:30.084141",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T19:07:33.050055",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T19:08:30.134000",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T19:08:33.107841",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T19:09:30.170572",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T19:09:33.155248",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T19:10:30.224969",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T19:10:33.208726",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T19:11:30.281901",
+    "service_id": "database"
+  },
+  {
+    "active_connections": 94.67533997190256,
+    "cpu_usage": 45.58866129580872,
+    "memory_usage": 52.429911483425634,
+    "query_time_avg": 62.05261455690736,
+    "timestamp": "2025-04-21T19:11:33.252783",
+    "service_id": "database"
+  }
+]

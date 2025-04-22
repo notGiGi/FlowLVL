@@ -6,7 +6,7 @@
       "memory_usage",
       "response_time_ms"
     ],
-    "last_trained": "2025-04-21T18:53:32.353824"
+    "last_trained": "2025-04-21T18:30:07.206639"
   },
   "database": {
     "metrics": [
@@ -15,6 +15,14 @@
       "memory_usage",
       "query_time_avg"
     ],
-    "last_trained": "2025-04-21T18:53:32.353824"
+    "last_trained": "2025-04-21T18:30:07.206639"
+  },
+  "prediction": {
+    "metrics": [
+      "prediction_horizon",
+      "probability",
+      "confidence"
+    ],
+    "last_trained": "2025-04-21T18:30:07.206639"
   }
 }

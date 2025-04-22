@@ -1,0 +1,3560 @@
+[
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-21T18:45:45.449108",
+    "timeline": {
+      "1": {
+        "metrics": {
+          "cpu_usage": 91.3,
+          "error_rate": 8.45,
+          "memory_usage": 87.25,
+          "response_time_ms": 470.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 91.3,
+            "threshold": 70,
+            "severity": 0.30428571428571427
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 8.45,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 87.25,
+            "threshold": 75,
+            "severity": 0.16333333333333333
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 470.3,
+            "threshold": 300,
+            "severity": 0.5676666666666667
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "2": {
+        "metrics": {
+          "cpu_usage": 89.8,
+          "error_rate": 8.2,
+          "memory_usage": 86.0,
+          "response_time_ms": 460.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 89.8,
+            "threshold": 70,
+            "severity": 0.2828571428571428
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 8.2,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 86.0,
+            "threshold": 75,
+            "severity": 0.14666666666666667
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 460.3,
+            "threshold": 300,
+            "severity": 0.5343333333333333
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "4": {
+        "metrics": {
+          "cpu_usage": 86.8,
+          "error_rate": 7.7,
+          "memory_usage": 83.5,
+          "response_time_ms": 440.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 86.8,
+            "threshold": 70,
+            "severity": 0.23999999999999996
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 7.7,
+            "threshold": 4,
+            "severity": 0.925
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 83.5,
+            "threshold": 75,
+            "severity": 0.11333333333333333
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 440.3,
+            "threshold": 300,
+            "severity": 0.46766666666666673
+          }
+        ],
+        "highest_severity": 0.925
+      },
+      "8": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "12": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "24": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      }
+    },
+    "first_anomaly_in": 1,
+    "predicted_anomalies": [
+      {
+        "metric": "error_rate",
+        "predicted": 8.45,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 1,
+        "timestamp": "2025-04-21T19:45:45.498644"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 470.3,
+        "threshold": 300,
+        "severity": 0.5676666666666667,
+        "hours": 1,
+        "timestamp": "2025-04-21T19:45:45.498644"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 8.2,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 2,
+        "timestamp": "2025-04-21T20:45:45.498644"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 460.3,
+        "threshold": 300,
+        "severity": 0.5343333333333333,
+        "hours": 2,
+        "timestamp": "2025-04-21T20:45:45.498644"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 7.7,
+        "threshold": 4,
+        "severity": 0.925,
+        "hours": 4,
+        "timestamp": "2025-04-21T22:45:45.498644"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 440.3,
+        "threshold": 300,
+        "severity": 0.46766666666666673,
+        "hours": 4,
+        "timestamp": "2025-04-21T22:45:45.498644"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 8,
+        "timestamp": "2025-04-22T02:45:45.498644"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 8,
+        "timestamp": "2025-04-22T02:45:45.498644"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 12,
+        "timestamp": "2025-04-22T06:45:45.498644"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 12,
+        "timestamp": "2025-04-22T06:45:45.498644"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 24,
+        "timestamp": "2025-04-22T18:45:45.498644"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 24,
+        "timestamp": "2025-04-22T18:45:45.498644"
+      }
+    ],
+    "confidence": 0.77,
+    "probability": 0.9,
+    "influential_metrics": {
+      "error_rate": 10,
+      "response_time_ms": 500
+    },
+    "prediction_horizon": 1
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-21T18:45:48.523870",
+    "timeline": {
+      "1": {
+        "metrics": {
+          "cpu_usage": 91.3,
+          "error_rate": 8.45,
+          "memory_usage": 87.25,
+          "response_time_ms": 470.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 91.3,
+            "threshold": 70,
+            "severity": 0.30428571428571427
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 8.45,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 87.25,
+            "threshold": 75,
+            "severity": 0.16333333333333333
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 470.3,
+            "threshold": 300,
+            "severity": 0.5676666666666667
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "2": {
+        "metrics": {
+          "cpu_usage": 89.8,
+          "error_rate": 8.2,
+          "memory_usage": 86.0,
+          "response_time_ms": 460.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 89.8,
+            "threshold": 70,
+            "severity": 0.2828571428571428
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 8.2,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 86.0,
+            "threshold": 75,
+            "severity": 0.14666666666666667
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 460.3,
+            "threshold": 300,
+            "severity": 0.5343333333333333
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "4": {
+        "metrics": {
+          "cpu_usage": 86.8,
+          "error_rate": 7.7,
+          "memory_usage": 83.5,
+          "response_time_ms": 440.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 86.8,
+            "threshold": 70,
+            "severity": 0.23999999999999996
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 7.7,
+            "threshold": 4,
+            "severity": 0.925
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 83.5,
+            "threshold": 75,
+            "severity": 0.11333333333333333
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 440.3,
+            "threshold": 300,
+            "severity": 0.46766666666666673
+          }
+        ],
+        "highest_severity": 0.925
+      },
+      "8": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "12": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "24": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      }
+    },
+    "first_anomaly_in": 1,
+    "predicted_anomalies": [
+      {
+        "metric": "error_rate",
+        "predicted": 8.45,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 1,
+        "timestamp": "2025-04-21T19:45:48.576635"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 470.3,
+        "threshold": 300,
+        "severity": 0.5676666666666667,
+        "hours": 1,
+        "timestamp": "2025-04-21T19:45:48.576635"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 8.2,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 2,
+        "timestamp": "2025-04-21T20:45:48.576635"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 460.3,
+        "threshold": 300,
+        "severity": 0.5343333333333333,
+        "hours": 2,
+        "timestamp": "2025-04-21T20:45:48.576635"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 7.7,
+        "threshold": 4,
+        "severity": 0.925,
+        "hours": 4,
+        "timestamp": "2025-04-21T22:45:48.576635"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 440.3,
+        "threshold": 300,
+        "severity": 0.46766666666666673,
+        "hours": 4,
+        "timestamp": "2025-04-21T22:45:48.576635"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 8,
+        "timestamp": "2025-04-22T02:45:48.576635"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 8,
+        "timestamp": "2025-04-22T02:45:48.576635"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 12,
+        "timestamp": "2025-04-22T06:45:48.576635"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 12,
+        "timestamp": "2025-04-22T06:45:48.576635"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 24,
+        "timestamp": "2025-04-22T18:45:48.576635"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 24,
+        "timestamp": "2025-04-22T18:45:48.576635"
+      }
+    ],
+    "confidence": 0.77,
+    "probability": 0.9,
+    "influential_metrics": {
+      "error_rate": 10,
+      "response_time_ms": 500
+    },
+    "prediction_horizon": 1
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-21T18:46:45.515460",
+    "timeline": {
+      "1": {
+        "metrics": {
+          "cpu_usage": 91.3,
+          "error_rate": 8.45,
+          "memory_usage": 87.25,
+          "response_time_ms": 470.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 91.3,
+            "threshold": 70,
+            "severity": 0.30428571428571427
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 8.45,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 87.25,
+            "threshold": 75,
+            "severity": 0.16333333333333333
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 470.3,
+            "threshold": 300,
+            "severity": 0.5676666666666667
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "2": {
+        "metrics": {
+          "cpu_usage": 89.8,
+          "error_rate": 8.2,
+          "memory_usage": 86.0,
+          "response_time_ms": 460.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 89.8,
+            "threshold": 70,
+            "severity": 0.2828571428571428
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 8.2,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 86.0,
+            "threshold": 75,
+            "severity": 0.14666666666666667
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 460.3,
+            "threshold": 300,
+            "severity": 0.5343333333333333
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "4": {
+        "metrics": {
+          "cpu_usage": 86.8,
+          "error_rate": 7.7,
+          "memory_usage": 83.5,
+          "response_time_ms": 440.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 86.8,
+            "threshold": 70,
+            "severity": 0.23999999999999996
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 7.7,
+            "threshold": 4,
+            "severity": 0.925
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 83.5,
+            "threshold": 75,
+            "severity": 0.11333333333333333
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 440.3,
+            "threshold": 300,
+            "severity": 0.46766666666666673
+          }
+        ],
+        "highest_severity": 0.925
+      },
+      "8": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "12": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "24": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      }
+    },
+    "first_anomaly_in": 1,
+    "predicted_anomalies": [
+      {
+        "metric": "error_rate",
+        "predicted": 8.45,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 1,
+        "timestamp": "2025-04-21T19:46:45.534118"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 470.3,
+        "threshold": 300,
+        "severity": 0.5676666666666667,
+        "hours": 1,
+        "timestamp": "2025-04-21T19:46:45.534118"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 8.2,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 2,
+        "timestamp": "2025-04-21T20:46:45.534118"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 460.3,
+        "threshold": 300,
+        "severity": 0.5343333333333333,
+        "hours": 2,
+        "timestamp": "2025-04-21T20:46:45.534118"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 7.7,
+        "threshold": 4,
+        "severity": 0.925,
+        "hours": 4,
+        "timestamp": "2025-04-21T22:46:45.534118"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 440.3,
+        "threshold": 300,
+        "severity": 0.46766666666666673,
+        "hours": 4,
+        "timestamp": "2025-04-21T22:46:45.534118"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 8,
+        "timestamp": "2025-04-22T02:46:45.534118"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 8,
+        "timestamp": "2025-04-22T02:46:45.534118"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 12,
+        "timestamp": "2025-04-22T06:46:45.534118"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 12,
+        "timestamp": "2025-04-22T06:46:45.534118"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 24,
+        "timestamp": "2025-04-22T18:46:45.534118"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 24,
+        "timestamp": "2025-04-22T18:46:45.534118"
+      }
+    ],
+    "confidence": 0.77,
+    "probability": 0.9,
+    "influential_metrics": {
+      "error_rate": 10,
+      "response_time_ms": 500
+    },
+    "prediction_horizon": 1
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-21T18:46:48.590720",
+    "timeline": {
+      "1": {
+        "metrics": {
+          "cpu_usage": 91.3,
+          "error_rate": 8.45,
+          "memory_usage": 87.25,
+          "response_time_ms": 470.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 91.3,
+            "threshold": 70,
+            "severity": 0.30428571428571427
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 8.45,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 87.25,
+            "threshold": 75,
+            "severity": 0.16333333333333333
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 470.3,
+            "threshold": 300,
+            "severity": 0.5676666666666667
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "2": {
+        "metrics": {
+          "cpu_usage": 89.8,
+          "error_rate": 8.2,
+          "memory_usage": 86.0,
+          "response_time_ms": 460.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 89.8,
+            "threshold": 70,
+            "severity": 0.2828571428571428
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 8.2,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 86.0,
+            "threshold": 75,
+            "severity": 0.14666666666666667
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 460.3,
+            "threshold": 300,
+            "severity": 0.5343333333333333
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "4": {
+        "metrics": {
+          "cpu_usage": 86.8,
+          "error_rate": 7.7,
+          "memory_usage": 83.5,
+          "response_time_ms": 440.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 86.8,
+            "threshold": 70,
+            "severity": 0.23999999999999996
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 7.7,
+            "threshold": 4,
+            "severity": 0.925
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 83.5,
+            "threshold": 75,
+            "severity": 0.11333333333333333
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 440.3,
+            "threshold": 300,
+            "severity": 0.46766666666666673
+          }
+        ],
+        "highest_severity": 0.925
+      },
+      "8": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "12": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "24": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      }
+    },
+    "first_anomaly_in": 1,
+    "predicted_anomalies": [
+      {
+        "metric": "error_rate",
+        "predicted": 8.45,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 1,
+        "timestamp": "2025-04-21T19:46:48.598719"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 470.3,
+        "threshold": 300,
+        "severity": 0.5676666666666667,
+        "hours": 1,
+        "timestamp": "2025-04-21T19:46:48.598719"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 8.2,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 2,
+        "timestamp": "2025-04-21T20:46:48.598719"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 460.3,
+        "threshold": 300,
+        "severity": 0.5343333333333333,
+        "hours": 2,
+        "timestamp": "2025-04-21T20:46:48.598719"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 7.7,
+        "threshold": 4,
+        "severity": 0.925,
+        "hours": 4,
+        "timestamp": "2025-04-21T22:46:48.598719"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 440.3,
+        "threshold": 300,
+        "severity": 0.46766666666666673,
+        "hours": 4,
+        "timestamp": "2025-04-21T22:46:48.598719"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 8,
+        "timestamp": "2025-04-22T02:46:48.598719"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 8,
+        "timestamp": "2025-04-22T02:46:48.598719"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 12,
+        "timestamp": "2025-04-22T06:46:48.598719"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 12,
+        "timestamp": "2025-04-22T06:46:48.598719"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 24,
+        "timestamp": "2025-04-22T18:46:48.598719"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 24,
+        "timestamp": "2025-04-22T18:46:48.598719"
+      }
+    ],
+    "confidence": 0.77,
+    "probability": 0.9,
+    "influential_metrics": {
+      "error_rate": 10,
+      "response_time_ms": 500
+    },
+    "prediction_horizon": 1
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-21T18:47:45.585329",
+    "timeline": {
+      "1": {
+        "metrics": {
+          "cpu_usage": 91.3,
+          "error_rate": 8.45,
+          "memory_usage": 87.25,
+          "response_time_ms": 470.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 91.3,
+            "threshold": 70,
+            "severity": 0.30428571428571427
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 8.45,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 87.25,
+            "threshold": 75,
+            "severity": 0.16333333333333333
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 470.3,
+            "threshold": 300,
+            "severity": 0.5676666666666667
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "2": {
+        "metrics": {
+          "cpu_usage": 89.8,
+          "error_rate": 8.2,
+          "memory_usage": 86.0,
+          "response_time_ms": 460.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 89.8,
+            "threshold": 70,
+            "severity": 0.2828571428571428
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 8.2,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 86.0,
+            "threshold": 75,
+            "severity": 0.14666666666666667
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 460.3,
+            "threshold": 300,
+            "severity": 0.5343333333333333
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "4": {
+        "metrics": {
+          "cpu_usage": 86.8,
+          "error_rate": 7.7,
+          "memory_usage": 83.5,
+          "response_time_ms": 440.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 86.8,
+            "threshold": 70,
+            "severity": 0.23999999999999996
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 7.7,
+            "threshold": 4,
+            "severity": 0.925
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 83.5,
+            "threshold": 75,
+            "severity": 0.11333333333333333
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 440.3,
+            "threshold": 300,
+            "severity": 0.46766666666666673
+          }
+        ],
+        "highest_severity": 0.925
+      },
+      "8": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "12": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "24": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      }
+    },
+    "first_anomaly_in": 1,
+    "predicted_anomalies": [
+      {
+        "metric": "error_rate",
+        "predicted": 8.45,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 1,
+        "timestamp": "2025-04-21T19:47:45.590696"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 470.3,
+        "threshold": 300,
+        "severity": 0.5676666666666667,
+        "hours": 1,
+        "timestamp": "2025-04-21T19:47:45.590696"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 8.2,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 2,
+        "timestamp": "2025-04-21T20:47:45.590696"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 460.3,
+        "threshold": 300,
+        "severity": 0.5343333333333333,
+        "hours": 2,
+        "timestamp": "2025-04-21T20:47:45.590696"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 7.7,
+        "threshold": 4,
+        "severity": 0.925,
+        "hours": 4,
+        "timestamp": "2025-04-21T22:47:45.590696"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 440.3,
+        "threshold": 300,
+        "severity": 0.46766666666666673,
+        "hours": 4,
+        "timestamp": "2025-04-21T22:47:45.590696"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 8,
+        "timestamp": "2025-04-22T02:47:45.590696"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 8,
+        "timestamp": "2025-04-22T02:47:45.590696"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 12,
+        "timestamp": "2025-04-22T06:47:45.590696"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 12,
+        "timestamp": "2025-04-22T06:47:45.590696"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 24,
+        "timestamp": "2025-04-22T18:47:45.590696"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 24,
+        "timestamp": "2025-04-22T18:47:45.590696"
+      }
+    ],
+    "confidence": 0.77,
+    "probability": 0.9,
+    "influential_metrics": {
+      "error_rate": 10,
+      "response_time_ms": 500
+    },
+    "prediction_horizon": 1
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-21T18:47:48.645273",
+    "timeline": {
+      "1": {
+        "metrics": {
+          "cpu_usage": 91.3,
+          "error_rate": 8.45,
+          "memory_usage": 87.25,
+          "response_time_ms": 470.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 91.3,
+            "threshold": 70,
+            "severity": 0.30428571428571427
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 8.45,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 87.25,
+            "threshold": 75,
+            "severity": 0.16333333333333333
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 470.3,
+            "threshold": 300,
+            "severity": 0.5676666666666667
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "2": {
+        "metrics": {
+          "cpu_usage": 89.8,
+          "error_rate": 8.2,
+          "memory_usage": 86.0,
+          "response_time_ms": 460.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 89.8,
+            "threshold": 70,
+            "severity": 0.2828571428571428
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 8.2,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 86.0,
+            "threshold": 75,
+            "severity": 0.14666666666666667
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 460.3,
+            "threshold": 300,
+            "severity": 0.5343333333333333
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "4": {
+        "metrics": {
+          "cpu_usage": 86.8,
+          "error_rate": 7.7,
+          "memory_usage": 83.5,
+          "response_time_ms": 440.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 86.8,
+            "threshold": 70,
+            "severity": 0.23999999999999996
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 7.7,
+            "threshold": 4,
+            "severity": 0.925
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 83.5,
+            "threshold": 75,
+            "severity": 0.11333333333333333
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 440.3,
+            "threshold": 300,
+            "severity": 0.46766666666666673
+          }
+        ],
+        "highest_severity": 0.925
+      },
+      "8": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "12": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "24": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      }
+    },
+    "first_anomaly_in": 1,
+    "predicted_anomalies": [
+      {
+        "metric": "error_rate",
+        "predicted": 8.45,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 1,
+        "timestamp": "2025-04-21T19:47:48.648492"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 470.3,
+        "threshold": 300,
+        "severity": 0.5676666666666667,
+        "hours": 1,
+        "timestamp": "2025-04-21T19:47:48.648492"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 8.2,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 2,
+        "timestamp": "2025-04-21T20:47:48.648492"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 460.3,
+        "threshold": 300,
+        "severity": 0.5343333333333333,
+        "hours": 2,
+        "timestamp": "2025-04-21T20:47:48.648492"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 7.7,
+        "threshold": 4,
+        "severity": 0.925,
+        "hours": 4,
+        "timestamp": "2025-04-21T22:47:48.648492"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 440.3,
+        "threshold": 300,
+        "severity": 0.46766666666666673,
+        "hours": 4,
+        "timestamp": "2025-04-21T22:47:48.648492"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 8,
+        "timestamp": "2025-04-22T02:47:48.648492"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 8,
+        "timestamp": "2025-04-22T02:47:48.648492"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 12,
+        "timestamp": "2025-04-22T06:47:48.648492"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 12,
+        "timestamp": "2025-04-22T06:47:48.648492"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 24,
+        "timestamp": "2025-04-22T18:47:48.648492"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 24,
+        "timestamp": "2025-04-22T18:47:48.648492"
+      }
+    ],
+    "confidence": 0.77,
+    "probability": 0.9,
+    "influential_metrics": {
+      "error_rate": 10,
+      "response_time_ms": 500
+    },
+    "prediction_horizon": 1
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-21T18:50:49.784252",
+    "timeline": {
+      "1": {
+        "metrics": {
+          "cpu_usage": 66.5,
+          "error_rate": 3.25,
+          "memory_usage": 66.75,
+          "response_time_ms": 270.0
+        },
+        "anomalies": [],
+        "highest_severity": 0.0
+      },
+      "2": {
+        "metrics": {
+          "cpu_usage": 65.0,
+          "error_rate": 3.0,
+          "memory_usage": 65.5,
+          "response_time_ms": 260.0
+        },
+        "anomalies": [],
+        "highest_severity": 0.0
+      },
+      "4": {
+        "metrics": {
+          "cpu_usage": 62.0,
+          "error_rate": 2.5,
+          "memory_usage": 63.0,
+          "response_time_ms": 240.0
+        },
+        "anomalies": [],
+        "highest_severity": 0.0
+      },
+      "8": {
+        "metrics": {
+          "cpu_usage": 70.06,
+          "error_rate": 4.92,
+          "memory_usage": 70.52,
+          "response_time_ms": 329.73
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 70.06,
+            "threshold": 70,
+            "severity": 0.1
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 4.92,
+            "threshold": 4,
+            "severity": 0.22999999999999998
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 329.73,
+            "threshold": 300,
+            "severity": 0.1
+          }
+        ],
+        "highest_severity": 0.22999999999999998
+      },
+      "12": {
+        "metrics": {
+          "cpu_usage": 82.12,
+          "error_rate": 7.33,
+          "memory_usage": 78.15,
+          "response_time_ms": 419.47
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 82.12,
+            "threshold": 70,
+            "severity": 0.1731428571428572
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 7.33,
+            "threshold": 4,
+            "severity": 0.8325
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 78.15,
+            "threshold": 75,
+            "severity": 0.1
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 419.47,
+            "threshold": 300,
+            "severity": 0.39823333333333344
+          }
+        ],
+        "highest_severity": 0.8325
+      },
+      "24": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      }
+    },
+    "first_anomaly_in": 12,
+    "predicted_anomalies": [
+      {
+        "metric": "error_rate",
+        "predicted": 7.33,
+        "threshold": 4,
+        "severity": 0.8325,
+        "hours": 12,
+        "timestamp": "2025-04-22T06:50:49.835774"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 24,
+        "timestamp": "2025-04-22T18:50:49.835774"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 24,
+        "timestamp": "2025-04-22T18:50:49.835774"
+      }
+    ],
+    "confidence": 0.77,
+    "probability": 0.9,
+    "influential_metrics": {
+      "error_rate": 10,
+      "response_time_ms": 500
+    },
+    "prediction_horizon": 12
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-21T18:50:52.233405",
+    "timeline": {
+      "1": {
+        "metrics": {
+          "cpu_usage": 66.5,
+          "error_rate": 3.25,
+          "memory_usage": 66.75,
+          "response_time_ms": 270.0
+        },
+        "anomalies": [],
+        "highest_severity": 0.0
+      },
+      "2": {
+        "metrics": {
+          "cpu_usage": 65.0,
+          "error_rate": 3.0,
+          "memory_usage": 65.5,
+          "response_time_ms": 260.0
+        },
+        "anomalies": [],
+        "highest_severity": 0.0
+      },
+      "4": {
+        "metrics": {
+          "cpu_usage": 62.0,
+          "error_rate": 2.5,
+          "memory_usage": 63.0,
+          "response_time_ms": 240.0
+        },
+        "anomalies": [],
+        "highest_severity": 0.0
+      },
+      "8": {
+        "metrics": {
+          "cpu_usage": 70.06,
+          "error_rate": 4.92,
+          "memory_usage": 70.52,
+          "response_time_ms": 329.73
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 70.06,
+            "threshold": 70,
+            "severity": 0.1
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 4.92,
+            "threshold": 4,
+            "severity": 0.22999999999999998
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 329.73,
+            "threshold": 300,
+            "severity": 0.1
+          }
+        ],
+        "highest_severity": 0.22999999999999998
+      },
+      "12": {
+        "metrics": {
+          "cpu_usage": 82.12,
+          "error_rate": 7.33,
+          "memory_usage": 78.15,
+          "response_time_ms": 419.47
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 82.12,
+            "threshold": 70,
+            "severity": 0.1731428571428572
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 7.33,
+            "threshold": 4,
+            "severity": 0.8325
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 78.15,
+            "threshold": 75,
+            "severity": 0.1
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 419.47,
+            "threshold": 300,
+            "severity": 0.39823333333333344
+          }
+        ],
+        "highest_severity": 0.8325
+      },
+      "24": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      }
+    },
+    "first_anomaly_in": 12,
+    "predicted_anomalies": [
+      {
+        "metric": "error_rate",
+        "predicted": 7.33,
+        "threshold": 4,
+        "severity": 0.8325,
+        "hours": 12,
+        "timestamp": "2025-04-22T06:50:52.270772"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 24,
+        "timestamp": "2025-04-22T18:50:52.270772"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 24,
+        "timestamp": "2025-04-22T18:50:52.270772"
+      }
+    ],
+    "confidence": 0.77,
+    "probability": 0.9,
+    "influential_metrics": {
+      "error_rate": 10,
+      "response_time_ms": 500
+    },
+    "prediction_horizon": 12
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-21T18:51:56.818658",
+    "timeline": {
+      "1": {
+        "metrics": {
+          "cpu_usage": 91.3,
+          "error_rate": 8.45,
+          "memory_usage": 87.25,
+          "response_time_ms": 470.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 91.3,
+            "threshold": 70,
+            "severity": 0.30428571428571427
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 8.45,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 87.25,
+            "threshold": 75,
+            "severity": 0.16333333333333333
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 470.3,
+            "threshold": 300,
+            "severity": 0.5676666666666667
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "2": {
+        "metrics": {
+          "cpu_usage": 89.8,
+          "error_rate": 8.2,
+          "memory_usage": 86.0,
+          "response_time_ms": 460.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 89.8,
+            "threshold": 70,
+            "severity": 0.2828571428571428
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 8.2,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 86.0,
+            "threshold": 75,
+            "severity": 0.14666666666666667
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 460.3,
+            "threshold": 300,
+            "severity": 0.5343333333333333
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "4": {
+        "metrics": {
+          "cpu_usage": 86.8,
+          "error_rate": 7.7,
+          "memory_usage": 83.5,
+          "response_time_ms": 440.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 86.8,
+            "threshold": 70,
+            "severity": 0.23999999999999996
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 7.7,
+            "threshold": 4,
+            "severity": 0.925
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 83.5,
+            "threshold": 75,
+            "severity": 0.11333333333333333
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 440.3,
+            "threshold": 300,
+            "severity": 0.46766666666666673
+          }
+        ],
+        "highest_severity": 0.925
+      },
+      "8": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "12": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "24": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      }
+    },
+    "first_anomaly_in": 1,
+    "predicted_anomalies": [
+      {
+        "metric": "error_rate",
+        "predicted": 8.45,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 1,
+        "timestamp": "2025-04-21T19:51:56.861533"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 470.3,
+        "threshold": 300,
+        "severity": 0.5676666666666667,
+        "hours": 1,
+        "timestamp": "2025-04-21T19:51:56.861533"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 8.2,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 2,
+        "timestamp": "2025-04-21T20:51:56.861533"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 460.3,
+        "threshold": 300,
+        "severity": 0.5343333333333333,
+        "hours": 2,
+        "timestamp": "2025-04-21T20:51:56.861533"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 7.7,
+        "threshold": 4,
+        "severity": 0.925,
+        "hours": 4,
+        "timestamp": "2025-04-21T22:51:56.861533"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 440.3,
+        "threshold": 300,
+        "severity": 0.46766666666666673,
+        "hours": 4,
+        "timestamp": "2025-04-21T22:51:56.861533"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 8,
+        "timestamp": "2025-04-22T02:51:56.861533"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 8,
+        "timestamp": "2025-04-22T02:51:56.861533"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 12,
+        "timestamp": "2025-04-22T06:51:56.861533"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 12,
+        "timestamp": "2025-04-22T06:51:56.861533"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 24,
+        "timestamp": "2025-04-22T18:51:56.861533"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 24,
+        "timestamp": "2025-04-22T18:51:56.861533"
+      }
+    ],
+    "confidence": 0.76,
+    "probability": 0.89,
+    "influential_metrics": {
+      "error_rate": 10,
+      "response_time_ms": 500
+    },
+    "prediction_horizon": 1
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-21T18:51:59.680969",
+    "timeline": {
+      "1": {
+        "metrics": {
+          "cpu_usage": 91.3,
+          "error_rate": 8.45,
+          "memory_usage": 87.25,
+          "response_time_ms": 470.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 91.3,
+            "threshold": 70,
+            "severity": 0.30428571428571427
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 8.45,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 87.25,
+            "threshold": 75,
+            "severity": 0.16333333333333333
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 470.3,
+            "threshold": 300,
+            "severity": 0.5676666666666667
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "2": {
+        "metrics": {
+          "cpu_usage": 89.8,
+          "error_rate": 8.2,
+          "memory_usage": 86.0,
+          "response_time_ms": 460.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 89.8,
+            "threshold": 70,
+            "severity": 0.2828571428571428
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 8.2,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 86.0,
+            "threshold": 75,
+            "severity": 0.14666666666666667
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 460.3,
+            "threshold": 300,
+            "severity": 0.5343333333333333
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "4": {
+        "metrics": {
+          "cpu_usage": 86.8,
+          "error_rate": 7.7,
+          "memory_usage": 83.5,
+          "response_time_ms": 440.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 86.8,
+            "threshold": 70,
+            "severity": 0.23999999999999996
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 7.7,
+            "threshold": 4,
+            "severity": 0.925
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 83.5,
+            "threshold": 75,
+            "severity": 0.11333333333333333
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 440.3,
+            "threshold": 300,
+            "severity": 0.46766666666666673
+          }
+        ],
+        "highest_severity": 0.925
+      },
+      "8": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "12": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "24": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      }
+    },
+    "first_anomaly_in": 1,
+    "predicted_anomalies": [
+      {
+        "metric": "error_rate",
+        "predicted": 8.45,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 1,
+        "timestamp": "2025-04-21T19:51:59.730425"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 470.3,
+        "threshold": 300,
+        "severity": 0.5676666666666667,
+        "hours": 1,
+        "timestamp": "2025-04-21T19:51:59.730425"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 8.2,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 2,
+        "timestamp": "2025-04-21T20:51:59.730425"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 460.3,
+        "threshold": 300,
+        "severity": 0.5343333333333333,
+        "hours": 2,
+        "timestamp": "2025-04-21T20:51:59.730425"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 7.7,
+        "threshold": 4,
+        "severity": 0.925,
+        "hours": 4,
+        "timestamp": "2025-04-21T22:51:59.730425"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 440.3,
+        "threshold": 300,
+        "severity": 0.46766666666666673,
+        "hours": 4,
+        "timestamp": "2025-04-21T22:51:59.730425"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 8,
+        "timestamp": "2025-04-22T02:51:59.730425"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 8,
+        "timestamp": "2025-04-22T02:51:59.730425"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 12,
+        "timestamp": "2025-04-22T06:51:59.730425"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 12,
+        "timestamp": "2025-04-22T06:51:59.730425"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 24,
+        "timestamp": "2025-04-22T18:51:59.730425"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 24,
+        "timestamp": "2025-04-22T18:51:59.730425"
+      }
+    ],
+    "confidence": 0.76,
+    "probability": 0.89,
+    "influential_metrics": {
+      "error_rate": 10,
+      "response_time_ms": 500
+    },
+    "prediction_horizon": 1
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-21T18:52:52.546745",
+    "timeline": {
+      "1": {
+        "metrics": {
+          "cpu_usage": 91.3,
+          "error_rate": 8.45,
+          "memory_usage": 87.25,
+          "response_time_ms": 470.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 91.3,
+            "threshold": 70,
+            "severity": 0.30428571428571427
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 8.45,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 87.25,
+            "threshold": 75,
+            "severity": 0.16333333333333333
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 470.3,
+            "threshold": 300,
+            "severity": 0.5676666666666667
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "2": {
+        "metrics": {
+          "cpu_usage": 89.8,
+          "error_rate": 8.2,
+          "memory_usage": 86.0,
+          "response_time_ms": 460.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 89.8,
+            "threshold": 70,
+            "severity": 0.2828571428571428
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 8.2,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 86.0,
+            "threshold": 75,
+            "severity": 0.14666666666666667
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 460.3,
+            "threshold": 300,
+            "severity": 0.5343333333333333
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "4": {
+        "metrics": {
+          "cpu_usage": 86.8,
+          "error_rate": 7.7,
+          "memory_usage": 83.5,
+          "response_time_ms": 440.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 86.8,
+            "threshold": 70,
+            "severity": 0.23999999999999996
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 7.7,
+            "threshold": 4,
+            "severity": 0.925
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 83.5,
+            "threshold": 75,
+            "severity": 0.11333333333333333
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 440.3,
+            "threshold": 300,
+            "severity": 0.46766666666666673
+          }
+        ],
+        "highest_severity": 0.925
+      },
+      "8": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "12": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "24": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      }
+    },
+    "first_anomaly_in": 1,
+    "predicted_anomalies": [
+      {
+        "metric": "error_rate",
+        "predicted": 8.45,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 1,
+        "timestamp": "2025-04-21T19:52:52.593546"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 470.3,
+        "threshold": 300,
+        "severity": 0.5676666666666667,
+        "hours": 1,
+        "timestamp": "2025-04-21T19:52:52.593546"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 8.2,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 2,
+        "timestamp": "2025-04-21T20:52:52.593546"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 460.3,
+        "threshold": 300,
+        "severity": 0.5343333333333333,
+        "hours": 2,
+        "timestamp": "2025-04-21T20:52:52.593546"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 7.7,
+        "threshold": 4,
+        "severity": 0.925,
+        "hours": 4,
+        "timestamp": "2025-04-21T22:52:52.593546"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 440.3,
+        "threshold": 300,
+        "severity": 0.46766666666666673,
+        "hours": 4,
+        "timestamp": "2025-04-21T22:52:52.593546"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 8,
+        "timestamp": "2025-04-22T02:52:52.593546"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 8,
+        "timestamp": "2025-04-22T02:52:52.593546"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 12,
+        "timestamp": "2025-04-22T06:52:52.593546"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 12,
+        "timestamp": "2025-04-22T06:52:52.593546"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 24,
+        "timestamp": "2025-04-22T18:52:52.593546"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 24,
+        "timestamp": "2025-04-22T18:52:52.593546"
+      }
+    ],
+    "confidence": 0.76,
+    "probability": 0.89,
+    "influential_metrics": {
+      "error_rate": 10,
+      "response_time_ms": 500
+    },
+    "prediction_horizon": 1
+  },
+  {
+    "service_id": "app-server",
+    "timestamp": "2025-04-21T18:52:56.097142",
+    "timeline": {
+      "1": {
+        "metrics": {
+          "cpu_usage": 91.3,
+          "error_rate": 8.45,
+          "memory_usage": 87.25,
+          "response_time_ms": 470.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 91.3,
+            "threshold": 70,
+            "severity": 0.30428571428571427
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 8.45,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 87.25,
+            "threshold": 75,
+            "severity": 0.16333333333333333
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 470.3,
+            "threshold": 300,
+            "severity": 0.5676666666666667
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "2": {
+        "metrics": {
+          "cpu_usage": 89.8,
+          "error_rate": 8.2,
+          "memory_usage": 86.0,
+          "response_time_ms": 460.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 89.8,
+            "threshold": 70,
+            "severity": 0.2828571428571428
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 8.2,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 86.0,
+            "threshold": 75,
+            "severity": 0.14666666666666667
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 460.3,
+            "threshold": 300,
+            "severity": 0.5343333333333333
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "4": {
+        "metrics": {
+          "cpu_usage": 86.8,
+          "error_rate": 7.7,
+          "memory_usage": 83.5,
+          "response_time_ms": 440.3
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 86.8,
+            "threshold": 70,
+            "severity": 0.23999999999999996
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 7.7,
+            "threshold": 4,
+            "severity": 0.925
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 83.5,
+            "threshold": 75,
+            "severity": 0.11333333333333333
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 440.3,
+            "threshold": 300,
+            "severity": 0.46766666666666673
+          }
+        ],
+        "highest_severity": 0.925
+      },
+      "8": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "12": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      },
+      "24": {
+        "metrics": {
+          "cpu_usage": 95,
+          "error_rate": 10,
+          "memory_usage": 95,
+          "response_time_ms": 500
+        },
+        "anomalies": [
+          {
+            "metric": "cpu_usage",
+            "predicted": 95,
+            "threshold": 70,
+            "severity": 0.35714285714285715
+          },
+          {
+            "metric": "error_rate",
+            "predicted": 10,
+            "threshold": 4,
+            "severity": 0.95
+          },
+          {
+            "metric": "memory_usage",
+            "predicted": 95,
+            "threshold": 75,
+            "severity": 0.26666666666666666
+          },
+          {
+            "metric": "response_time_ms",
+            "predicted": 500,
+            "threshold": 300,
+            "severity": 0.6666666666666666
+          }
+        ],
+        "highest_severity": 0.95
+      }
+    },
+    "first_anomaly_in": 1,
+    "predicted_anomalies": [
+      {
+        "metric": "error_rate",
+        "predicted": 8.45,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 1,
+        "timestamp": "2025-04-21T19:52:56.175704"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 470.3,
+        "threshold": 300,
+        "severity": 0.5676666666666667,
+        "hours": 1,
+        "timestamp": "2025-04-21T19:52:56.175704"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 8.2,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 2,
+        "timestamp": "2025-04-21T20:52:56.175704"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 460.3,
+        "threshold": 300,
+        "severity": 0.5343333333333333,
+        "hours": 2,
+        "timestamp": "2025-04-21T20:52:56.175704"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 7.7,
+        "threshold": 4,
+        "severity": 0.925,
+        "hours": 4,
+        "timestamp": "2025-04-21T22:52:56.175704"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 440.3,
+        "threshold": 300,
+        "severity": 0.46766666666666673,
+        "hours": 4,
+        "timestamp": "2025-04-21T22:52:56.175704"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 8,
+        "timestamp": "2025-04-22T02:52:56.175704"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 8,
+        "timestamp": "2025-04-22T02:52:56.175704"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 12,
+        "timestamp": "2025-04-22T06:52:56.175704"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 12,
+        "timestamp": "2025-04-22T06:52:56.175704"
+      },
+      {
+        "metric": "error_rate",
+        "predicted": 10,
+        "threshold": 4,
+        "severity": 0.95,
+        "hours": 24,
+        "timestamp": "2025-04-22T18:52:56.175704"
+      },
+      {
+        "metric": "response_time_ms",
+        "predicted": 500,
+        "threshold": 300,
+        "severity": 0.6666666666666666,
+        "hours": 24,
+        "timestamp": "2025-04-22T18:52:56.175704"
+      }
+    ],
+    "confidence": 0.76,
+    "probability": 0.89,
+    "influential_metrics": {
+      "error_rate": 10,
+      "response_time_ms": 500
+    },
+    "prediction_horizon": 1
+  }
+]

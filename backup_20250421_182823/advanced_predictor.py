@@ -22,7 +22,7 @@ logging.basicConfig(
 logger = logging.getLogger('advanced_predictor')
 
 class AdvancedPredictor:
-    """Predictor avanzado mejorado con detección proactiva de anomalías futuras"""
+    """Predictor avanzado con detección proactiva de anomalías futuras"""
     
     def __init__(self, config=None):
         self.config = config or {}
@@ -46,37 +46,7 @@ class AdvancedPredictor:
         # Cargar umbrales para evaluación
         self.thresholds = self.load_thresholds()
         
-        # Límites de crecimiento por hora para evitar predicciones extremas
-        self.growth_limits = {
-            'cpu_usage': 3.0,        # máximo 3% por hora
-            'memory_usage': 2.5,     # máximo 2.5% por hora
-            'response_time_ms': 20,  # máximo 20ms por hora
-            'error_rate': 0.5,       # máximo 0.5 errores por hora
-            'active_connections': 5, # máximo 5 conexiones por hora
-            'query_time_avg': 10     # máximo 10ms por hora
-        }
-        
-        # Valores límite absolutos para las predicciones
-        self.absolute_limits = {
-            'cpu_usage': 95,        # máximo 95%
-            'memory_usage': 95,     # máximo 95%
-            'response_time_ms': 500, # máximo 500ms
-            'error_rate': 10,       # máximo 10 errores
-            'active_connections': 150, # máximo 150 conexiones
-            'query_time_avg': 200   # máximo 200ms
-        }
-        # Lista de campos calculados a excluir del modelado porque son resultados, no métricas
-        self.excluded_metrics = [
-            'first_anomaly_in',     # Hora de primera anomalía calculada
-            'prediction_horizon',    # Horizonte de predicción
-            'probability',           # Probabilidad calculada
-            'confidence',            # Confianza calculada
-            'predicted_anomalies'    # Lista de anomalías
-        ]
-        
-
-        
-        logger.info("Predictor avanzado mejorado inicializado - Detección proactiva activada")
+        logger.info("Predictor avanzado inicializado - Detección proactiva activada")
     
     def load_thresholds(self):
         """Carga umbrales desde archivo para evaluación de anomalías"""
@@ -89,22 +59,8 @@ class AdvancedPredictor:
                 logger.info(f"Umbrales cargados: {len(thresholds)} servicios")
                 return thresholds
             else:
-                logger.warning("Archivo de umbrales no encontrado, creando valores por defecto")
-                default_thresholds = {
-                    "default": {
-                        "memory_usage": 75,
-                        "cpu_usage": 75,
-                        "response_time_ms": 300,
-                        "error_rate": 5,
-                        "active_connections": 90,
-                        "query_time_avg": 80,
-                        "gc_collection_time": 400
-                    }
-                }
-                # Guardar umbrales por defecto
-                with open(threshold_file, 'w', encoding='utf-8') as f:
-                    json.dump(default_thresholds, f, indent=2)
-                return default_thresholds
+                logger.warning("Archivo de umbrales no encontrado")
+                return {"default": {}}
         except Exception as e:
             logger.error(f"Error al cargar umbrales: {str(e)}")
             return {"default": {}}
@@ -196,36 +152,19 @@ class AdvancedPredictor:
             X = np.array(X)
             y = np.array(y)
             
-            # MEJORA: Detectar y manejar outliers usando límites de percentiles
-            # Esto evita que valores extremos afecten al modelo
-            if len(y) > 10:
-                q1 = np.percentile(y, 10)
-                q3 = np.percentile(y, 90)
-                iqr = q3 - q1
-                lower_bound = q1 - 1.5 * iqr
-                upper_bound = q3 + 1.5 * iqr
-                
-                # Filtrar puntos dentro del rango aceptable
-                valid_indices = np.where((y >= lower_bound) & (y <= upper_bound))[0]
-                
-                if len(valid_indices) >= self.min_history_points:
-                    X = X[valid_indices]
-                    y = y[valid_indices]
-                    logger.info(f"Filtrados {len(data_points) - len(valid_indices)} outliers para {service_id}:{metric}")
-            
-            # MEJORA: Usar modelos más estables según la cantidad de datos
+            # Si tenemos pocos datos, usar modelo simple
             if len(X) < 10:
-                # Crear pipeline con escalado y regresión lineal simple para pocos datos
+                # Crear pipeline con escalado y regresión lineal
                 model = Pipeline([
                     ('scaler', StandardScaler()),
-                    ('regressor', Ridge(alpha=1.0))  # Alpha más alto para regularización más fuerte
+                    ('regressor', Ridge(alpha=0.5))
                 ])
             else:
-                # Crear pipeline con escalado, características polinómicas limitadas y regresión regularizada
+                # Crear pipeline con escalado, características polinómicas y regresión
                 model = Pipeline([
                     ('scaler', StandardScaler()),
-                    ('poly', PolynomialFeatures(degree=2, include_bias=False)),  # Include_bias=False para evitar multicolinealidad
-                    ('regressor', Ridge(alpha=0.8))  # Buena regularización para evitar overfitting
+                    ('poly', PolynomialFeatures(degree=2)),
+                    ('regressor', Ridge(alpha=0.5))
                 ])
             
             # Entrenar modelo
@@ -234,28 +173,6 @@ class AdvancedPredictor:
             # Calcular métricas de ajuste
             y_pred = model.predict(X)
             mse = np.mean((y - y_pred) ** 2)
-            
-            # MEJORA: Validación cruzada simple si hay suficientes datos
-            # Esto da una idea más real del rendimiento esperado
-            if len(X) >= 15:
-                try:
-                    # Usar una pequeña validación para verificar estabilidad
-                    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-                    model.fit(X_train, y_train)
-                    test_mse = np.mean((y_test - model.predict(X_test)) ** 2)
-                    
-                    # Si el error en test es mucho mayor, el modelo es inestable, usamos uno más simple
-                    if test_mse > 2 * mse:
-                        logger.warning(f"Modelo inestable para {service_id}:{metric}, usando modelo más simple")
-                        model = Pipeline([
-                            ('scaler', StandardScaler()),
-                            ('regressor', Ridge(alpha=1.5))  # Modelo muy simple y estable
-                        ])
-                        model.fit(X, y)  # Re-entrenar con todos los datos
-                        y_pred = model.predict(X)
-                        mse = np.mean((y - y_pred) ** 2)
-                except Exception as e:
-                    logger.error(f"Error en validación cruzada para {service_id}:{metric}: {str(e)}")
             
             # Guardar modelo y metadata
             if service_id not in self.models:
@@ -266,9 +183,7 @@ class AdvancedPredictor:
                 'base_time': base_time,
                 'last_trained': datetime.now().isoformat(),
                 'mse': mse,
-                'data_points': len(y),
-                'current_value': y[-1] if len(y) > 0 else None,  # MEJORA: Guardar valor actual
-                'trend': self._calculate_trend(y)  # MEJORA: Calcular tendencia
+                'data_points': len(y)
             }
             
             logger.info(f"Modelo avanzado entrenado para {service_id}:{metric} (MSE: {mse:.3f}, puntos: {len(y)})")
@@ -280,34 +195,6 @@ class AdvancedPredictor:
             logger.error(f"Error al entrenar modelo avanzado para {service_id}:{metric}: {str(e)}")
             return None
     
-    def _calculate_trend(self, values):
-        """Calcula la tendencia de los valores (positiva, negativa o estable)"""
-        if len(values) < 5:
-            return 0  # No hay suficientes datos para calcular tendencia
-        
-        # Usar los últimos 5 puntos para calcular tendencia
-        recent = values[-5:]
-        
-        # Ajuste lineal simple
-        X = np.array(range(len(recent))).reshape(-1, 1)
-        y = np.array(recent)
-        
-        try:
-            model = LinearRegression()
-            model.fit(X, y)
-            slope = model.coef_[0]
-            
-            # Normalizar pendiente respecto al valor promedio
-            avg_value = np.mean(y)
-            if avg_value != 0:
-                normalized_slope = slope / avg_value
-            else:
-                normalized_slope = slope
-            
-            return normalized_slope
-        except Exception:
-            return 0
-    
     def predict_point(self, service_id, metric, hours_ahead):
         """Predice un valor futuro específico para una métrica"""
         try:
@@ -317,10 +204,8 @@ class AdvancedPredictor:
             model_data = self.models[service_id][metric]
             model = model_data['model']
             base_time = model_data['base_time']
-            current_value = model_data.get('current_value')
-            trend = model_data.get('trend', 0)
             
-            # MEJORA: Preparar punto futuro para predicción
+            # Preparar punto futuro para predicción
             future_time = datetime.now() + timedelta(hours=hours_ahead)
             
             # Crear características
@@ -330,51 +215,7 @@ class AdvancedPredictor:
             
             # Hacer predicción
             X_future = np.array([[minutes, hour_of_day, day_of_week]])
-            raw_prediction = float(model.predict(X_future)[0])
-            
-            # MEJORA: Aplicar restricciones para predicciones más realistas
-            if current_value is not None:
-                # Obtener límite de crecimiento para esta métrica
-                max_growth_per_hour = self.growth_limits.get(metric, 1.0)
-                
-                # Calcular límites superior e inferior basados en el valor actual
-                # Considerar la tendencia reciente para permitir más flexibilidad en esa dirección
-                if trend > 0:
-                    # Tendencia creciente
-                    upper_limit = current_value + (max_growth_per_hour * hours_ahead * (1 + abs(trend)))
-                    lower_limit = current_value - (max_growth_per_hour * hours_ahead * 0.5)  # Más restrictivo hacia abajo
-                elif trend < 0:
-                    # Tendencia decreciente 
-                    upper_limit = current_value + (max_growth_per_hour * hours_ahead * 0.5)  # Más restrictivo hacia arriba
-                    lower_limit = current_value - (max_growth_per_hour * hours_ahead * (1 + abs(trend)))
-                else:
-                    # Tendencia neutra
-                    upper_limit = current_value + (max_growth_per_hour * hours_ahead)
-                    lower_limit = current_value - (max_growth_per_hour * hours_ahead)
-                
-                # Limitar la predicción según estos límites
-                bounded_prediction = max(lower_limit, min(upper_limit, raw_prediction))
-                
-                # Para horizontes largos, aplicar amortiguación adicional
-                if hours_ahead > 4:
-                    # Calcular factor de amortiguación que aumenta con el horizonte
-                    damping_factor = 4 / hours_ahead
-                    
-                    # Aplicar amortiguación: mezclar predicción con tendencia lineal simple
-                    simple_prediction = current_value + (current_value * trend * hours_ahead)
-                    damped_prediction = (bounded_prediction * damping_factor) + (simple_prediction * (1 - damping_factor))
-                    
-                    # Aplicar límites de nuevo después de amortiguación
-                    predicted_value = max(lower_limit, min(upper_limit, damped_prediction))
-                else:
-                    predicted_value = bounded_prediction
-            else:
-                # Sin valor actual, confiar en la predicción bruta pero limitar cambios extremos
-                predicted_value = raw_prediction
-            
-            # MEJORA: Aplicar límites absolutos para asegurar valores realistas
-            abs_limit = self.absolute_limits.get(metric, float('inf'))
-            predicted_value = min(abs_limit, max(0, predicted_value))
+            predicted_value = float(model.predict(X_future)[0])
             
             # Limitar a valores razonables (no negativos para la mayoría de métricas)
             if metric not in ['hit_rate', 'availability']:
@@ -433,28 +274,12 @@ class AdvancedPredictor:
             if len(timestamps) < self.min_history_points:
                 return result
             
-            # MEJORA: Usar valores actuales de las métricas para mejores predicciones iniciales
-            current_metrics = {}
-            if metrics_history and len(metrics_history) > 0:
-                latest = metrics_history[-1]
-                for key, value in latest.items():
-                    if key not in ['service_id', 'timestamp'] and isinstance(value, (int, float)):
-                        current_metrics[key] = value
-            
             # Entrenar o actualizar modelos para cada métrica
             for metric, values in metrics_data.items():
                 if len(values) >= self.min_history_points:
-                    # Saltar métricas excluidas
-                    if metric in self.excluded_metrics:
-                        continue
-                        
                     if (service_id not in self.models or
                         metric not in self.models[service_id]):
                         self.train_advanced_model(service_id, metric, values, timestamps)
-                    elif metric in current_metrics:
-                        # Actualizar valor actual en el modelo
-                        if service_id in self.models and metric in self.models[service_id]:
-                            self.models[service_id][metric]['current_value'] = current_metrics[metric]
             
             # Obtener umbrales para este servicio
             service_thresholds = self.thresholds.get(service_id, self.thresholds.get('default', {}))
@@ -473,8 +298,6 @@ class AdvancedPredictor:
                         predicted_value = self.predict_point(service_id, metric, hours)
                         
                         if predicted_value is not None:
-                            # Redondear para mejorar legibilidad
-                            predicted_value = round(predicted_value, 2)
                             result['timeline'][str(hours)]['metrics'][metric] = predicted_value
                             
                             # Verificar si excede umbral
@@ -482,7 +305,7 @@ class AdvancedPredictor:
                             if threshold:
                                 # Para hit_rate, valores bajos son anómalos
                                 if metric == 'hit_rate' and predicted_value < threshold:
-                                    severity = min(0.95, max(0.1, (threshold - predicted_value) / threshold))
+                                    severity = min(1.0, (threshold - predicted_value) / threshold)
                                     anomaly = {
                                         'metric': metric,
                                         'predicted': predicted_value,
@@ -495,7 +318,7 @@ class AdvancedPredictor:
                                 
                                 # Para otras métricas, valores altos son anómalos
                                 elif metric != 'hit_rate' and predicted_value > threshold:
-                                    severity = min(0.95, max(0.1, (predicted_value - threshold) / threshold))
+                                    severity = min(1.0, (predicted_value - threshold) / threshold)
                                     anomaly = {
                                         'metric': metric,
                                         'predicted': predicted_value,
@@ -528,35 +351,25 @@ class AdvancedPredictor:
             result['first_anomaly_in'] = first_anomaly_hours
             result['predicted_anomalies'] = predicted_anomalies
             
-            # MEJORA: Calcular confianza basada en cantidad de datos, MSE y consistencia
+            # Calcular confianza basada en cantidad de datos y MSE
             confidence_factors = []
             for metric in metrics_data.keys():
                 if service_id in self.models and metric in self.models[service_id]:
                     model_data = self.models[service_id][metric]
+                    # Más puntos de datos y menor MSE = mayor confianza
+                    data_factor = min(1.0, model_data['data_points'] / 20.0)
                     
-                    # Factor de puntos de datos: más datos = mayor confianza
-                    # Saturar en 30 puntos (0.3 a 1.0)
-                    data_factor = min(1.0, 0.3 + 0.7 * min(1.0, model_data['data_points'] / 30.0))
-                    
-                    # Factor MSE: menor error = mayor confianza
                     # Normalizar MSE a un factor entre 0-1 (menor es mejor)
-                    # Asumimos que un MSE de 100 o más es muy malo (confianza base 0.2)
-                    mse_factor = 0.2 + 0.8 * max(0.0, 1.0 - (model_data['mse'] / 100.0))
+                    # Asumimos que un MSE de 100 o más es muy malo (confianza 0)
+                    mse_factor = max(0.0, 1.0 - (model_data['mse'] / 100.0))
                     
-                    # Combinar factores
-                    metric_confidence = 0.6 * data_factor + 0.4 * mse_factor
+                    metric_confidence = 0.7 * data_factor + 0.3 * mse_factor
                     confidence_factors.append(metric_confidence)
             
             if confidence_factors:
-                result['confidence'] = round(sum(confidence_factors) / len(confidence_factors), 2)
+                result['confidence'] = sum(confidence_factors) / len(confidence_factors)
             else:
-                result['confidence'] = 0.3  # Confianza base si no hay factores
-            
-            # MEJORA: Asegurar que la probabilidad nunca sea NaN
-            if result['predicted_anomalies']:
-                result['probability'] = round(max([a['severity'] for a in result['predicted_anomalies']]), 2)
-            else:
-                result['probability'] = 0.0
+                result['confidence'] = 0.0
             
             # Guardar en historial
             if service_id not in self.prediction_history:
@@ -609,7 +422,7 @@ class AdvancedPredictor:
             
             # Calcular probabilidad general de fallo basada en severidad y confianza
             max_severity = max([a['severity'] for a in prediction['predicted_anomalies']])
-            prediction['probability'] = round(0.7 * max_severity + 0.3 * prediction['confidence'], 2)
+            prediction['probability'] = 0.7 * max_severity + 0.3 * prediction['confidence']
             
             # Añadir hora prevista de la primera anomalía como prediction_horizon
             prediction['prediction_horizon'] = prediction['first_anomaly_in']
@@ -661,4 +474,3 @@ class AdvancedPredictor:
             
         except Exception as e:
             logger.error(f"Error al guardar predicción: {str(e)}")
-

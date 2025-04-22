@@ -85,15 +85,15 @@
                     <h2>Controles</h2>
                     <div class="card p-3">
                         <div class="mb-3">
-                            <label class="form-label">Modo de Ejecución</label>
+                            <label class="form-label">Modo de EjecuciÃ³n</label>
                             <div class="input-group">
                                 <select id="executionMode" class="form-select">
-                                    <option value="simulation">Simulación</option>
+                                    <option value="simulation">SimulaciÃ³n</option>
                                     <option value="real">Real (producciÃ³n)</option>
                                 </select>
                                 <button id="setExecutionMode" class="btn btn-primary">Aplicar</button>
                             </div>
-                            <div class="form-text">En modo Simulación no se ejecutan acciones reales</div>
+                            <div class="form-text">En modo simulaciÃ³n no se ejecutan acciones reales</div>
                         </div>
                     </div>
                 </div>
@@ -108,8 +108,8 @@
                                 <tr>
                                     <th>Servicio</th>
                                     <th>Estado</th>
-                                    <th>Métricas Clave</th>
-                                    <th>Última ActualizaciÃ³n</th>
+                                    <th>MÃ©tricas Clave</th>
+                                    <th>Ãšltima ActualizaciÃ³n</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
@@ -190,9 +190,9 @@
                     <label class="form-label">Filtrar por tipo</label>
                     <select id="eventTypeFilter" class="form-select">
                         <option value="">Todos</option>
-                        <option value="anomaly_detection">DetecciÃ³n de Anomalías</option>
+                        <option value="anomaly_detection">DetecciÃ³n de anomalÃ­as</option>
                         <option value="recommendation">Recomendaciones</option>
-                        <option value="action_execution">Ejecución de acciones</option>
+                        <option value="action_execution">EjecuciÃ³n de acciones</option>
                     </select>
                 </div>
                 <div class="col-md-4">
@@ -303,11 +303,11 @@
                         <div class="row">
                             <div class="col-6">
                                 <p><strong>Servicios monitoreados:</strong> ${data.services_monitored}</p>
-                                <p><strong>Anomalías detectadas:</strong> ${data.anomalies_detected}</p>
+                                <p><strong>AnomalÃ­as detectadas:</strong> ${data.anomalies_detected}</p>
                             </div>
                             <div class="col-6">
                                 <p><strong>Recomendaciones:</strong> ${data.recommendations_made}</p>
-                                <p><strong>Acciones ejecutadas:</strong> ${data.actions_executed} (Éxito: ${(data.action_success_rate * 100).toFixed(0)}%)</p>
+                                <p><strong>Acciones ejecutadas:</strong> ${data.actions_executed} (Ã‰xito: ${(data.action_success_rate * 100).toFixed(0)}%)</p>
                             </div>
                         </div>
                     `;
@@ -422,7 +422,7 @@
                         } else if (event.type === 'action_execution') {
                             cardClass = 'card-action';
                             title = `AcciÃ³n ejecutada en ${event.service_id}`;
-                            details = `${event.action_id}: ${event.success ? 'Éxito' : 'Fallo'}`;
+                            details = `${event.action_id}: ${event.success ? 'Ã‰xito' : 'Fallo'}`;
                         }
                         
                         eventsEl.innerHTML += `
@@ -453,7 +453,7 @@
                         return;
                     }
                     
-                    // Crear HTML para Métricas y umbrales
+                    // Crear HTML para mÃ©tricas y umbrales
                     let metricsHtml = '<div class="row">';
                     for (const [key, value] of Object.entries(data.metrics)) {
                         const threshold = data.thresholds[key] || 'â€”';
@@ -470,7 +470,7 @@
                                     statusClass = 'bg-success';
                                 }
                             } else {
-                                // Para otras Métricas, valores mayores son problemÃ¡ticos
+                                // Para otras mÃ©tricas, valores mayores son problemÃ¡ticos
                                 if (value > threshold * 1.2) {
                                     statusClass = 'bg-danger';
                                 } else if (value > threshold) {
@@ -525,7 +525,7 @@
                             } else if (event.type === 'action_execution') {
                                 cardClass = 'card-action';
                                 title = `AcciÃ³n ejecutada`;
-                                details = `${event.action_id}: ${event.success ? 'Éxito' : 'Fallo'}`;
+                                details = `${event.action_id}: ${event.success ? 'Ã‰xito' : 'Fallo'}`;
                             }
                             
                             eventsHtml += `
@@ -547,9 +547,9 @@
                     detailsEl.innerHTML = `
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h3>${serviceId}</h3>
-                            <span>Última actualizaciÃ³n: ${formatDate(data.last_update)}</span>
+                            <span>Ãšltima actualizaciÃ³n: ${formatDate(data.last_update)}</span>
                         </div>
-                        <h4>Métricas actuales</h4>
+                        <h4>MÃ©tricas actuales</h4>
                         ${metricsHtml}
                         ${eventsHtml}
                     `;
@@ -608,7 +608,7 @@
                         } else if (event.type === 'action_execution') {
                             cardClass = 'card-action';
                             title = `AcciÃ³n ejecutada en ${event.service_id}`;
-                            details = `${event.action_id}: ${event.success ? 'Éxito' : 'Fallo'}`;
+                            details = `${event.action_id}: ${event.success ? 'Ã‰xito' : 'Fallo'}`;
                         }
                         
                         eventsEl.innerHTML += `
@@ -647,7 +647,7 @@
                                 <td>${action.action_id}</td>
                                 <td>
                                     <span class="badge ${action.success ? 'bg-success' : 'bg-danger'}">
-                                        ${action.success ? 'Éxito' : 'Fallo'}
+                                        ${action.success ? 'Ã‰xito' : 'Fallo'}
                                     </span>
                                 </td>
                                 <td>
@@ -746,7 +746,7 @@
             });
         }
 
-        // Cambiar modo de Ejecución
+        // Cambiar modo de ejecuciÃ³n
         function setExecutionMode(mode) {
             fetch('/api/mode', {
                 method: 'POST',
@@ -758,7 +758,7 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    alert(`Modo de Ejecución cambiado a: ${mode}`);
+                    alert(`Modo de ejecuciÃ³n cambiado a: ${mode}`);
                     loadSystemStatus();
                 } else {
                     alert(`Error al cambiar modo: ${data.error || 'Error desconocido'}`);
@@ -798,7 +798,7 @@
             }
         });
         
-        // Configurar botÃ³n de modo de Ejecución
+        // Configurar botÃ³n de modo de ejecuciÃ³n
         document.getElementById('setExecutionMode').addEventListener('click', function() {
             const mode = document.getElementById('executionMode').value;
             if (mode === 'real') {
@@ -1051,32 +1051,5 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }, 1000);
 });
-</script>
-<script>
-// Corregir visualización de NaN% en probabilidad
-document.addEventListener('DOMContentLoaded', function() {
-    const updateProbability = function() {
-        const probElements = document.querySelectorAll('.progress-bar, .probability-value');
-        probElements.forEach(el => {
-            if (el.textContent.includes('NaN')) {
-                const confidence = document.querySelector('.confidence-value');
-                let confValue = 0.8;
-                if (confidence && !isNaN(parseFloat(confidence.textContent))) {
-                    confValue = parseFloat(confidence.textContent) / 100;
-                }
-                let probValue = Math.round(confValue * 85);
-                el.textContent = el.textContent.replace('NaN%', probValue + '%');
-                if (el.style && el.style.width) {
-                    el.style.width = probValue + '%';
-                }
-            }
-        });
-    };
-    
-    // Ejecutar al cargar y periódicamente
-    updateProbability();
-    setInterval(updateProbability, 2000);
-});
-</script>
-</body>
+</script></body>
 </html>

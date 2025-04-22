@@ -1,10 +1,23 @@
-{
-  "default": {
-    "memory_usage": 70,
-    "cpu_usage": 80,
-    "response_time_ms": 300,
-    "error_rate": 5,
-    "active_connections": 90,
-    "query_time_avg": 100
-  }
+﻿{
+    "database":  {
+                     "cpu_usage":  70,
+                     "memory_usage":  70,
+                     "active_connections":  90,
+                     "query_time_avg":  80
+                 },
+    "default":  {
+                    "cpu_usage":  75,
+                    "gc_collection_time":  400,
+                    "response_time_ms":  300,
+                    "query_time_avg":  80,
+                    "active_connections":  90,
+                    "error_rate":  5,
+                    "memory_usage":  75
+                },
+    "app-server":  {
+                       "cpu_usage":  70,
+                       "memory_usage":  75,
+                       "response_time_ms":  300,
+                       "error_rate":  4
+                   }
 }

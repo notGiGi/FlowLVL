@@ -1,0 +1,10 @@
+{
+  "default": {
+    "memory_usage": 70,
+    "cpu_usage": 80,
+    "response_time_ms": 300,
+    "error_rate": 5,
+    "active_connections": 90,
+    "query_time_avg": 100
+  }
+}
